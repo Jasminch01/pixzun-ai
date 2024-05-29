@@ -8,10 +8,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#BB25D8",
+      },
+      backgroundColor: {
+        primary: "#BB25D8",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "button-gradient": "linear-gradient(to right, #BB25D8, #3444D8)",
+        "bg-lighter":
+          "linear-gradient(to bottom, rgba(187, 37, 216, 0.5) 5%, rgba(43, 46, 61, 0.5))",
+        "bg-gradient": "linear-gradient(to right, #191B27, #2B2E3D)",
+        "border-gradient": "linear-gradient(180deg, #672a73, #2B2D3C)",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },
