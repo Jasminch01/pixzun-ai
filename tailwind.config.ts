@@ -13,6 +13,7 @@ const config: Config = {
       },
       backgroundColor: {
         primary: "#BB25D8",
+        secondary: "#2B2E3D",
       },
       backgroundImage: {
         "button-gradient": "linear-gradient(to right, #BB25D8, #3444D8)",
