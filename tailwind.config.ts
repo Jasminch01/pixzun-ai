@@ -21,7 +21,7 @@ const config: Config = {
           "linear-gradient(104deg, #BB25D8 -4.77%, #3444D8 100%)",
         "shape-gradient": "linear-gradient(120deg, #A42BD8, #6531F6)",
         "bg-lighter":
-          "linear-gradient(to bottom, rgba(187, 37, 216, 0.5), rgba(72, 93, 143, 0.0))",
+          "linear-gradient(to bottom, rgba(187, 37, 216, 0.3), rgba(72, 93, 143, 0.0))",
         "bg-card-lighter":
           "linear-gradient(to bottom, rgba(187, 37, 216, 0.1), rgba(72, 93, 143, 0.0))",
         "bg-lighter2":
