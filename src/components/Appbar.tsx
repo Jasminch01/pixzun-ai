@@ -35,24 +35,32 @@ const Appbar: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto md:px-10 xl:px-0 px-5 text-white">
-      <div className="flex justify-between mt-6">
+      <div className="flex justify-between mt-6 items-center">
         <div>
           <p className="md:text-2xl">pixaura</p>
         </div>
-        <div className={`md:flex space-x-10 hidden`}>
+        <div className="hidden md:flex items-center">
           {links.map((link, index) => (
-            <Link className="text-base" key={index} href={link.href}>
+            <Link
+              className={`text-base ${
+                link.name === "Login"
+                  ? "px-6 py-2 gradient text-white transition-all"
+                  : ""
+              } ${link.name !== "Signup" && index !== 0 ? "ml-10" : "ml-6"}`}
+              key={index}
+              href={link.href}
+            >
               {link.name}
             </Link>
           ))}
         </div>
-        <div className="md:hidden relative">
+        <div className="relative md:hidden">
           <div className="btn btn-ghost btn-circle">
             <IoMenu size={25} onClick={() => setIsOpen(!isOpen)} />
           </div>
           <ul
             tabIndex={0}
-            className={`absolute right-0 z-[1] bg-white text-black px-5 rounded transition-transform duration-300 ease-in-out transform  ${
+            className={`absolute right-0 z-[1] bg-white text-black px-5 rounded transition-transform duration-300 ease-in-out transform ${
               isOpen
                 ? "block scale-100 opacity-100"
                 : "hidden scale-95 opacity-0"

@@ -1,5 +1,8 @@
 import Container from "@/components/Container";
+import Counter from "@/components/Counter";
+import EnhancePhoto from "@/components/EnhancePhoto";
 import Hero from "@/components/Hero";
+import Pricing from "@/components/Pricing";
 import Steps from "@/components/Steps";
 
 export default function Home() {
@@ -8,6 +11,9 @@ export default function Home() {
       <Container>
         <Hero />
         <Steps/>
+        <EnhancePhoto/>
+        <Counter/>
+        <Pricing/>
       </Container>
     </main>
   );

@@ -34,3 +34,48 @@ export const CarvLine2: React.FC = () => {
     </svg>
   );
 };
+export const Star: React.FC = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="absolute md:w-10 md:h-10 h-7 w-7 md:-top-32 -top-24 lg:right-48 md:right-5 right-5"
+      viewBox="0 0 67 67"
+      fill="none"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M33.5 67C33.433 48.5212 18.4603 33.5621 0 33.5621C18.5015 33.5621 33.5 18.5356 33.5 0C33.5667 18.4788 48.5397 33.4379 67 33.4379C48.4982 33.4379 33.5 48.4644 33.5 67Z"
+        fill="#454B74"
+      />
+    </svg>
+  );
+};
+type CheckProps = {
+  strokeColour: string;
+};
+export const Check: React.FC<CheckProps> = ({ strokeColour }) => {
+  return (
+    <svg
+      className="w-7 h-7"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      id="Check"
+    >
+      <defs>
+        <linearGradient id="gradient" x1="0" y1="0" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#bb25d8" />
+          <stop offset="100%" stopColor="#3444d8" />
+        </linearGradient>
+      </defs>
+      <polyline
+        fill="none"
+        stroke={strokeColour}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="24"
+        points="216 72.005 104 184 48 128.005"
+      />
+    </svg>
+  );
+};
