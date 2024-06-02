@@ -3,6 +3,7 @@ import Container from "@/components/Container";
 import Counter from "@/components/Counter";
 import EnhancePhoto from "@/components/EnhancePhoto";
 import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Pricing from "@/components/Pricing";
 import Reviews from "@/components/Reviews";
@@ -25,6 +26,9 @@ export default function Home() {
       <Container>
         <FAQ />
       </Container>
+      <div className="bg-footer-gradient py-20">
+        <Footer />
+      </div>
     </main>
   );
 }

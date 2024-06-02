@@ -1,4 +1,3 @@
-// JavaScript/TypeScript code
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -9,6 +8,7 @@ import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import { IoArrowForwardOutline, IoArrowBackOutline } from "react-icons/io5";
+
 type Treview = {
   id: number;
   clientName: string;
@@ -22,6 +22,7 @@ interface ReviewSwiperProps {
 
 const ReviewSwiper: React.FC<ReviewSwiperProps> = ({ reviews }) => {
   const [swiper, setSwiper] = useState<any>(null); // State to hold swiper instance
+  const [activeIndex, setActiveIndex] = useState<number>(1);
 
   const handleSlidePrev = () => {
     swiper?.slidePrev(); // Go to previous slide
@@ -34,6 +35,11 @@ const ReviewSwiper: React.FC<ReviewSwiperProps> = ({ reviews }) => {
   const handleSwiperInit = (swiper: any) => {
     setSwiper(swiper); // Save swiper instance to state
   };
+
+  const handleSlideChange = (swiper: any) => {
+    setActiveIndex(swiper.realIndex + 1); // Set the active slide to the middle one
+  };
+
   const [showFullContentMap, setShowFullContentMap] = useState<
     Record<number, boolean>
   >({});
@@ -49,6 +55,7 @@ const ReviewSwiper: React.FC<ReviewSwiperProps> = ({ reviews }) => {
     <div className="relative mt-36 swiper-container lg:px-10 xl:px-0 px-0">
       <Swiper
         onSwiper={handleSwiperInit}
+        onSlideChange={handleSlideChange}
         breakpoints={{
           0: {
             slidesPerView: 1,
@@ -75,7 +82,8 @@ const ReviewSwiper: React.FC<ReviewSwiperProps> = ({ reviews }) => {
           prevEl: ".prev",
         }}
       >
-        {reviews.map((review) => {
+        {reviews.map((review, index) => {
+          const isActive = index === activeIndex;
           const truncatedReview =
             review.review.length === 118
               ? review.review
@@ -85,7 +93,11 @@ const ReviewSwiper: React.FC<ReviewSwiperProps> = ({ reviews }) => {
 
           return (
             <SwiperSlide key={review.id}>
-              <div className="relative pt-16">
+              <div
+                className={`relative pt-16 transition-transform duration-300 ${
+                  isActive ? "scale-110" : "scale-95"
+                }`}
+              >
                 <div className="absolute top-5 left-1/2 transform -translate-x-1/2 z-10">
                   <Image
                     alt="client-image"
@@ -96,22 +108,24 @@ const ReviewSwiper: React.FC<ReviewSwiperProps> = ({ reviews }) => {
                   />
                 </div>
                 <div className="space-y-10 group border hover:border-primary border-gray-500 p-10 bg-gray-400 rounded-lg transition-all backdrop-blur-md backdrop-filter bg-opacity-10 mb-20">
-                  <div className="absolute inset-0 flex justify-center items-center z-0">
-                    <div className="hidden group-hover:block absolute bg-bg-card-lighter blur-3xl lg:w-[300px] lg:h-[400px] md:w-[500px] md:h-[300px] w-[100px] h-[180px] rounded -z-10 transition-opacity duration-300 ease-in-out"></div>
+                  <div className="absolute inset-0 flex justify-center items-center -z-10">
+                    <div className="hidden group-hover:block absolute bg-bg-card-lighter blur-3xl lg:w-[300px] lg:h-[400px] md:w-[500px] md:h-[300px] w-[100px] h-[180px] rounded transition-opacity duration-300 ease-in-out"></div>
                   </div>
                   <div className="mt-10">
-                    <p className="text-white">
+                    <p className="text-white text-left">
                       {showFullContent
                         ? review.review
                         : truncatedReview + "..."}
                     </p>
                     {review.review.length > 118 && (
-                      <button
-                        onClick={() => handleToggleContent(review.id)}
-                        className="font-bold text-blue-500"
-                      >
-                        {showFullContent ? "Show less" : "Show more"}
-                      </button>
+                      <div className="text-left">
+                        <button
+                          onClick={() => handleToggleContent(review.id)}
+                          className="font-bold text-blue-500 cursor-pointer"
+                        >
+                          {showFullContent ? "Show less" : "Show more"}
+                        </button>
+                      </div>
                     )}
                   </div>
                   <div className="flex justify-center">
