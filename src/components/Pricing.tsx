@@ -40,7 +40,7 @@ const Pricing: React.FC = () => {
     },
   ];
   return (
-    <div className="mt-36 mb-20 px-5 xl:px-0">
+    <div className="mt-36 px-5 xl:px-0">
       <div className="text-center">
         <p className="text-3xl font-bold text-white">Pricing</p>
         <p className="text-gray-400 mt-5">
@@ -63,7 +63,7 @@ const Pricing: React.FC = () => {
                   <span className="absolute top-0 -left-2 text-lg">$</span>
                   <span
                     className={`md:text-6xl text-4xl pl-2 ${
-                      plan.price === "0" ? "text-white" : "gradient-text"
+                      plan.price === "0" ? "text-white" : "gradient-text3"
                     }`}
                   >
                     {plan.price}

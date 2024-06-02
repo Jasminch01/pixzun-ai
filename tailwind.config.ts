@@ -26,6 +26,8 @@ const config: Config = {
           "linear-gradient(to bottom, rgba(187, 37, 216, 0.1), rgba(72, 93, 143, 0.0))",
         "bg-lighter2":
           "linear-gradient(to right, rgba(187, 37, 216, 1.05), rgba(72, 93, 143, 1.05))",
+        "lighter-gradient":
+          "linear-gradient(to right, rgba(187, 37, 216, 0.3), rgba(187, 37, 216, 0.3))",
         "bg-gradient": "linear-gradient(to right, #191B27, #2B2E3D)",
         "border-gradient": "linear-gradient(180deg, #672a73, #2B2D3C)",
         "pricing-gradient":

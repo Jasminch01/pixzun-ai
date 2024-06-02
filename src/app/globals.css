@@ -11,6 +11,11 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.gradient-text3 {
+  background: linear-gradient(101deg, #bb25d8 17.78%, #5a6af3 96.9%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .gradient {
   position: relative;
@@ -34,5 +39,10 @@
 
 .gradient:hover{
   z-index: 0;
+}
+
+/* CSS code */
+.swiper-button-prev, .swiper-button-next {
+  display: none !important;
 }
 
