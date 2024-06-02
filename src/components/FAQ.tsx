@@ -71,6 +71,7 @@ const Faq: React.FC = () => {
                 <p className="text-base text-gray-400">{section.content}</p>
               </div>
             )}
+            <hr className="border border-gray-400"/>
           </div>
         ))}
       </div>
