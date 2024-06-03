@@ -34,7 +34,7 @@ const Faq: React.FC = () => {
   };
 
   return (
-    <div id="faq" className="py-20 px-5 min-h-[80vh] md:px-0 lg:px-0">
+    <div id="faq" className="py-20 px-5 min-h-[80vh] md:px-10 lg:px-0">
       <div className="mb-20 text-white">
         <p className="text-center font-bold text-4xl lg:text-5xl xsm:text-2xl text-white">
           FAQ
@@ -43,9 +43,9 @@ const Faq: React.FC = () => {
           Common Inquiries and Helpful Responses
         </p>
       </div>
-      <div className="w-full">
+      <div className="lg:w-full">
         {accordionData.map((section, index) => (
-          <div key={index} className="mb-4 space-y-3 w-[800px] mx-auto">
+          <div key={index} className="mb-4 space-y-3 lg:w-[800px] mx-auto">
             <div
               className={`flex gap-2 cursor-pointer transition-transform duration-300 ease-in-out`}
               onClick={() => handleToggle(index)}

@@ -47,11 +47,11 @@ const Pricing: React.FC = () => {
           Choose the perfect plan that fits your budget and requirements.
         </p>
       </div>
-      <div className="xl:grid-cols-3 grid md:grid-cols-2 grid-cols-1 gap-y-10 xl:gap-0 flex-col mt-[8.56rem] md:gap-10">
+      <div className="xl:grid-cols-3 grid md:grid-cols-2 grid-cols-1 gap-y-10 gap-5 flex-col mt-[8.56rem] md:gap-10">
         {plans.map((plan, index) => (
           <div
             key={index}
-            className="flex relative group flex-col justify-between bg-pricing-gradient text-white hover:border-primary border border-secondary rounded-lg shadow-md py-6 xl:w-[400px] xl:h-[560px] text-left transition-transform transform hover:scale-105 duration-300 ease-in-out"
+            className="flex relative group flex-col justify-between bg-pricing-gradient text-white hover:border-primary border border-secondary rounded-lg shadow-md py-6 text-left transition-transform transform hover:scale-105 duration-300 ease-in-out"
           >
             <div className="absolute inset-0 flex justify-center items-center z-0">
               <div className="hidden group-hover:block absolute bg-bg-card-lighter blur-3xl lg:w-[500px] lg:h-[700px] md:w-[500px] md:h-[300px] w-[100px] h-[180px] rounded -z-10 transition-opacity duration-300 ease-in-out"></div>

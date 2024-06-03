@@ -38,14 +38,14 @@ const Appbar: React.FC = () => {
 
   return (
     <div
-      className={`fixed w-full z-50 top-0 ${
+      className={`fixed w-full z-50 top-0 px-5 lg:px-5 xl:px-0 md:px-0${
         isScrolled && "bg-white/10 backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-4">
           <div>
-            <p className="md:text-2xl text-white">pixaura</p>
+            <p className="md:text-2xl text-xl text-white">pixaura</p>
           </div>
           <div className="hidden md:flex items-center">
             {links.map((link, index) => (
@@ -64,7 +64,7 @@ const Appbar: React.FC = () => {
           </div>
           <div className="relative md:hidden">
             <div className="btn btn-ghost btn-circle">
-              <IoMenu size={25} onClick={() => setIsOpen(!isOpen)} />
+              <IoMenu color="white" size={25} onClick={() => setIsOpen(!isOpen)} />
             </div>
             <ul
               tabIndex={0}
