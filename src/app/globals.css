@@ -1,10 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 .gradient-text {
-  background: linear-gradient(to right, #BB25D8, #3444D8);
+  background: linear-gradient(to right, #bb25d8, #3444d8);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.gradient-text2 {
+  background: linear-gradient(101deg, #f09dff 17.78%, #f8d4ff 96.9%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.gradient-text3 {
+  background: linear-gradient(101deg, #d83af8 17.78%, #7828f9 108.31%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient {
+  position: relative;
+  background-color: #2B2E3D;
+  border: none;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradient::after {
+  content: '';
+  position: absolute;
+  height: 104%;
+  width: 102%;
+  border-radius: 1000px;
+  background-image: linear-gradient(to right, #A82AD8, #4940D8);
+  z-index: -1;
+}
+
+.gradient:hover{
+  z-index: 0;
+}
+
+/* CSS code */
+.swiper-button-prev, .swiper-button-next {
+  display: none !important;
+}
+
