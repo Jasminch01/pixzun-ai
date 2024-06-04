@@ -22,7 +22,7 @@ const EnhancePhoto: React.FC = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       handleNext();
-    }, 1000);
+    }, 5000);
 
     return () => clearInterval(intervalId);
   }, []);
