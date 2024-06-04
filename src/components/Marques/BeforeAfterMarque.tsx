@@ -23,7 +23,7 @@ export const BeforeAfterMarque: React.FC = () => {
     { src: "/after-3.png", alt: "After Image 2", label: "After" },
   ];
   return (
-    <Marquee gradient={false} speed={50}>
+    <Marquee gradient={false} speed={30}>
       <div className="flex ml-20">
         {imagesPair1.map((image, index) => (
           <div key={index} className="relative flex">
@@ -96,7 +96,7 @@ export const BeforeAfterMarque2: React.FC = () => {
     { src: "/after-1.png", alt: "After Image 2", label: "After" },
   ];
   return (
-    <Marquee gradient={false} speed={60}>
+    <Marquee gradient={false} speed={40}>
       <div className="flex ml-20">
         {imagesPair1.map((image, index) => (
           <div key={index} className="relative flex">
