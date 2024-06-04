@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <Container>
       <div className=" text-white xl:px-0 px-5">
-        <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex md:flex-row flex-col-reverse justify-between">
           <div className="">
             <div className="mb-5">
               <p className="text-xl font-bold">pixaura</p>
@@ -35,17 +35,19 @@ const Footer: React.FC = () => {
             <div className="mt-5">
               <p className="font-bold">Follow us on</p>
               <div className="mt-4 flex items-center space-x-5">
-                <IoLogoLinkedin size={30} />
-                <FaInstagram size={30} />
+                <Link href={''}>
+                  <IoLogoLinkedin size={30} />
+                </Link>
+                <Link href={''}>
+                  <FaInstagram size={30} />
+                </Link>
               </div>
             </div>
           </div>
 
-          <div className="mt-10 md:mt-0">
+          <div className="mt-10 md:mt-0 mb-10 md:mb-0">
             <div className="mb-5">
-              <p className="text-lg font-semibold">
-                Subscribe to Our Newsletter
-              </p>
+              <p className="text-xl font-bold">Subscribe to Our Newsletter</p>
               <p className="text-white">
                 Receive updates on the latest news and offers
               </p>
