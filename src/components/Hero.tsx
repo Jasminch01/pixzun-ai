@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div>
       <div className="text-center text-white px-5 md:px-0">
-        <p className="md:text-6xl text-3xl font-bold">
+        <p className="lg:text-6xl md:text-4xl text-3xl font-bold">
           Make Standout Content <br/> With Stunning{" "}
           <span className="gradient-text">AI</span>
         </p>

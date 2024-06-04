@@ -1,6 +1,8 @@
 import React from "react";
 import Container from "./Container";
 import Link from "next/link";
+import { IoLogoLinkedin } from "react-icons/io5";
+import { FaInstagram } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
   return (
@@ -28,6 +30,13 @@ const Footer: React.FC = () => {
                 <Link href="/services" className="text-sm">
                   Services
                 </Link>
+              </div>
+            </div>
+            <div className="mt-5">
+              <p className="font-bold">Follow us on</p>
+              <div className="mt-4 flex items-center space-x-5">
+                <IoLogoLinkedin size={30} />
+                <FaInstagram size={30} />
               </div>
             </div>
           </div>

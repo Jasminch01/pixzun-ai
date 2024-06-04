@@ -34,7 +34,7 @@ const Reviews: React.FC = () => {
 
   return (
     <div className="md:px-20 px-5 xl:px-0 mt-48 text-center">
-      <p className=" text-white font-bold text-3xl lg:text-3xl xsm:text-2xl">
+      <p className=" text-white font-bold lg:text-4xl md:text-3xl text-2xl">
         What our customers {"Say’s"}
       </p>
       <p className="text-base text-gray-400  mt-5">

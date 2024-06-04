@@ -8,7 +8,7 @@ const Steps: React.FC = () => {
   return (
     <div className="mt-[11.50rem] xl:px-0 px-5">
       <div className="text-white text-center mb-36">
-        <p className="md:text-4xl text-2xl font-bold">Follow three steps</p>
+        <p className="lg:text-4xl md:text-3xl text-2xl font-bold">Follow three steps</p>
         <p className="text-gray-400 text-base mt-5">
           Pick a best product background that perfectly captur
           <br /> your unique brand style.

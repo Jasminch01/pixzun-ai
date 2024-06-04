@@ -21,7 +21,7 @@ const TrustedBrands = () => {
   return (
     <div className="mt-36">
       <div className="text-center">
-        <p className="text-3xl md:text-2xl font-bold text-white">Who trust us</p>
+        <p className="lg:text-4xl md:text-3xl text-2xl font-bold text-white">Who trust us</p>
         <p className="text-base text-gray-400 mt-5">Partnered with Industry Leaders Who Trust Our Expertise</p>
       </div>
       <div>

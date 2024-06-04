@@ -38,8 +38,8 @@ const Appbar: React.FC = () => {
 
   return (
     <div
-      className={`fixed w-full z-50 top-0 px-5 lg:px-5 xl:px-0 md:px-0${
-        isScrolled && "bg-white/10 backdrop-blur-md"
+      className={`fixed w-full z-50 top-0 px-5 lg:px-5 xl:px-0 md:px-5 ${
+        isScrolled && "bg-bg-gradient"
       }`}
     >
       <div className="max-w-7xl mx-auto">
