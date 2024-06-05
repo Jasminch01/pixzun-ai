@@ -19,7 +19,7 @@
 
 .gradient {
   position: relative;
-  background-color: #2B2E3D;
+  background-color: #2b2e3d;
   border: none;
   border-radius: 1000px;
   display: flex;
@@ -28,20 +28,21 @@
 }
 
 .gradient::after {
-  content: '';
+  content: "";
   position: absolute;
   height: 104%;
   width: 102%;
   border-radius: 1000px;
-  background-image: linear-gradient(to right, #A82AD8, #4940D8);
+  background-image: linear-gradient(to right, #a82ad8, #4940d8);
   z-index: -1;
 }
 
-.gradient:hover{
+.gradient:hover {
   z-index: 0;
 }
 
-/* CSS code */
-.swiper-button-prev, .swiper-button-next {
+/* off default swiper button */
+.swiper-button-prev,
+.swiper-button-next {
   display: none !important;
 }

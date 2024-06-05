@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoMenu } from "react-icons/io5";
+import { Brand } from "./Svg";
 
 interface LinkItem {
   name: string;
@@ -44,7 +45,8 @@ const Appbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-4">
-          <div>
+          <div className="flex justify-center gap-2">
+            <Brand/>
             <p className="md:text-2xl text-xl text-white">pixaura</p>
           </div>
           <div className="hidden md:flex items-center">
