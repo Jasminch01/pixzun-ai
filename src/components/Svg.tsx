@@ -98,7 +98,7 @@ export const Leaf: React.FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="md:w-7 md:h-7 w-4 h-4"
+      className="md:w-5 md:h-5 w-4 h-4"
       viewBox="0 0 37 37"
       fill="none"
     >

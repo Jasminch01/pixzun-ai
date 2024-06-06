@@ -1,3 +1,4 @@
+import Appbar from "@/components/Appbar";
 import BeforeAfter from "@/components/BeforeAfter";
 import Container from "@/components/Container";
 import Counter from "@/components/Counter";
@@ -12,6 +13,7 @@ import TrustedBrands from "@/components/TrustedBrands";
 export default function Home() {
   return (
     <main className="min-h-screen mt-32">
+      <Appbar />
       <Container>
         <Hero />
         <Steps />

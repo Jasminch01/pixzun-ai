@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-bg-gradient ${poppins.variable} font-poppins`}>
-        <Appbar />
+
         {children}
         <div className="bg-footer-gradient md:py-20 py-10">
           <Footer />
