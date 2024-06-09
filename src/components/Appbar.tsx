@@ -13,8 +13,6 @@ const Appbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const links: LinkItem[] = [
-    { name: "Home", href: "/" },
-    { name: "Service", href: "/service" },
     { name: "Pricing", href: "/pricing" },
     { name: "Login", href: "/login" },
     { name: "Signup", href: "/signup" },

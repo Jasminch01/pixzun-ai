@@ -1,46 +1,60 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "@/components/Container";
 import { Brand, Folder, Leaf } from "@/components/Svg";
 import { Modal } from "@/components/Modal";
+import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
+import Link from "next/link";
 
 const Page: React.FC = () => {
   const [isNewUser, setIsNewUser] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef<HTMLDialogElement>(null);
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
+  const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
+  const [projectName, setProjectName] = useState<string>("");
+  const RecentProject = true;
+  const FavouriteProject = true;
 
   // Handle modal close
-  const handleModalClose = () => {
-    if (modalRef.current) {
-      modalRef.current.close();
-    }
-    setIsModalOpen(false);
+  const handleWelcomeModalClose = () => {
+    setIsWelcomeModalOpen(false);
   };
 
-  // Open modal if the user is new
+  const handleNewProjectModalClose = () => {
+    setIsNewProjectModalOpen(false);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProjectName(e.target.value);
+  };
+
+  const handleCreateNewProjects = () => {
+    //create db insert
+    //project name 
+    setIsNewProjectModalOpen(false);
+  };
+
+  // Open modals if the user is new
   useEffect(() => {
     if (isNewUser) {
-      const timer = setTimeout(() => {
-        setIsModalOpen(true);
+      const welcomeTimer = setTimeout(() => {
+        setIsWelcomeModalOpen(true);
       }, 5000);
-      return () => clearTimeout(timer);
+      return () => clearTimeout(welcomeTimer);
     }
   }, [isNewUser]);
 
-  // Show modal when isModalOpen changes
-  useEffect(() => {
-    if (isModalOpen && modalRef.current) {
-      modalRef.current.showModal();
-    }
-  }, [isModalOpen]);
-
   return (
-    <div className="min-h-screen mt-60">
+    <div className="mt-32">
       <Container>
         <div className="flex justify-center">
           <div className="md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]">
             <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
-              <Folder />
+              <div
+                className="cursor-pointer"
+                onClick={() => setIsNewProjectModalOpen(true)}
+              >
+                <Folder />
+              </div>
               <p className="text-white text-sm md:text-base">
                 Create New Project
               </p>
@@ -48,8 +62,14 @@ const Page: React.FC = () => {
           </div>
         </div>
 
-        {isModalOpen && (
-          <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        {isWelcomeModalOpen && (
+          <Modal
+            isOpen={isWelcomeModalOpen}
+            onClose={handleWelcomeModalClose}
+            modalSize={"md:h-[25rem] md:w-[40rem]"}
+            gradientSize={"md:h-[20rem] md:w-[30rem] h-[15rem] w-[20rem]"}
+            marginTop={"mt-[16rem]"}
+          >
             <div className="text-white text-center space-y-5">
               <div className="flex justify-center">
                 <Brand />
@@ -67,12 +87,59 @@ const Page: React.FC = () => {
             </div>
           </Modal>
         )}
-        {/* TO DO : if have projects show's projects */}
-        <div className="mt-[10.50rem]">
-          <p className="text-gray-400 text-center text-sm md:text-base">
-            You don’t have any projects yet!
-          </p>
-        </div>
+
+        {isNewProjectModalOpen && (
+          <Modal
+            isOpen={isNewProjectModalOpen}
+            onClose={handleNewProjectModalClose}
+            modalSize={"md:h-[15rem] md:w-[30rem] mt-[25rem]"}
+            gradientSize={"md:h-[7rem] md:w-[25rem] h-[15rem] w-[20rem]"}
+            marginTop={"mt-[10rem]"}
+          >
+            <div className="text-white md:w-[20rem]">
+              <p className="mb-3">Project Name</p>
+              <input
+                type="text"
+                name="project-name"
+                onChange={handleInputChange}
+                className="border-0 border-b-2 border-gray-400 focus:outline-none bg-transparent text-white px-2 w-full"
+                placeholder="Enter Project Name"
+              />
+              <div className=" flex justify-end mt-10">
+                <div className="p-[1px] bg-button-gradient rounded-full">
+                  <button
+                    onClick={handleCreateNewProjects}
+                    className="px-3 py-2 bg-secondary rounded-full"
+                  >
+                    <Link href={'deshboard/create-project'}>Create</Link>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Modal>
+        )}
+
+        {/* TO DO: Show projects */}
+        {/*recent project fetch from db*/}
+        {/* {RecentProject ? ( */}
+          <RecentProjects />
+        {/* ) : ( */}
+          {/* <div className="mt-[10.50rem]">
+            <p className="text-gray-400 text-center text-sm md:text-base">
+              You don’t have any projects yet!
+            </p>
+          </div> */}
+        {/* // )} */}
+        {/* favourite project fetch from db
+        {FavouriteProject ? (
+          <RecentProjects />
+        ) : (
+          <div className="mt-[10.50rem]">
+            <p className="text-gray-400 text-center text-sm md:text-base">
+              You don’t have any projects yet!
+            </p>
+          </div>
+        )} */}
       </Container>
     </div>
   );

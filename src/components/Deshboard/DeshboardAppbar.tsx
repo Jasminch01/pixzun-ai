@@ -37,11 +37,11 @@ const DehsboardAppbar: React.FC = () => {
 
   return (
     <div
-      className={`fixed w-full z-50 top-0 px-5 lg:px-5 xl:px-0 md:px-5 border-b border-b-gray-400 ${
+      className={`fixed w-full z-50 top-0 ${
         isScrolled && "bg-bg-gradient"
       }`}
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="px-5">
         <div className="flex justify-between items-center py-5">
           <div className="flex justify-center gap-2">
             <Brand />
@@ -51,7 +51,7 @@ const DehsboardAppbar: React.FC = () => {
             <nav className="flex items-center space-x-3">
               <Link
                 href="/cradit"
-                className="text-base space-x-2 px-5 py-3 gradient text-white transition-all"
+                className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
               >
                 {" "}
                 <Leaf />

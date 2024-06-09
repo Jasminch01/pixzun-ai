@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Appbar from "@/components/Appbar";
-import Footer from "@/components/Footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -23,11 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-bg-gradient ${poppins.variable} font-poppins`}>
-
         {children}
-        <div className="bg-footer-gradient md:py-20 py-10">
-          <Footer />
-        </div>
       </body>
     </html>
   );
