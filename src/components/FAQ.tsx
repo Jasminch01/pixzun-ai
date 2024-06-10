@@ -36,7 +36,7 @@ const Faq: React.FC = () => {
   return (
     <div id="faq" className="py-20 px-5 min-h-[80vh] md:px-10 lg:px-0">
       <div className="mb-20 text-white">
-        <p className="text-center font-bold text-4xl lg:text-5xl xsm:text-2xl text-white">
+        <p className="text-center font-bold lg:text-4xl md:text-3xl text-2xl text-white">
           FAQ
         </p>
         <p className={`text-center mt-5 text-base text-gray-400`}>

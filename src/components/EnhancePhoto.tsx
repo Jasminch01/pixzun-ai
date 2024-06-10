@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import { IoMdArrowDropright } from "react-icons/io";
+import React, { useEffect, useState } from "react";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { Star } from "./Svg";
 
 const EnhancePhoto: React.FC = () => {
@@ -18,10 +18,18 @@ const EnhancePhoto: React.FC = () => {
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      handleNext();
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <div className="mt-32 md:px-5 xl:px-0 px-5">
       <div className="text-center">
-        <p className="text-white font-bold md:text-3xl text-2xl">
+        <p className="text-white font-bold lg:text-4xl md:text-3xl text-2xl">
           Get Inspired: AI-Enhanced Photos
         </p>
         <p className="text-gray-400 md:text-base text-sm md:w-[500px] mx-auto mt-5 lg:mt-7">
@@ -45,9 +53,9 @@ const EnhancePhoto: React.FC = () => {
           <div className="relative">
             <button
               onClick={handlePrev}
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-xl text-white p-2 rounded-sm border border-gray-300"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-xl text-white md:p-2 p-1 rounded-sm border border-gray-300"
             >
-              <IoMdArrowDropright className="text-3xl text-gray-700" />
+              <IoMdArrowDropleft className="md:text-3xl text-xl text-gray-700" />
             </button>
             <Image
               src={images[currentIndex]}
@@ -58,9 +66,9 @@ const EnhancePhoto: React.FC = () => {
             />
             <button
               onClick={handleNext}
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-xl text-white p-2 rounded-sm border border-gray-300"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-xl text-white md:p-2 p-1 rounded-sm border border-gray-300"
             >
-              <IoMdArrowDropright className="text-3xl text-gray-700" />
+              <IoMdArrowDropright className="md:text-3xl text-xl text-gray-700" />
             </button>
           </div>
         </div>

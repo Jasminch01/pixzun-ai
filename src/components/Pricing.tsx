@@ -42,7 +42,7 @@ const Pricing: React.FC = () => {
   return (
     <div className="mt-36 px-5 xl:px-0">
       <div className="text-center">
-        <p className="text-3xl font-bold text-white">Pricing</p>
+        <p className="lg:text-4xl md:text-3xl text-2xl font-bold text-white">Pricing</p>
         <p className="text-gray-400 mt-5">
           Choose the perfect plan that fits your budget and requirements.
         </p>
