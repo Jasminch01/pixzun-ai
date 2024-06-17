@@ -76,7 +76,7 @@ const DehsboardAppbar: React.FC = () => {
                 {/* show user info */}
                 {isProfileOpen && (
                   <div className="absolute right-4 top-[4rem] z-[1] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] py-3">
-                    <Link href={'/profile'} className="flex items-center justify-center gap-5">
+                    <Link href={'/app/profile'} className="flex items-center justify-center gap-5">
                       <div className="text-base text-white size-11 flex justify-center items-center bg-purple-500 rounded-full transition-all px-3 py-2">
                         <p>ST</p>
                       </div>
