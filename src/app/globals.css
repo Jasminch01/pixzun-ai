@@ -67,8 +67,29 @@
 }
 
 .focus\:shadow-primary-blur:focus {
-  box-shadow: 0 0 10px 5px rgba(168, 42, 216, 0.5); 
+  box-shadow: 0 0 10px 5px rgba(168, 42, 216, 0.5);
 }
 .shadow-primary {
-  box-shadow: 0 0 10px 5px rgba(168, 42, 216, 0.5); 
+  box-shadow: 0 0 10px 5px rgba(168, 42, 216, 0.5);
 }
+
+/* renew css */
+
+/* Add to your global CSS or a relevant CSS module */
+.toggle-checkbox {
+  left: 0.25rem;
+  top: 0.25rem;
+  transition: transform 0.2s ease-in-out;
+}
+.toggle-checkbox:checked {
+  transform: translateX(1.5rem);
+}
+.toggle-checkbox + .toggle-label {
+  width: 3rem;
+  height: 1.5rem;
+  background-color: white;
+  border-radius: 9999px;
+  display: inline-block;
+  position: relative;
+}
+

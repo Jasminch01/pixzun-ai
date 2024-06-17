@@ -67,8 +67,8 @@ const Page: React.FC = () => {
             isOpen={isWelcomeModalOpen}
             onClose={handleWelcomeModalClose}
             modalSize={"md:h-[25rem] md:w-[40rem]"}
-            gradientSize={"md:h-[20rem] md:w-[30rem] h-[15rem] w-[20rem]"}
-            marginTop={"mt-[16rem]"}
+            gradientSize={"md:h-[25rem] md:w-[30rem] h-[15rem] w-[20rem]"}
+            marginTop={"-mt-[5rem]"}
           >
             <div className="text-white text-center space-y-5">
               <div className="flex justify-center">
@@ -92,9 +92,9 @@ const Page: React.FC = () => {
           <Modal
             isOpen={isNewProjectModalOpen}
             onClose={handleNewProjectModalClose}
-            modalSize={"md:h-[15rem] md:w-[30rem] mt-[25rem]"}
-            gradientSize={"md:h-[7rem] md:w-[25rem] h-[15rem] w-[20rem]"}
-            marginTop={"mt-[10rem]"}
+            modalSize={"md:h-[15rem] md:w-[30rem]"}
+            gradientSize={"md:h-[10rem] md:w-[25rem] h-[15rem] w-[20rem]"}
+            marginTop={"-mt-[7rem]"}
           >
             <div className="text-white md:w-[20rem]">
               <p className="mb-3">Project Name</p>
