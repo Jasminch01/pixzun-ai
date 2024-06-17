@@ -12,8 +12,8 @@ const Faq: React.FC = () => {
 
   const accordionData: AccordionItem[] = [
     {
-      title: "What is pixaura AI?",
-      content: `Pixaura AI is an advanced image processing and enhancement tool that leverages artificial intelligence to provide high-quality image editing solutions.`,
+      title: "What is pixzun AI?",
+      content: `pixzun AI is an advanced image processing and enhancement tool that leverages artificial intelligence to provide high-quality image editing solutions.`,
     },
     {
       title: "Can I customize the background textures?",

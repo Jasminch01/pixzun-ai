@@ -23,19 +23,22 @@ const LeftSidebar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const sidebar = document.getElementById("left-sidebar");
+    if (typeof window !== "undefined") {
+      // Ensure this runs only on the client side
+      const sidebar = document.getElementById("left-sidebar");
 
-    const handleScroll = () => {
-      if (sidebar && sidebar.scrollTop > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      const handleScroll = () => {
+        if (sidebar && sidebar.scrollTop > 0) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      };
+
+      if (sidebar) {
+        sidebar.addEventListener("scroll", handleScroll);
+        return () => sidebar.removeEventListener("scroll", handleScroll);
       }
-    };
-
-    if (sidebar) {
-      sidebar.addEventListener("scroll", handleScroll);
-      return () => sidebar.removeEventListener("scroll", handleScroll);
     }
   }, []);
 

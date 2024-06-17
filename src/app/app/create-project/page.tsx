@@ -6,13 +6,21 @@ import LeftSidebar from "@/components/Deshboard/Sidebar/LeftSidebar";
 import { useState } from "react";
 import Image from "next/image";
 import { dotSpinner } from "ldrs";
+import PricingModal from "@/components/Deshboard/Projects/PircingModal";
+
 dotSpinner.register();
-///get projectName in to db
+
 const projectName = "my Project";
 
-const Project: React.FC = () => {
-  const [imageUploaded, setImageUploaded] = useState(false);
-  const [imageUploadLoading, setImageUploadLoading] = useState(true);
+const project: React.FC = () => {
+  const [imageUploaded, setImageUploaded] = useState(true);
+  const [imageUploadLoading, setImageUploadLoading] = useState(false);
+  const [isFreeUser, setIsFreeUser] = useState(true);
+  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+
+  const openModal = () => setIsPricingModalOpen(true);
+  const closeModal = () => setIsPricingModalOpen(false);
+
   return (
     <div className="flex">
       {/* Left Sidebar */}
@@ -24,8 +32,7 @@ const Project: React.FC = () => {
         <div className="flex items-center justify-center mt-[5.56rem] relative">
           <div className="absolute bg-bg-lighter blur-3xl md:w-[30rem] md:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
 
-          {/* image upload */}
-
+          {/* Image Upload */}
           {!imageUploaded && !imageUploadLoading ? (
             <div className="bg-secondary size-[20rem] text-white border-dashed border-gray-400 border-2 rounded flex flex-col justify-center items-center px-5">
               <IoMdImages size={70} className="mb-9 text-2xl" />
@@ -39,11 +46,7 @@ const Project: React.FC = () => {
             </div>
           ) : imageUploadLoading ? (
             <div className="bg-secondary size-[20rem] text-white rounded flex flex-col justify-center items-center">
-              <l-dot-spinner
-                size="50"
-                speed="1"
-                color="white"
-              ></l-dot-spinner>
+              <l-dot-spinner size="50" speed="1" color="white"></l-dot-spinner>
             </div>
           ) : (
             <div className="bg-secondary size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
@@ -58,7 +61,7 @@ const Project: React.FC = () => {
             </div>
           )}
 
-          {/* input prompt */}
+          {/* Input Prompt */}
         </div>
         <div className="flex justify-center mt-10">
           <div className="w-[35rem]">
@@ -73,14 +76,26 @@ const Project: React.FC = () => {
         </div>
         <div className="flex justify-center mt-3">
           <div className="w-[35rem] ">
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-5">
+              {isFreeUser && (
+                <button
+                  className="bg-button-gradient p-3 rounded-full text-white"
+                  onClick={openModal}
+                >
+                  Remove WaterMark
+                </button>
+              )}
               <button className="text-white flex items-center gap-2 bg-button-gradient p-3 rounded-full">
                 <FaWandMagicSparkles />
-              {imageUploadLoading && !imageUploaded ? <l-dot-spinner
-                size="20"
-                speed="1"
-                color="white"
-              ></l-dot-spinner> : 'Generate'}
+                {imageUploadLoading && !imageUploaded ? (
+                  <l-dot-spinner
+                    size="20"
+                    speed="1"
+                    color="white"
+                  ></l-dot-spinner>
+                ) : (
+                  "Generate"
+                )}
               </button>
             </div>
           </div>
@@ -89,8 +104,11 @@ const Project: React.FC = () => {
 
       {/* Right Sidebar */}
       <RightSidebar />
+
+      {/* Pricing Modal */}
+      <PricingModal isOpen={isPricingModalOpen} onClose={closeModal} />
     </div>
   );
 };
 
-export default Project;
+export default project;

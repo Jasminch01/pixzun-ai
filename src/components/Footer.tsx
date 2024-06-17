@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
         <div className="flex md:flex-row flex-col-reverse justify-between">
           <div className="">
             <div className="mb-5">
-              <p className="text-xl">pixaura</p>
+              <p className="text-xl">pixzun</p>
             </div>
             <div className="">
               <div className="space-x-10">
