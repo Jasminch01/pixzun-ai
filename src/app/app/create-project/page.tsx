@@ -5,8 +5,8 @@ import RightSidebar from "@/components/Deshboard/Sidebar/RightSidebar";
 import LeftSidebar from "@/components/Deshboard/Sidebar/LeftSidebar";
 import { useState } from "react";
 import Image from "next/image";
+import PricingModal from "@/components/Deshboard/Projects/PricingModal";
 // import { dotSpinner } from "ldrs";
-import PricingModal from "@/components/Deshboard/Projects/PircingModal";
 
 // dotSpinner.register();
 
