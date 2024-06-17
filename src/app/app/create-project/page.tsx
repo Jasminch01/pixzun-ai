@@ -5,10 +5,10 @@ import RightSidebar from "@/components/Deshboard/Sidebar/RightSidebar";
 import LeftSidebar from "@/components/Deshboard/Sidebar/LeftSidebar";
 import { useState } from "react";
 import Image from "next/image";
-import { dotSpinner } from "ldrs";
+// import { dotSpinner } from "ldrs";
 import PricingModal from "@/components/Deshboard/Projects/PircingModal";
 
-dotSpinner.register();
+// dotSpinner.register();
 
 const projectName = "my Project";
 
@@ -46,7 +46,8 @@ const project: React.FC = () => {
             </div>
           ) : imageUploadLoading ? (
             <div className="bg-secondary size-[20rem] text-white rounded flex flex-col justify-center items-center">
-              <l-dot-spinner size="50" speed="1" color="white"></l-dot-spinner>
+              {/* <l-dot-spinner size="50" speed="1" color="white"></l-dot-spinner> */}
+              {'loading...'}
             </div>
           ) : (
             <div className="bg-secondary size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
@@ -88,11 +89,12 @@ const project: React.FC = () => {
               <button className="text-white flex items-center gap-2 bg-button-gradient p-3 rounded-full">
                 <FaWandMagicSparkles />
                 {imageUploadLoading && !imageUploaded ? (
-                  <l-dot-spinner
-                    size="20"
-                    speed="1"
-                    color="white"
-                  ></l-dot-spinner>
+                  // <l-dot-spinner
+                  //   size="20"
+                  //   speed="1"
+                  //   color="white"
+                  // ></l-dot-spinner>
+                  "loading..."
                 ) : (
                   "Generate"
                 )}
