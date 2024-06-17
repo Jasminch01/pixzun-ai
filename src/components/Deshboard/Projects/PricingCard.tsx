@@ -9,6 +9,7 @@ interface PricingCardProps {
   buttonText: string;
 }
 
+
 const PricingCard: React.FC<PricingCardProps> = ({
   title,
   price,
