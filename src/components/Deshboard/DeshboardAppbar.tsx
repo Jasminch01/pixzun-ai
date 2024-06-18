@@ -7,6 +7,7 @@ import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
+import axios from "axios";
 
 interface LinkItem {
   name: string;
@@ -24,12 +25,15 @@ const DehsboardAppbar: React.FC = () => {
     // { name: "Profile", href: "" },
   ];
   const { isLoaded, user } = useUser();
+
+  //save user and role in db if user is not exist in db
   const newUser = {
-    name : user?.fullName,
-    email : user?.emailAddresses,
-    image : user?.imageUrl,
-  }
-  console.log(newUser)
+    id: user?.id,
+    name: user?.fullName,
+    email: user?.emailAddresses[0],
+    image: user?.imageUrl,
+  };
+
   const handleSignOut = () => {
     signOut();
     redirect("/");
@@ -45,7 +49,6 @@ const DehsboardAppbar: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   return (
     <div
       className={`fixed w-full z-50 top-0 ${isScrolled && "bg-bg-gradient"}`}
