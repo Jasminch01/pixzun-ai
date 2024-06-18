@@ -5,6 +5,8 @@ import { IoImageOutline, IoMenu } from "react-icons/io5";
 import { Brand, Leaf } from "../Svg";
 import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
+import { useClerk, useUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 interface LinkItem {
   name: string;
@@ -12,27 +14,33 @@ interface LinkItem {
 }
 
 const DehsboardAppbar: React.FC = () => {
+  const { signOut } = useClerk();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(true);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
     // { name: "Profile", href: "" },
   ];
+  const { isLoaded, user } = useUser();
+  const newUser = {
+    name : user?.fullName,
+    email : user?.emailAddresses,
+    image : user?.imageUrl,
+  }
+  console.log(newUser)
+  const handleSignOut = () => {
+    signOut();
+    redirect("/");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      if (scrollTop > 0) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(scrollTop > 0);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -46,7 +54,7 @@ const DehsboardAppbar: React.FC = () => {
         <div className="flex justify-between items-center py-5">
           <div className="flex justify-center gap-2">
             <Brand />
-            <Link href={"/"} className="md:text-2xl text-xl text-white">
+            <Link href={"/app"} className="md:text-2xl text-xl text-white">
               pixzun
             </Link>
           </div>
@@ -56,7 +64,6 @@ const DehsboardAppbar: React.FC = () => {
                 href="/cradit"
                 className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
               >
-                {" "}
                 <Leaf />
                 <p>Cradit : 1</p>
               </Link>
@@ -68,21 +75,36 @@ const DehsboardAppbar: React.FC = () => {
               </Link>
               <div className="relative group">
                 <button
-                  className="text-base text-white size-11 flex justify-center items-center bg-purple-500 rounded-full transition-all px-3 py-2"
+                  className="text-base text-white flex justify-center items-center rounded-full transition-all "
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                 >
-                  <p>ST</p>
+                  {/* <p>ST</p> */}
+                  <img
+                    src={`${user?.imageUrl}`}
+                    alt="Profile"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
                 </button>
-                {/* show user info */}
                 {isProfileOpen && (
                   <div className="absolute right-4 top-[4rem] z-[1] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] py-3">
-                    <Link href={'app/profile'} className="flex items-center justify-center gap-5">
-                      <div className="text-base text-white size-11 flex justify-center items-center bg-purple-500 rounded-full transition-all px-3 py-2">
-                        <p>ST</p>
+                    <Link
+                      href={"app/profile"}
+                      className="flex items-center justify-center gap-5"
+                    >
+                      <div className="text-base text-white  flex justify-center items-center rounded-full transition-all ">
+                        <img
+                          src={`${user?.imageUrl}`}
+                          alt="Profile"
+                          width={40}
+                          height={40}
+                          className="rounded-full"
+                        />
                       </div>
                       <div>
-                        <p>Sumed Tanchanga</p>
-                        <p className="text-sm">email : sumed@gmail.com</p>
+                        <p>{user?.fullName}</p>
+                        <p className="text-sm">{`${user?.emailAddresses}`}</p>
                       </div>
                     </Link>
                     <div className="ml-8 mt-3 text-sm">
@@ -104,7 +126,10 @@ const DehsboardAppbar: React.FC = () => {
                       </div>
                     </div>
                     <hr className="border-gray-400 border" />
-                    <button className="flex text-sm ml-8 items-center gap-3 my-2">
+                    <button
+                      className="flex text-sm ml-8 items-center gap-3 my-2"
+                      onClick={() => handleSignOut()}
+                    >
                       <TbLogout size={25} color="white" />
                       Logout
                     </button>
