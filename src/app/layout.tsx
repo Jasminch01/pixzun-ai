@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import AuthProvider from "./context/AuthProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -20,9 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`bg-bg-gradient ${poppins.variable} font-poppins`}>
-        {children}
-      </body>
+      <AuthProvider>
+        <body className={`bg-bg-gradient ${poppins.variable} font-poppins`}>
+          {children}
+        </body>
+      </AuthProvider>
     </html>
   );
 }
