@@ -9,21 +9,21 @@ interface Project {
 }
 
 const initialProjects: Project[] = [
-  {
-    id: 1,
-    name: "Project 1",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 2,
-    name: "Project 2",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 3,
-    name: "Project 3",
-    image: "https://via.placeholder.com/150",
-  },
+  // {
+  //   id: 1,
+  //   name: "Project 1",
+  //   image: "https://via.placeholder.com/150",
+  // },
+  // {
+  //   id: 2,
+  //   name: "Project 2",
+  //   image: "https://via.placeholder.com/150",
+  // },
+  // {
+  //   id: 3,
+  //   name: "Project 3",
+  //   image: "https://via.placeholder.com/150",
+  // },
 ];
 
 const RecentProjects: React.FC = () => {
@@ -74,7 +74,7 @@ const RecentProjects: React.FC = () => {
 
   if (recentProjects.length === 0 && favoriteProjects.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center mt-44">
         <p className="text-gray-400 text-center text-sm md:text-base">
           You don't have any projects yet!
         </p>

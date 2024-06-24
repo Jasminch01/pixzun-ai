@@ -1,9 +1,11 @@
 "use client";
-import Container from "@/components/Container";
+import { useUserContext } from "@/app/context/ContextProvider";
 import React, { useState } from "react";
+
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState("personalInfo");
+  const {currentUser, loading} = useUserContext()
 
   const renderContent = () => {
     switch (activeTab) {
@@ -15,7 +17,7 @@ const Profile: React.FC = () => {
               <div className="">
                 <p className="text-gray-300">User Name</p>
                 <div className="flex justify-between">
-                  <p className="text-white">Name: John Doe</p>
+                  <p className="text-white">Name: {`${currentUser.name}`}</p>
                   <div className="">
                     <button className="py-2 rounded-md px-4 border border-gray-400">
                       Edit
@@ -27,7 +29,7 @@ const Profile: React.FC = () => {
                 <div>
                   <p className="text-gray-300">User Email</p>
                   <div className="flex justify-between">
-                    <p className="text-white">Name: sumed@gamil.com</p>
+                    <p className="text-white">Email: {`${currentUser.email}`}</p>
                     <button className="py-2 rounded-md px-4 border border-gray-400">
                       Modify email addrerss
                     </button>

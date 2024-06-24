@@ -3,23 +3,49 @@ import { IoMdImages } from "react-icons/io";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import RightSidebar from "@/components/Deshboard/Sidebar/RightSidebar";
 import LeftSidebar from "@/components/Deshboard/Sidebar/LeftSidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import PricingModal from "@/components/Deshboard/Projects/PricingModal";
+import { useUserContext } from "@/app/context/ContextProvider";
 // import { dotSpinner } from "ldrs";
 
 // dotSpinner.register();
-
-const projectName = "my Project";
+interface Project {
+  name: string;
+  createdAt: string; // or Date if you prefer to store it as Date
+}
 
 const project: React.FC = () => {
   const [imageUploaded, setImageUploaded] = useState(true);
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
   const [isFreeUser, setIsFreeUser] = useState(true);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const { currentUser, loading } = useUserContext();
+  const [projectName, setProjectName] = useState<string>("");
 
   const openModal = () => setIsPricingModalOpen(true);
   const closeModal = () => setIsPricingModalOpen(false);
+
+  //get latest Project Name
+  const getLatestProject = (projects: Project[]): Project | null => {
+    if (!projects || projects.length === 0) {
+      return null;
+    }
+
+    return projects.reduce((latestProject, currentProject) => {
+      return new Date(currentProject.createdAt) >
+        new Date(latestProject.createdAt)
+        ? currentProject
+        : latestProject;
+    });
+  };
+  //set project name
+  useEffect(() => {
+    if (!loading && currentUser) {
+      const latestProject = getLatestProject(currentUser.projects);
+      setProjectName(latestProject ? latestProject.name : "");
+    }
+  }, [currentUser, loading]);
 
   return (
     <div className="flex">
@@ -28,7 +54,7 @@ const project: React.FC = () => {
 
       {/* Main Content */}
       <div className="flex-1 ml-80 mr-64 mt-[5rem] p-6">
-        <p className="text-white text-center text-lg">{projectName}</p>
+        <p className="text-white text-center text-lg">{`${projectName}`}</p>
         <div className="flex items-center justify-center mt-[5.56rem] relative">
           <div className="absolute bg-bg-lighter blur-3xl md:w-[30rem] md:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
 
@@ -47,7 +73,7 @@ const project: React.FC = () => {
           ) : imageUploadLoading ? (
             <div className="bg-secondary size-[20rem] text-white rounded flex flex-col justify-center items-center">
               {/* <l-dot-spinner size="50" speed="1" color="white"></l-dot-spinner> */}
-              {'loading...'}
+              {"loading..."}
             </div>
           ) : (
             <div className="bg-secondary size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
@@ -88,16 +114,14 @@ const project: React.FC = () => {
               )}
               <button className="text-white flex items-center gap-2 bg-button-gradient p-3 rounded-full">
                 <FaWandMagicSparkles />
-                {imageUploadLoading && !imageUploaded ? (
-                  // <l-dot-spinner
-                  //   size="20"
-                  //   speed="1"
-                  //   color="white"
-                  // ></l-dot-spinner>
-                  "loading..."
-                ) : (
-                  "Generate"
-                )}
+                {imageUploadLoading && !imageUploaded
+                  ? // <l-dot-spinner
+                    //   size="20"
+                    //   speed="1"
+                    //   color="white"
+                    // ></l-dot-spinner>
+                    "loading..."
+                  : "Generate"}
               </button>
             </div>
           </div>

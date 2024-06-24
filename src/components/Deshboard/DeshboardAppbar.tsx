@@ -19,6 +19,7 @@ const DehsboardAppbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState()
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
@@ -26,18 +27,56 @@ const DehsboardAppbar: React.FC = () => {
   ];
   const { isLoaded, user } = useUser();
 
-  //save user and role in db if user is not exist in db
-  const newUser = {
-    id: user?.id,
-    name: user?.fullName,
-    email: user?.emailAddresses[0],
-    image: user?.imageUrl,
-  };
-
   const handleSignOut = () => {
     signOut();
     redirect("/");
   };
+  //save user and role in db if user is not exist in db
+  useEffect(() => {
+    if (!isLoaded || !user) return;
+
+    const newUser = {
+      name: user.fullName,
+      email: user.emailAddresses[0].emailAddress,
+      image: user.imageUrl,
+    };
+
+    const signUpUser = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/api/auth/signup",
+          newUser,
+          {
+            withCredentials: true,
+          }
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    signUpUser();
+  }, [isLoaded, user]);
+
+  //getuser
+  useEffect(() => {
+    if (!isLoaded || !user) return;
+    const currentUser= async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/user/me?email=${user?.emailAddresses}`,
+          {
+            withCredentials: true,
+          }
+        );
+        setCurrentUser(res.data.data)
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    currentUser();
+  }, [isLoaded, user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +88,7 @@ const DehsboardAppbar: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <div
       className={`fixed w-full z-50 top-0 ${isScrolled && "bg-bg-gradient"}`}
@@ -68,7 +108,7 @@ const DehsboardAppbar: React.FC = () => {
                 className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
               >
                 <Leaf />
-                <p>Cradit : 1</p>
+                <p>Cradit :  {`${currentUser?.cradit}`}</p>
               </Link>
               <Link
                 href="/get-cradits"
