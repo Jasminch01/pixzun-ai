@@ -7,6 +7,7 @@ import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import Link from "next/link";
 import { useUserContext } from "../context/ContextProvider";
 import axios from "axios";
+import { redirect } from "next/navigation";
 
 const Page: React.FC = () => {
   const [isNewUser, setIsNewUser] = useState(true);
@@ -31,19 +32,43 @@ const Page: React.FC = () => {
     setProjectName(e.target.value);
   };
 
+  interface Project {
+    _id: string;
+    name: string;
+    createdAt: string; // or Date if preferred
+  }
+
+  // Function to get the latest project
+  const getLatestProject = (projects: Project[]): Project | null => {
+    if (!projects || projects.length === 0) {
+      return null;
+    }
+
+    return projects.reduce((latestProject, currentProject) => {
+      return new Date(currentProject.createdAt) >
+        new Date(latestProject.createdAt)
+        ? currentProject
+        : latestProject;
+    });
+  };
+
   const handleCreateNewProjects = () => {
     //create db insert
     //project name
     const payload = {
-      name : projectName
-    }
+      name: projectName,
+    };
     const createProject = async () => {
       try {
         const res = await axios.put(
           `http://localhost:5000/api/${currentUser.email}/create-project`,
           payload
         );
-        console.log(res);
+        const projects: Project[] = res.data.data.projects;
+        const latestProject = getLatestProject(projects);
+        if (latestProject?._id) {
+          window.location.href = "/app/create-project";
+        }
       } catch (error) {
         console.error(error);
       }
@@ -131,7 +156,7 @@ const Page: React.FC = () => {
                     onClick={handleCreateNewProjects}
                     className="px-3 py-2 bg-secondary rounded-full"
                   >
-                    <Link href={'/app/create-project'}>Create</Link>
+                    Create
                   </button>
                 </div>
               </div>
