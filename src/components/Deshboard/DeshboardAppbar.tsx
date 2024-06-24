@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoImageOutline, IoMenu } from "react-icons/io5";
@@ -9,36 +9,46 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import axios from "axios";
 
+interface UserResource {
+  fullName: string;
+  emailAddresses: { emailAddress: string }[];
+  imageUrl: string;
+  cradit : number;
+}
+
 interface LinkItem {
   name: string;
   href: string;
 }
 
-const DehsboardAppbar: React.FC = () => {
+const DashboardAppBar: React.FC = () => {
   const { signOut } = useClerk();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState<UserResource | null>(null); // Initialize currentUser as null
+
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
     // { name: "Profile", href: "" },
   ];
+
   const { isLoaded, user } = useUser();
 
   const handleSignOut = () => {
     signOut();
     redirect("/");
   };
-  //save user and role in db if user is not exist in db
+
+  // Save user and role in db if user is not exist in db
   useEffect(() => {
     if (!isLoaded || !user) return;
 
     const newUser = {
-      name: user.fullName,
-      email: user.emailAddresses[0].emailAddress,
-      image: user.imageUrl,
+      fullName: user.fullName ?? "", // Use nullish coalescing operator to handle null or undefined
+      emailAddresses: user.emailAddresses.map((email) => email.emailAddress),
+      imageUrl: user.imageUrl ?? "", // Use nullish coalescing operator to handle null or undefined
     };
 
     const signUpUser = async () => {
@@ -58,24 +68,25 @@ const DehsboardAppbar: React.FC = () => {
     signUpUser();
   }, [isLoaded, user]);
 
-  //getuser
+  // Get user information
   useEffect(() => {
     if (!isLoaded || !user) return;
-    const currentUser= async () => {
+
+    const fetchCurrentUser = async () => {
       try {
-        const res = await axios.get(
-          `https://pixzun-server.vercel.app/api/user/me?email=${user?.emailAddresses}`,
+        const res = await axios.get<UserResource>(
+          `https://pixzun-server.vercel.app/api/user/me?email=${user.emailAddresses}`,
           {
             withCredentials: true,
           }
         );
-        setCurrentUser(res.data.data)
+        setCurrentUser(res.data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    currentUser();
+    fetchCurrentUser();
   }, [isLoaded, user]);
 
   useEffect(() => {
@@ -83,6 +94,7 @@ const DehsboardAppbar: React.FC = () => {
       const scrollTop = window.scrollY;
       setIsScrolled(scrollTop > 0);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -108,7 +120,8 @@ const DehsboardAppbar: React.FC = () => {
                 className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
               >
                 <Leaf />
-                <p>Cradit :  {`${currentUser?.cradit}`}</p>
+                <p>Cradit : {currentUser?.cradit}</p>{" "}
+                {/* Access currentUser safely */}
               </Link>
               <Link
                 href="/get-cradits"
@@ -147,7 +160,11 @@ const DehsboardAppbar: React.FC = () => {
                       </div>
                       <div>
                         <p>{user?.fullName}</p>
-                        <p className="text-sm">{`${user?.emailAddresses}`}</p>
+                        {user?.emailAddresses.map((email, index) => (
+                          <p key={index} className="text-sm">
+                            {email.emailAddress}
+                          </p>
+                        ))}
                       </div>
                     </Link>
                     <div className="ml-8 mt-3 text-sm">
@@ -213,4 +230,4 @@ const DehsboardAppbar: React.FC = () => {
   );
 };
 
-export default DehsboardAppbar;
+export default DashboardAppBar;
