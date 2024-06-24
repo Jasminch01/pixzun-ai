@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { IoImageOutline, IoMenu } from "react-icons/io5";
@@ -8,13 +8,6 @@ import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import axios from "axios";
-
-interface UserResource {
-  fullName: string;
-  emailAddresses: { emailAddress: string }[];
-  imageUrl: string;
-  cradit : number;
-}
 
 interface LinkItem {
   name: string;
@@ -26,14 +19,12 @@ const DashboardAppBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<UserResource | null>(null); // Initialize currentUser as null
-
+  const [currentUser, setCurrentUser] = useState<any>(null); // Adjust type based on your API response
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
     // { name: "Profile", href: "" },
   ];
-
   const { isLoaded, user } = useUser();
 
   const handleSignOut = () => {
@@ -46,9 +37,9 @@ const DashboardAppBar: React.FC = () => {
     if (!isLoaded || !user) return;
 
     const newUser = {
-      fullName: user.fullName ?? "", // Use nullish coalescing operator to handle null or undefined
-      emailAddresses: user.emailAddresses.map((email) => email.emailAddress),
-      imageUrl: user.imageUrl ?? "", // Use nullish coalescing operator to handle null or undefined
+      name: user.fullName,
+      email: user.emailAddresses[0].emailAddress,
+      image: user.imageUrl,
     };
 
     const signUpUser = async () => {
@@ -74,13 +65,13 @@ const DashboardAppBar: React.FC = () => {
 
     const fetchCurrentUser = async () => {
       try {
-        const res = await axios.get<UserResource>(
-          `https://pixzun-server.vercel.app/api/user/me?email=${user.emailAddresses}`,
+        const res = await axios.get(
+          `https://pixzun-server.vercel.app/api/user/me?email=${user?.emailAddresses[0]?.emailAddress}`,
           {
             withCredentials: true,
           }
         );
-        setCurrentUser(res.data);
+        setCurrentUser(res.data.data);
       } catch (error) {
         console.error(error);
       }
@@ -94,7 +85,6 @@ const DashboardAppBar: React.FC = () => {
       const scrollTop = window.scrollY;
       setIsScrolled(scrollTop > 0);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -103,7 +93,9 @@ const DashboardAppBar: React.FC = () => {
 
   return (
     <div
-      className={`fixed w-full z-50 top-0 ${isScrolled && "bg-bg-gradient"}`}
+      className={`fixed w-full z-50 top-0 ${
+        isScrolled ? "bg-bg-gradient" : ""
+      }`}
     >
       <div className="px-5">
         <div className="flex justify-between items-center py-5">
@@ -120,8 +112,7 @@ const DashboardAppBar: React.FC = () => {
                 className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
               >
                 <Leaf />
-                <p>Cradit : {currentUser?.cradit}</p>{" "}
-                {/* Access currentUser safely */}
+                <p>Cradit : {currentUser?.cradit}</p>
               </Link>
               <Link
                 href="/get-cradits"
@@ -136,7 +127,7 @@ const DashboardAppBar: React.FC = () => {
                 >
                   {/* <p>ST</p> */}
                   <img
-                    src={`${user?.imageUrl}`}
+                    src={user?.imageUrl}
                     alt="Profile"
                     width={40}
                     height={40}
@@ -151,7 +142,7 @@ const DashboardAppBar: React.FC = () => {
                     >
                       <div className="text-base text-white  flex justify-center items-center rounded-full transition-all ">
                         <img
-                          src={`${user?.imageUrl}`}
+                          src={user?.imageUrl}
                           alt="Profile"
                           width={40}
                           height={40}
@@ -170,7 +161,7 @@ const DashboardAppBar: React.FC = () => {
                     <div className="ml-8 mt-3 text-sm">
                       <div className="my-5">
                         <p className="mb-3 flex gap-3">
-                          <Leaf /> Cradit : 1
+                          <Leaf /> Cradit : {currentUser.cradit}
                         </p>
                         <p className="text-gray-400">Clude project</p>
                       </div>
