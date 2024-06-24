@@ -7,15 +7,12 @@ import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import Link from "next/link";
 import { useUserContext } from "../context/ContextProvider";
 import axios from "axios";
-import { redirect } from "next/navigation";
 
 const Page: React.FC = () => {
   const [isNewUser, setIsNewUser] = useState(true);
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [projectName, setProjectName] = useState<string>("");
-  const RecentProject = true;
-  const FavouriteProject = true;
 
   const { currentUser, loading } = useUserContext();
 
@@ -61,7 +58,7 @@ const Page: React.FC = () => {
     const createProject = async () => {
       try {
         const res = await axios.put(
-          `http://localhost:5000/api/${currentUser.email}/create-project`,
+          `https://pixzun-server.vercel.app/api/${currentUser.email}/create-project`,
           payload
         );
         const projects: Project[] = res.data.data.projects;

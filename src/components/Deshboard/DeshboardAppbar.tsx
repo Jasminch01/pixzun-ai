@@ -44,7 +44,7 @@ const DehsboardAppbar: React.FC = () => {
     const signUpUser = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:5000/api/auth/signup",
+          "https://pixzun-server.vercel.app/api/auth/signup",
           newUser,
           {
             withCredentials: true,
@@ -64,7 +64,7 @@ const DehsboardAppbar: React.FC = () => {
     const currentUser= async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/user/me?email=${user?.emailAddresses}`,
+          `https://pixzun-server.vercel.app/api/user/me?email=${user?.emailAddresses}`,
           {
             withCredentials: true,
           }
