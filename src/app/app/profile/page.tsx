@@ -77,8 +77,8 @@ const Profile: React.FC = () => {
           <p>ST</p>
         </div>
         <div>
-          <h1 className="text-2xl">Sumed Tancahange</h1>
-          <p className="text-lg">johndoe@example.com</p>
+          <h1 className="text-2xl">{currentUser.name}</h1>
+          <p className="text-lg">{currentUser.email}</p>
         </div>
       </div>
       <div className="w-full mt-10">
