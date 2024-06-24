@@ -5,14 +5,16 @@ import { Brand, Folder, Leaf } from "@/components/Svg";
 import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import Link from "next/link";
+import { useUserContext } from "../context/ContextProvider";
+import axios from "axios";
 
 const Page: React.FC = () => {
   const [isNewUser, setIsNewUser] = useState(true);
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [projectName, setProjectName] = useState<string>("");
-  const RecentProject = true;
-  const FavouriteProject = true;
+
+  const { currentUser, loading } = useUserContext();
 
   // Handle modal close
   const handleWelcomeModalClose = () => {
@@ -27,9 +29,49 @@ const Page: React.FC = () => {
     setProjectName(e.target.value);
   };
 
+  interface Project {
+    _id: string;
+    name: string;
+    createdAt: string; // or Date if preferred
+  }
+
+  // Function to get the latest project
+  const getLatestProject = (projects: Project[]): Project | null => {
+    if (!projects || projects.length === 0) {
+      return null;
+    }
+
+    return projects.reduce((latestProject, currentProject) => {
+      return new Date(currentProject.createdAt) >
+        new Date(latestProject.createdAt)
+        ? currentProject
+        : latestProject;
+    });
+  };
+
   const handleCreateNewProjects = () => {
     //create db insert
-    //project name 
+    //project name
+    const payload = {
+      name: projectName,
+    };
+    const createProject = async () => {
+      try {
+        const res = await axios.put(
+          `https://pixzun-server.vercel.app/api/${currentUser.email}/create-project`,
+          payload
+        );
+        const projects: Project[] = res.data.data.projects;
+        const latestProject = getLatestProject(projects);
+        if (latestProject?._id) {
+          window.location.href = "/app/create-project";
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    createProject();
     setIsNewProjectModalOpen(false);
   };
 
@@ -111,7 +153,7 @@ const Page: React.FC = () => {
                     onClick={handleCreateNewProjects}
                     className="px-3 py-2 bg-secondary rounded-full"
                   >
-                    <Link href={'deshboard/create-project'}>Create</Link>
+                    Create
                   </button>
                 </div>
               </div>
@@ -122,9 +164,9 @@ const Page: React.FC = () => {
         {/* TO DO: Show projects */}
         {/*recent project fetch from db*/}
         {/* {RecentProject ? ( */}
-          <RecentProjects />
+        <RecentProjects />
         {/* ) : ( */}
-          {/* <div className="mt-[10.50rem]">
+        {/* <div className="mt-[10.50rem]">
             <p className="text-gray-400 text-center text-sm md:text-base">
               You don’t have any projects yet!
             </p>

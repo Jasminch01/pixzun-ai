@@ -1,6 +1,6 @@
-"use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
+import { useUserContext } from "@/app/context/ContextProvider";
 
 interface Project {
   id: number;
@@ -8,29 +8,19 @@ interface Project {
   image: string;
 }
 
-const initialProjects: Project[] = [
-  {
-    id: 1,
-    name: "Project 1",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 2,
-    name: "Project 2",
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    id: 3,
-    name: "Project 3",
-    image: "https://via.placeholder.com/150",
-  },
-];
+const initialProjects: Project[] = [];
 
 const RecentProjects: React.FC = () => {
-  const [recentProjects, setRecentProjects] =
-    useState<Project[]>(initialProjects);
+  const { currentUser, loading } = useUserContext();
+  const [recentProjects, setRecentProjects] = useState<Project[]>([]);
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: number]: boolean }>({});
+
+  useEffect(() => {
+    if (!loading && currentUser) {
+      setRecentProjects(currentUser.projects || []);
+    }
+  }, [currentUser, loading]);
 
   const handleMenuToggle = (projectId: number) => {
     setMenuOpen((prevState) => ({
@@ -72,9 +62,19 @@ const RecentProjects: React.FC = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center mt-44">
+        <p className="text-gray-400 text-center text-sm md:text-base">
+          Loading...
+        </p>
+      </div>
+    );
+  }
+
   if (recentProjects.length === 0 && favoriteProjects.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center mt-44">
         <p className="text-gray-400 text-center text-sm md:text-base">
           You don't have any projects yet!
         </p>

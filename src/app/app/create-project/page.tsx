@@ -3,23 +3,56 @@ import { IoMdImages } from "react-icons/io";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import RightSidebar from "@/components/Deshboard/Sidebar/RightSidebar";
 import LeftSidebar from "@/components/Deshboard/Sidebar/LeftSidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import PricingModal from "@/components/Deshboard/Projects/PricingModal";
+import { useUserContext } from "@/app/context/ContextProvider";
 // import { dotSpinner } from "ldrs";
 
 // dotSpinner.register();
-
-const projectName = "my Project";
+interface Project {
+  name: string;
+  createdAt: string; // or Date if you prefer to store it as Date
+}
 
 const project: React.FC = () => {
-  const [imageUploaded, setImageUploaded] = useState(true);
+  const [imageUploaded, setImageUploaded] = useState(false);
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
   const [isFreeUser, setIsFreeUser] = useState(true);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
+  const { currentUser, loading } = useUserContext();
+  const [projectName, setProjectName] = useState<string>("");
 
   const openModal = () => setIsPricingModalOpen(true);
   const closeModal = () => setIsPricingModalOpen(false);
+
+  //get latest Project Name
+  const getLatestProject = (projects: Project[]): Project | null => {
+    if (!projects || projects.length === 0) {
+      return null;
+    }
+
+    return projects.reduce((latestProject, currentProject) => {
+      return new Date(currentProject.createdAt) >
+        new Date(latestProject.createdAt)
+        ? currentProject
+        : latestProject;
+    });
+  };
+  //set project name
+  useEffect(() => {
+    if (!loading && currentUser) {
+      const latestProject = getLatestProject(currentUser.projects);
+      setProjectName(latestProject ? latestProject.name : "");
+    }
+  }, [currentUser, loading]);
+  if (loading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex">
@@ -46,8 +79,7 @@ const project: React.FC = () => {
             </div>
           ) : imageUploadLoading ? (
             <div className="bg-secondary size-[20rem] text-white rounded flex flex-col justify-center items-center">
-              {/* <l-dot-spinner size="50" speed="1" color="white"></l-dot-spinner> */}
-              {'loading...'}
+              {"Loading..."}
             </div>
           ) : (
             <div className="bg-secondary size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
@@ -61,43 +93,35 @@ const project: React.FC = () => {
               </div>
             </div>
           )}
-
-          {/* Input Prompt */}
         </div>
+
+        {/* Input Prompt */}
         <div className="flex justify-center mt-10">
           <div className="w-[35rem]">
             <textarea
-              name=""
-              id=""
               rows={4}
               className="rounded-md w-full bg-transparent p-3 border-2 border-gray-400 border-opacity-50 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
               placeholder="Type whatever you want to do with AI"
             ></textarea>
           </div>
         </div>
+
         <div className="flex justify-center mt-3">
-          <div className="w-[35rem] ">
+          <div className="w-[35rem]">
             <div className="flex justify-end gap-5">
               {isFreeUser && (
                 <button
                   className="bg-button-gradient p-3 rounded-full text-white"
                   onClick={openModal}
                 >
-                  Remove WaterMark
+                  Remove Watermark
                 </button>
               )}
               <button className="text-white flex items-center gap-2 bg-button-gradient p-3 rounded-full">
                 <FaWandMagicSparkles />
-                {imageUploadLoading && !imageUploaded ? (
-                  // <l-dot-spinner
-                  //   size="20"
-                  //   speed="1"
-                  //   color="white"
-                  // ></l-dot-spinner>
-                  "loading..."
-                ) : (
-                  "Generate"
-                )}
+                {imageUploadLoading && !imageUploaded
+                  ? "Loading..."
+                  : "Generate"}
               </button>
             </div>
           </div>

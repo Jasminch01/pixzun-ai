@@ -33,7 +33,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="relative bg-[#1E202D] w-60 h-64 rounded-md p-3 flex flex-col justify-center items-center">
         <div className="">
           <Image
-            src={project.image}
+            // src={project.image}
+            src={'https://via.placeholder.com/150'}
             alt={project.name}
             width={50}
             height={50}
