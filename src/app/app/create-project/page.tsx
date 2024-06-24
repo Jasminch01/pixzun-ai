@@ -16,7 +16,7 @@ interface Project {
 }
 
 const project: React.FC = () => {
-  const [imageUploaded, setImageUploaded] = useState(true);
+  const [imageUploaded, setImageUploaded] = useState(false);
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
   const [isFreeUser, setIsFreeUser] = useState(true);
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
