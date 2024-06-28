@@ -4,12 +4,10 @@ import Container from "@/components/Container";
 import { Brand, Folder, Leaf } from "@/components/Svg";
 import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
-import Link from "next/link";
 import { useUserContext } from "../context/ContextProvider";
 import axios from "axios";
 
 const Page: React.FC = () => {
-  const [isNewUser, setIsNewUser] = useState(true);
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [projectName, setProjectName] = useState<string>("");
@@ -74,27 +72,33 @@ const Page: React.FC = () => {
     createProject();
     setIsNewProjectModalOpen(false);
   };
-
   // Open modals if the user is new
   useEffect(() => {
-    if (isNewUser) {
-      const welcomeTimer = setTimeout(() => {
-        setIsWelcomeModalOpen(true);
-      }, 5000);
-      return () => clearTimeout(welcomeTimer);
+    if (currentUser) {
+      const createdAt = new Date(currentUser?.createdAt);
+      const now = new Date();
+      const diffInMillis = now.getTime() - createdAt.getTime();
+      const isNewUser = diffInMillis <= 2 * 60 * 1000;
+
+      if (isNewUser) {
+        const welcomeTimer = setTimeout(() => {
+          setIsWelcomeModalOpen(true);
+        }, 5000);
+        return () => clearTimeout(welcomeTimer);
+      }
     }
-  }, [isNewUser]);
+  }, [currentUser]);
 
   return (
     <div className="mt-32">
       <Container>
-        <div className="flex justify-center">
+        <div
+          className="flex justify-center cursor-pointer"
+          onClick={() => setIsNewProjectModalOpen(true)}
+        >
           <div className="md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]">
             <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
-              <div
-                className="cursor-pointer"
-                onClick={() => setIsNewProjectModalOpen(true)}
-              >
+              <div>
                 <Folder />
               </div>
               <p className="text-white text-sm md:text-base">

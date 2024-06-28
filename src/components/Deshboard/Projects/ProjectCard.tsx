@@ -4,17 +4,17 @@ import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 
 interface Project {
-  id: number;
+  _id: string;
   name: string;
   image: string;
 }
 
 interface ProjectCardProps {
   project: Project;
-  handleMenuToggle: (projectId: number) => void;
-  menuOpen: { [key: number]: boolean };
-  handleRename: (projectId: number) => void;
-  handleDelete: (projectId: number) => void;
+  handleMenuToggle: (projectId: string) => void;
+  menuOpen: { [key: string]: boolean };
+  handleRename: (projectId: string) => void;
+  handleDelete: (projectId: string) => void;
   handleFavoriteToggle: (project: Project) => void;
   isFavorite: boolean;
 }
@@ -34,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div className="">
           <Image
             // src={project.image}
-            src={'https://via.placeholder.com/150'}
+            src={"https://via.placeholder.com/150"}
             alt={project.name}
             width={50}
             height={50}
@@ -61,19 +61,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <AiOutlineEllipsis
             className="text-white cursor-pointer"
             size={20}
-            onClick={() => handleMenuToggle(project.id)}
+            onClick={() => handleMenuToggle(project._id)}
           />
-          {menuOpen[project.id] && (
+          {menuOpen[project._id] && (
             <div className="absolute right-0 bg-gray-800 rounded-md shadow-lg mt-2">
               <button
                 className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-700"
-                onClick={() => handleRename(project.id)}
+                onClick={() => handleRename(project._id)}
               >
                 Rename
               </button>
               <button
                 className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-700"
-                onClick={() => handleDelete(project.id)}
+                onClick={() => handleDelete(project._id)}
               >
                 Delete
               </button>

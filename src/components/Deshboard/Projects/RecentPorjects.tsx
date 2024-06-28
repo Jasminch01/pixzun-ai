@@ -3,52 +3,52 @@ import ProjectCard from "./ProjectCard";
 import { useUserContext } from "@/app/context/ContextProvider";
 
 interface Project {
-  id: number;
+  _id: string;
   name: string;
   image: string;
 }
 
-const initialProjects: Project[] = [];
-
 const RecentProjects: React.FC = () => {
-  const { currentUser, loading } = useUserContext();
+  const { currentUser, loading: contextLoading } = useUserContext();
   const [recentProjects, setRecentProjects] = useState<Project[]>([]);
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
-  const [menuOpen, setMenuOpen] = useState<{ [key: number]: boolean }>({});
+  const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!loading && currentUser) {
+    if (!contextLoading && currentUser) {
       setRecentProjects(currentUser.projects || []);
+      setLoading(false);
     }
-  }, [currentUser, loading]);
+  }, [currentUser, contextLoading]);
 
-  const handleMenuToggle = (projectId: number) => {
+  const handleMenuToggle = (projectId: string) => {
     setMenuOpen((prevState) => ({
       ...prevState,
       [projectId]: !prevState[projectId],
     }));
   };
 
-  const handleRename = (projectId: number) => {
+  const handleRename = (projectId: string) => {
     console.log(`Rename project with id: ${projectId}`);
     // Implement rename functionality here
   };
 
-  const handleDelete = (projectId: number) => {
+  const handleDelete = (projectId: string) => {
     console.log(`Delete project with id: ${projectId}`);
     setRecentProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== projectId)
+      prevProjects.filter((project) => project._id !== projectId)
     );
     setFavoriteProjects((prevProjects) =>
-      prevProjects.filter((project) => project.id !== projectId)
+      prevProjects.filter((project) => project._id !== projectId)
     );
   };
 
   const handleFavoriteToggle = (project: Project) => {
-    if (favoriteProjects.some((favProject) => favProject.id === project.id)) {
+    if (favoriteProjects.some((favProject) => favProject._id === project._id)) {
       // Remove from favorite projects
       setFavoriteProjects((prevFavorites) =>
-        prevFavorites.filter((favProject) => favProject.id !== project.id)
+        prevFavorites.filter((favProject) => favProject._id !== project._id)
       );
       // Add back to recent projects
       setRecentProjects((prevRecent) => [...prevRecent, project]);
@@ -57,7 +57,7 @@ const RecentProjects: React.FC = () => {
       setFavoriteProjects((prevFavorites) => [...prevFavorites, project]);
       // Remove from recent projects
       setRecentProjects((prevRecent) =>
-        prevRecent.filter((recentProject) => recentProject.id !== project.id)
+        prevRecent.filter((recentProject) => recentProject._id !== project._id)
       );
     }
   };
@@ -90,7 +90,7 @@ const RecentProjects: React.FC = () => {
           <div className="flex gap-5 mt-5">
             {recentProjects.map((project) => (
               <ProjectCard
-                key={project.id}
+                key={project._id}
                 project={project}
                 handleMenuToggle={handleMenuToggle}
                 menuOpen={menuOpen}
@@ -98,7 +98,7 @@ const RecentProjects: React.FC = () => {
                 handleDelete={handleDelete}
                 handleFavoriteToggle={handleFavoriteToggle}
                 isFavorite={favoriteProjects.some(
-                  (favProject) => favProject.id === project.id
+                  (favProject) => favProject._id === project._id
                 )}
               />
             ))}
@@ -118,7 +118,7 @@ const RecentProjects: React.FC = () => {
           <div className="flex gap-5 mt-5">
             {favoriteProjects.map((project) => (
               <ProjectCard
-                key={project.id}
+                key={project._id}
                 project={project}
                 handleMenuToggle={handleMenuToggle}
                 menuOpen={menuOpen}
