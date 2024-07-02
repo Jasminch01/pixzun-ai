@@ -13,9 +13,9 @@ const Appbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const links: LinkItem[] = [
-    { name: "Pricing", href: "/pricing" },
-    { name: "Login", href: "/login" },
-    { name: "Signup", href: "/signup" },
+    { name: "Pricing", href: "#pricing" },
+    { name: "Login", href: "/sign-in" },
+    { name: "Signup", href: "/sign-up" },
   ];
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const Appbar: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex justify-center gap-2">
             <Brand/>
-            <p className="md:text-2xl text-xl text-white">pixaura</p>
+            <p className="md:text-2xl text-xl text-white">pixzun</p>
           </div>
           <div className="hidden md:flex items-center">
             {links.map((link, index) => (
