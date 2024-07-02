@@ -45,7 +45,7 @@ const DashboardAppBar: React.FC = () => {
     const signUpUser = async () => {
       try {
         const res = await axios.post(
-          "https://pixzun-server.vercel.app/api/auth/signup",
+          "https://pixzun-ai-server.onrender.com/api/auth/signup",
           newUser,
           {
             withCredentials: true,
@@ -66,7 +66,7 @@ const DashboardAppBar: React.FC = () => {
     const fetchCurrentUser = async () => {
       try {
         const res = await axios.get(
-          `https://pixzun-server.vercel.app/api/user/me?email=${user?.emailAddresses[0]?.emailAddress}`,
+          `https://pixzun-ai-server.onrender.com/api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`,
           {
             withCredentials: true,
           }
@@ -112,13 +112,13 @@ const DashboardAppBar: React.FC = () => {
                 className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
               >
                 <Leaf />
-                <p>Cradit : {currentUser?.cradit}</p>
+                <p>Credit : {currentUser?.cradit}</p>
               </Link>
               <Link
                 href="/get-cradits"
                 className="text-base text-white p-3 bg-button-gradient rounded-full transition-all"
               >
-                Get Cradits
+                Get Credits
               </Link>
               <div className="relative group">
                 <button
@@ -161,7 +161,7 @@ const DashboardAppBar: React.FC = () => {
                     <div className="ml-8 mt-3 text-sm">
                       <div className="my-5">
                         <p className="mb-3 flex gap-3">
-                          <Leaf /> Cradit : {currentUser.cradit}
+                          <Leaf /> Credit : {currentUser.cradit}
                         </p>
                         <p className="text-gray-400">Clude project</p>
                       </div>

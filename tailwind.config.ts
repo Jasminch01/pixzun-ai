@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
 
-const config: Config = {
+const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -34,7 +33,8 @@ const config: Config = {
           "linear-gradient(154deg, #282A38 -22.12%, #32354E 104.23%)",
         "footer-gradient":
           "linear-gradient(0deg, #232633 -70.5%, #2E3037 198.56%)",
-         "join-button" : "linear-gradient(104deg, #BB25D8 -4.77%, #A536E6 47.09%, #9146F3 100%)"
+        "join-button":
+          "linear-gradient(104deg, #BB25D8 -4.77%, #A536E6 47.09%, #9146F3 100%)",
       },
       fontFamily: {
         poppins: "var(--font-poppins)",

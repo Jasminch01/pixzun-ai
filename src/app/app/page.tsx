@@ -4,12 +4,10 @@ import Container from "@/components/Container";
 import { Brand, Folder, Leaf } from "@/components/Svg";
 import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
-import Link from "next/link";
 import { useUserContext } from "../context/ContextProvider";
 import axios from "axios";
 
 const Page: React.FC = () => {
-  const [isNewUser, setIsNewUser] = useState(true);
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [projectName, setProjectName] = useState<string>("");
@@ -32,7 +30,7 @@ const Page: React.FC = () => {
   interface Project {
     _id: string;
     name: string;
-    createdAt: string; // or Date if preferred
+    createdAt: string;
   }
 
   // Function to get the latest project
@@ -49,52 +47,61 @@ const Page: React.FC = () => {
     });
   };
 
-  const handleCreateNewProjects = () => {
-    //create db insert
-    //project name
+  const handleCreateNewProjects = async () => {
+    if (!projectName.trim()) {
+      alert("Project name cannot be empty");
+      return;
+    }
+
     const payload = {
       name: projectName,
     };
-    const createProject = async () => {
-      try {
-        const res = await axios.put(
-          `https://pixzun-server.vercel.app/api/${currentUser.email}/create-project`,
-          payload
-        );
-        const projects: Project[] = res.data.data.projects;
-        const latestProject = getLatestProject(projects);
-        if (latestProject?._id) {
-          window.location.href = "/app/create-project";
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
-    createProject();
-    setIsNewProjectModalOpen(false);
+    try {
+      const res = await axios.post(
+        `https://pixzun-ai-server.onrender.com/api/project/${currentUser.email}/create-project`,
+        payload,
+        { withCredentials: true }
+      );
+
+      if (res.data.data) {
+        const newProject = res.data.data;
+        window.location.href = `/app/create-project/${newProject._id}`;
+      }
+    } catch (error) {
+      console.error("Error creating project:", error);
+    } finally {
+      setIsNewProjectModalOpen(false);
+    }
   };
 
   // Open modals if the user is new
   useEffect(() => {
-    if (isNewUser) {
-      const welcomeTimer = setTimeout(() => {
-        setIsWelcomeModalOpen(true);
-      }, 5000);
-      return () => clearTimeout(welcomeTimer);
+    if (currentUser) {
+      const createdAt = new Date(currentUser?.createdAt);
+      const now = new Date();
+      const diffInMillis = now.getTime() - createdAt.getTime();
+      const isNewUser = diffInMillis <= 2 * 60 * 1000;
+
+      if (isNewUser) {
+        const welcomeTimer = setTimeout(() => {
+          setIsWelcomeModalOpen(true);
+        }, 5000);
+        return () => clearTimeout(welcomeTimer);
+      }
     }
-  }, [isNewUser]);
+  }, [currentUser]);
 
   return (
     <div className="mt-32">
       <Container>
-        <div className="flex justify-center">
+        <div
+          className="flex justify-center cursor-pointer"
+          onClick={() => setIsNewProjectModalOpen(true)}
+        >
           <div className="md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]">
             <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
-              <div
-                className="cursor-pointer"
-                onClick={() => setIsNewProjectModalOpen(true)}
-              >
+              <div>
                 <Folder />
               </div>
               <p className="text-white text-sm md:text-base">
@@ -160,28 +167,7 @@ const Page: React.FC = () => {
             </div>
           </Modal>
         )}
-
-        {/* TO DO: Show projects */}
-        {/*recent project fetch from db*/}
-        {/* {RecentProject ? ( */}
         <RecentProjects />
-        {/* ) : ( */}
-        {/* <div className="mt-[10.50rem]">
-            <p className="text-gray-400 text-center text-sm md:text-base">
-              You don’t have any projects yet!
-            </p>
-          </div> */}
-        {/* // )} */}
-        {/* favourite project fetch from db
-        {FavouriteProject ? (
-          <RecentProjects />
-        ) : (
-          <div className="mt-[10.50rem]">
-            <p className="text-gray-400 text-center text-sm md:text-base">
-              You don’t have any projects yet!
-            </p>
-          </div>
-        )} */}
       </Container>
     </div>
   );
