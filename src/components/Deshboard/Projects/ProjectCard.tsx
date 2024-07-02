@@ -4,10 +4,16 @@ import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import Link from "next/link";
 
+interface ImageDetail {
+  urls: string[];
+  _id: string;
+}
+
 interface Project {
   _id: string;
   name: string;
-  image: string;
+  isFavourite: boolean;
+  images: ImageDetail[];
 }
 
 interface ProjectCardProps {
@@ -31,13 +37,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <Link href={`/app/create-project/${project._id}`}>
-
       <div className="p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#4940D8] rounded-md cursor-pointer">
         <div className="relative bg-[#1E202D] w-60 h-64 rounded-md p-3 flex flex-col justify-center items-center">
-          <div className="">
+          <div>
             <Image
-              // src={project.image}
-              src={"https://via.placeholder.com/150"}
+              src={project.images[0]?.urls[2] || "https://via.placeholder.com/150"}
               alt={project.name}
               width={50}
               height={50}

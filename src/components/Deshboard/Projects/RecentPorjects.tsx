@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
+import axios from "axios";
 import { useUserContext } from "@/app/context/ContextProvider";
+
+interface ImageDetail {
+  urls: string[];
+  _id: string;
+}
 
 interface Project {
   _id: string;
   name: string;
-  image: string;
+  isFavourite: boolean;
+  images: ImageDetail[];
 }
 
 const RecentProjects: React.FC = () => {
@@ -14,13 +21,30 @@ const RecentProjects: React.FC = () => {
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
   const [loading, setLoading] = useState(true);
+  console.log(recentProjects);
 
   useEffect(() => {
     if (!contextLoading && currentUser) {
-      setRecentProjects(currentUser.projects || []);
-      setLoading(false);
+      const fetchProjects = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:5000/api/project/${currentUser.email}`
+          );
+          console.log("Response:", response.data.data);
+          setRecentProjects(response.data.data);
+          setFavoriteProjects(
+            response.data.data.filter((project: Project) => project.isFavourite)
+          );
+        } catch (error) {
+          console.error("Error during get request:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchProjects();
     }
   }, [currentUser, contextLoading]);
+
   const handleMenuToggle = (projectId: string) => {
     setMenuOpen((prevState) => ({
       ...prevState,
