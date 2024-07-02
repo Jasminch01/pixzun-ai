@@ -28,10 +28,7 @@ const Project: React.FC = () => {
   const [projectName, setProjectName] = useState<string>("");
   const [inputPrompt, setInputPrompt] = useState("");
   const [loadingResult, setLoadingResult] = useState(false);
-  const [generatedResults, setGeneratedResults] = useState<string[]>([
-    "https://res.cloudinary.com/ddqt9bodf/image/upload/v1719850267/uploads/1719850267264-image.jpg",
-    "https://res.cloudinary.com/ddqt9bodf/image/upload/v1719850270/uploads/1719850269805-image.jpg",
-  ]); // Array to store generated image URLs
+  const [generatedResults, setGeneratedResults] = useState<string[]>([]); // Array to store generated image URLs
   const [currentImageIndex, setCurrentImageIndex] = useState(0); // Index of the current image pair
 
   const { id } = useParams();
