@@ -33,7 +33,7 @@ const Project: React.FC = () => {
     });
 
     try {
-      const res = await axios.post("http://localhost:5000/upload", formData, {
+      const res = await axios.post("https://pixzun-ai-server.onrender.com/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -58,7 +58,7 @@ const Project: React.FC = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/project/generate`,
+        `https://pixzun-ai-server.onrender.com/api/project/generate`,
         payload
       );
       console.log("Response:", response.data);

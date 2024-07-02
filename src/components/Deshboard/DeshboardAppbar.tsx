@@ -45,7 +45,7 @@ const DashboardAppBar: React.FC = () => {
     const signUpUser = async () => {
       try {
         const res = await axios.post(
-          "https://pixzun-server.vercel.app/api/auth/signup",
+          "https://pixzun-ai-server.onrender.com/api/auth/signup",
           newUser,
           {
             withCredentials: true,
@@ -66,7 +66,7 @@ const DashboardAppBar: React.FC = () => {
     const fetchCurrentUser = async () => {
       try {
         const res = await axios.get(
-          `https://pixzun-server.vercel.app/api/user/me?email=${user?.emailAddresses[0]?.emailAddress}`,
+          `https://pixzun-ai-server.onrender.com/api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`,
           {
             withCredentials: true,
           }

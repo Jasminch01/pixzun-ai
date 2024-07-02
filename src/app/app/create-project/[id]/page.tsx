@@ -9,7 +9,6 @@ import PricingModal from "@/components/Deshboard/Projects/PricingModal";
 import { useUserContext } from "@/app/context/ContextProvider";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
-import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { MdOutlineFileDownload } from "react-icons/md";
 
@@ -39,7 +38,7 @@ const Project: React.FC = () => {
       const fetchProjectDetails = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/project/project/${id}`
+            `https://pixzun-ai-server.onrender.com/api/project/project/${id}`
           );
           const project = response.data.data;
           console.log(project);
@@ -65,11 +64,15 @@ const Project: React.FC = () => {
     });
 
     try {
-      const res = await axios.post("http://localhost:5000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(
+        "https://pixzun-ai-server.onrender.com/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       setUploadedImage([res.data.url]); // Update to store as an array
       setImageUploaded(true);
     } catch (error) {
@@ -95,8 +98,9 @@ const Project: React.FC = () => {
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/project/${id}/generate`,
-        payload
+        `https://pixzun-ai-server.onrender.com/api/project/${id}/generate`,
+        payload,
+        { withCredentials: true }
       );
 
       // Assuming response.data.data contains an array of URLs
@@ -183,7 +187,7 @@ const Project: React.FC = () => {
           ) : generatedResults.length > 0 ? (
             <div className="flex">
               {/* Display generated images with download links */}
-              {generatedResults.map((imageUrl, index) => (
+              {generatedResults.slice(0, 2).map((imageUrl, index) => (
                 <div
                   key={index}
                   className="bg-secondary size-[20rem] rounded flex justify-center items-center overflow-hidden relative ml-4"
@@ -243,8 +247,9 @@ const Project: React.FC = () => {
             <div className="flex justify-end gap-5">
               {isFreeUser && (
                 <button
-                  className="bg-button-gradient p-3 rounded-full text-white"
+                  className="bg-button-gradient p-3 rounded-full text-white opacity-50 cursor-not-allowed"
                   onClick={openModal}
+                  disabled={true}
                 >
                   Remove Watermark
                 </button>

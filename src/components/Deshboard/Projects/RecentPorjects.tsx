@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 import axios from "axios";
 import { useUserContext } from "@/app/context/ContextProvider";
+import { treadmill } from "ldrs";
 
 interface ImageDetail {
   urls: string[];
@@ -28,7 +29,8 @@ const RecentProjects: React.FC = () => {
       const fetchProjects = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/api/project/${currentUser.email}`
+            `https://pixzun-ai-server.onrender.com/api/project/${currentUser.email}`,
+            { withCredentials: true }
           );
           console.log("Response:", response.data.data);
           setRecentProjects(response.data.data);
