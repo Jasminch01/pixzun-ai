@@ -56,6 +56,7 @@ const Page: React.FC = () => {
     const createProject = async () => {
       try {
         const res = await axios.put(
+          ///api/users/email
           `https://pixzun-server.vercel.app/api/${currentUser.email}/create-project`,
           payload
         );

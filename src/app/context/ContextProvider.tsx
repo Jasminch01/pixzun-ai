@@ -42,6 +42,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
     const fetchUser = async () => {
       try {
         const res = await axios.get(
+          //users
           `https://pixzun-server.vercel.app/api/user/me?email=${user.emailAddresses[0].emailAddress}`,
           {
             withCredentials: true,

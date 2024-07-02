@@ -21,7 +21,6 @@ const RecentProjects: React.FC = () => {
       setLoading(false);
     }
   }, [currentUser, contextLoading]);
-
   const handleMenuToggle = (projectId: string) => {
     setMenuOpen((prevState) => ({
       ...prevState,
@@ -50,15 +49,9 @@ const RecentProjects: React.FC = () => {
       setFavoriteProjects((prevFavorites) =>
         prevFavorites.filter((favProject) => favProject._id !== project._id)
       );
-      // Add back to recent projects
-      setRecentProjects((prevRecent) => [...prevRecent, project]);
     } else {
       // Add to favorite projects
       setFavoriteProjects((prevFavorites) => [...prevFavorites, project]);
-      // Remove from recent projects
-      setRecentProjects((prevRecent) =>
-        prevRecent.filter((recentProject) => recentProject._id !== project._id)
-      );
     }
   };
 

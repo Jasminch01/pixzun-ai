@@ -17,7 +17,7 @@ const Profile: React.FC = () => {
               <div className="">
                 <p className="text-gray-300">User Name</p>
                 <div className="flex justify-between">
-                  <p className="text-white">Name: {`${currentUser.name}`}</p>
+                  <p className="text-white">Name: {`${currentUser?.name}`}</p>
                   <div className="">
                     <button className="py-2 rounded-md px-4 border border-gray-400">
                       Edit
@@ -29,7 +29,7 @@ const Profile: React.FC = () => {
                 <div>
                   <p className="text-gray-300">User Email</p>
                   <div className="flex justify-between">
-                    <p className="text-white">Email: {`${currentUser.email}`}</p>
+                    <p className="text-white">Email: {`${currentUser?.email}`}</p>
                     <button className="py-2 rounded-md px-4 border border-gray-400">
                       Modify email addrerss
                     </button>
@@ -77,8 +77,8 @@ const Profile: React.FC = () => {
           <p>ST</p>
         </div>
         <div>
-          <h1 className="text-2xl">{currentUser.name}</h1>
-          <p className="text-lg">{currentUser.email}</p>
+          <h1 className="text-2xl">{currentUser?.name}</h1>
+          <p className="text-lg">{currentUser?.email}</p>
         </div>
       </div>
       <div className="w-full mt-10">
