@@ -11,6 +11,7 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import { useParams } from "next/navigation";
 import { MdOutlineFileDownload } from "react-icons/md";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface Project {
   name: string;
@@ -37,14 +38,9 @@ const Project: React.FC = () => {
     if (id && currentUser) {
       const fetchProjectDetails = async () => {
         try {
-          const response = await axios.get(
-            `https://pixzun-ai-server.onrender.com/api/project/project/${id}`
-          );
+          const response = await axiosInstance.get(`/project/project/${id}`);
           const project = response.data.data;
-          console.log(project);
           setProjectName(project.name);
-
-          // Assuming you want to set the first image URL from the response
           if (project.images.length > 0) {
             setUploadedImage(project.images[0].urls);
           }
@@ -64,15 +60,11 @@ const Project: React.FC = () => {
     });
 
     try {
-      const res = await axios.post(
-        "https://pixzun-ai-server.onrender.com/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const res = await axiosInstance.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setUploadedImage([res.data.url]); // Update to store as an array
       setImageUploaded(true);
     } catch (error) {
@@ -97,8 +89,8 @@ const Project: React.FC = () => {
 
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
     try {
-      const response = await axios.post(
-        `https://pixzun-ai-server.onrender.com/api/project/${id}/generate`,
+      const response = await axiosInstance.post(
+        `/project/${id}/generate`,
         payload,
         { withCredentials: true }
       );

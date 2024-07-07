@@ -3,6 +3,7 @@ import ProjectCard from "./ProjectCard";
 import axios from "axios";
 import { useUserContext } from "@/app/context/ContextProvider";
 import { treadmill } from "ldrs";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface ImageDetail {
   urls: string[];
@@ -22,17 +23,14 @@ const RecentProjects: React.FC = () => {
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
   const [loading, setLoading] = useState(true);
-  console.log(recentProjects);
 
   useEffect(() => {
     if (!contextLoading && currentUser) {
       const fetchProjects = async () => {
         try {
-          const response = await axios.get(
-            `https://pixzun-ai-server.onrender.com/api/project/${currentUser.email}`,
-            { withCredentials: true }
+          const response = await axiosInstance.get(
+            `/project`
           );
-          console.log("Response:", response.data.data);
           setRecentProjects(response.data.data);
           setFavoriteProjects(
             response.data.data.filter((project: Project) => project.isFavourite)
@@ -61,24 +59,12 @@ const RecentProjects: React.FC = () => {
 
   const handleDelete = (projectId: string) => {
     console.log(`Delete project with id: ${projectId}`);
-    setRecentProjects((prevProjects) =>
-      prevProjects.filter((project) => project._id !== projectId)
-    );
-    setFavoriteProjects((prevProjects) =>
-      prevProjects.filter((project) => project._id !== projectId)
-    );
+   
   };
 
-  const handleFavoriteToggle = (project: Project) => {
-    if (favoriteProjects.some((favProject) => favProject._id === project._id)) {
-      // Remove from favorite projects
-      setFavoriteProjects((prevFavorites) =>
-        prevFavorites.filter((favProject) => favProject._id !== project._id)
-      );
-    } else {
-      // Add to favorite projects
-      setFavoriteProjects((prevFavorites) => [...prevFavorites, project]);
-    }
+  const handleFavoriteToggle = (projectId: Project) => {
+    console.log(`favourite project with id: ${projectId}`);
+   
   };
 
   if (loading) {

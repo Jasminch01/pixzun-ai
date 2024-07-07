@@ -6,6 +6,7 @@ import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import { useUserContext } from "../context/ContextProvider";
 import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 
 const Page: React.FC = () => {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
@@ -27,26 +28,6 @@ const Page: React.FC = () => {
     setProjectName(e.target.value);
   };
 
-  interface Project {
-    _id: string;
-    name: string;
-    createdAt: string;
-  }
-
-  // Function to get the latest project
-  const getLatestProject = (projects: Project[]): Project | null => {
-    if (!projects || projects.length === 0) {
-      return null;
-    }
-
-    return projects.reduce((latestProject, currentProject) => {
-      return new Date(currentProject.createdAt) >
-        new Date(latestProject.createdAt)
-        ? currentProject
-        : latestProject;
-    });
-  };
-
   const handleCreateNewProjects = async () => {
     if (!projectName.trim()) {
       alert("Project name cannot be empty");
@@ -58,11 +39,7 @@ const Page: React.FC = () => {
     };
 
     try {
-      const res = await axios.post(
-        `https://pixzun-ai-server.onrender.com/api/project/${currentUser.email}/create-project`,
-        payload,
-        { withCredentials: true }
-      );
+      const res = await axiosInstance.post(`/project/create-project`, payload);
 
       if (res.data.data) {
         const newProject = res.data.data;
@@ -95,11 +72,11 @@ const Page: React.FC = () => {
   return (
     <div className="mt-32">
       <Container>
-        <div
-          className="flex justify-center cursor-pointer"
-          onClick={() => setIsNewProjectModalOpen(true)}
-        >
-          <div className="md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]">
+        <div className="flex justify-center">
+          <div
+            onClick={() => setIsNewProjectModalOpen(true)}
+            className="cursor-pointer md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+          >
             <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
               <div>
                 <Folder />

@@ -9,6 +9,7 @@ import PricingModal from "@/components/Deshboard/Projects/PricingModal";
 import { useUserContext } from "@/app/context/ContextProvider";
 import axios from "axios";
 import { useDropzone } from "react-dropzone";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface Project {
   name: string;
@@ -33,7 +34,7 @@ const Project: React.FC = () => {
     });
 
     try {
-      const res = await axios.post("https://pixzun-ai-server.onrender.com/upload", formData, {
+      const res = await axiosInstance.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -57,10 +58,7 @@ const Project: React.FC = () => {
     const payload = { inputPrompt, uploadedImage };
 
     try {
-      const response = await axios.post(
-        `https://pixzun-ai-server.onrender.com/api/project/generate`,
-        payload
-      );
+      const response = await axiosInstance.post(`/project/generate`, payload);
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error during post request:", error);
