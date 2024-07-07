@@ -6,7 +6,6 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import axios from "axios";
 import { useUser } from "@clerk/nextjs";
 import axiosInstance from "@/utils/axiosInstance";
 

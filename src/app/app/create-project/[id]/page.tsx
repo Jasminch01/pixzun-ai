@@ -38,7 +38,7 @@ const Project: React.FC = () => {
     if (id && currentUser) {
       const fetchProjectDetails = async () => {
         try {
-          const response = await axiosInstance.get(`/project/project/${id}`);
+          const response = await axiosInstance.get(`project/${id}`);
           const project = response.data.data;
           setProjectName(project.name);
           if (project.images.length > 0) {
