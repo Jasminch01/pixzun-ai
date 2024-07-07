@@ -38,12 +38,9 @@ const Project: React.FC = () => {
     if (id && currentUser) {
       const fetchProjectDetails = async () => {
         try {
-          const response = await axiosInstance.get(`api/project/project/${id}`);
+          const response = await axiosInstance.get(`/project/project/${id}`);
           const project = response.data.data;
-          console.log(project);
           setProjectName(project.name);
-
-          // Assuming you want to set the first image URL from the response
           if (project.images.length > 0) {
             setUploadedImage(project.images[0].urls);
           }

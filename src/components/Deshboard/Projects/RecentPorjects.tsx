@@ -59,24 +59,12 @@ const RecentProjects: React.FC = () => {
 
   const handleDelete = (projectId: string) => {
     console.log(`Delete project with id: ${projectId}`);
-    setRecentProjects((prevProjects) =>
-      prevProjects.filter((project) => project._id !== projectId)
-    );
-    setFavoriteProjects((prevProjects) =>
-      prevProjects.filter((project) => project._id !== projectId)
-    );
+   
   };
 
-  const handleFavoriteToggle = (project: Project) => {
-    if (favoriteProjects.some((favProject) => favProject._id === project._id)) {
-      // Remove from favorite projects
-      setFavoriteProjects((prevFavorites) =>
-        prevFavorites.filter((favProject) => favProject._id !== project._id)
-      );
-    } else {
-      // Add to favorite projects
-      setFavoriteProjects((prevFavorites) => [...prevFavorites, project]);
-    }
+  const handleFavoriteToggle = (projectId: Project) => {
+    console.log(`favourite project with id: ${projectId}`);
+   
   };
 
   if (loading) {
