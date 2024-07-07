@@ -6,6 +6,7 @@ import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import { useUserContext } from "../context/ContextProvider";
 import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 
 const Page: React.FC = () => {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
@@ -38,11 +39,7 @@ const Page: React.FC = () => {
     };
 
     try {
-      const res = await axios.post(
-        `http://localhost:5000/api/project/create-project`,
-        payload,
-        { withCredentials: true }
-      );
+      const res = await axiosInstance.post(`/project/create-project`, payload);
 
       if (res.data.data) {
         const newProject = res.data.data;

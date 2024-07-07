@@ -7,6 +7,7 @@ import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
 import axios from "axios";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface LinkItem {
   name: string;
@@ -31,12 +32,8 @@ const DashboardAppBar: React.FC = () => {
 
     const logout = async () => {
       try {
-        const res = await axios.post(
-          "http://localhost:5000/api/auth/logout",
-          {},
-          {
-            withCredentials: true,
-          }
+        const res = await axiosInstance.post(
+          "/auth/logout",
         );
         // Redirect to the home page
         window.location.href = "/";
@@ -60,13 +57,7 @@ const DashboardAppBar: React.FC = () => {
 
     const signUpUser = async () => {
       try {
-        const res = await axios.post(
-          "http://localhost:5000/api/auth/signup",
-          newUser,
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axiosInstance.post("/auth/signup", newUser);
       } catch (error) {
         console.error(error);
       }
@@ -81,11 +72,8 @@ const DashboardAppBar: React.FC = () => {
 
     const fetchCurrentUser = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`,
-          {
-            withCredentials: true,
-          }
+        const res = await axiosInstance.get(
+          `/users/me?email=${user?.emailAddresses[0]?.emailAddress}`
         );
         setCurrentUser(res.data.data);
       } catch (error) {

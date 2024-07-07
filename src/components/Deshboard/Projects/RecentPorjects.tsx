@@ -3,6 +3,7 @@ import ProjectCard from "./ProjectCard";
 import axios from "axios";
 import { useUserContext } from "@/app/context/ContextProvider";
 import { treadmill } from "ldrs";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface ImageDetail {
   urls: string[];
@@ -22,17 +23,14 @@ const RecentProjects: React.FC = () => {
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
   const [loading, setLoading] = useState(true);
-  console.log(recentProjects);
 
   useEffect(() => {
     if (!contextLoading && currentUser) {
       const fetchProjects = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:5000/api/project/${currentUser.email}`,
-            { withCredentials: true }
+          const response = await axiosInstance.get(
+            `/project`
           );
-          console.log("Response:", response.data.data);
           setRecentProjects(response.data.data);
           setFavoriteProjects(
             response.data.data.filter((project: Project) => project.isFavourite)
