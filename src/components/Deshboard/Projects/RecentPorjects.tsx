@@ -29,7 +29,7 @@ const RecentProjects: React.FC = () => {
       const fetchProjects = async () => {
         try {
           const response = await axios.get(
-            `https://pixzun-ai-server.onrender.com/api/project/${currentUser.email}`,
+            `http://localhost:5000/api/project/${currentUser.email}`,
             { withCredentials: true }
           );
           console.log("Response:", response.data.data);

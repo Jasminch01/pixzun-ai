@@ -59,7 +59,7 @@ const Page: React.FC = () => {
 
     try {
       const res = await axios.post(
-        `https://pixzun-ai-server.onrender.com/api/project/${currentUser.email}/create-project`,
+        `http://localhost:5000/api/project/create-project`,
         payload,
         { withCredentials: true }
       );

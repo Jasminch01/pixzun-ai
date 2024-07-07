@@ -38,7 +38,7 @@ const Project: React.FC = () => {
       const fetchProjectDetails = async () => {
         try {
           const response = await axios.get(
-            `https://pixzun-ai-server.onrender.com/api/project/project/${id}`
+            `http://localhost:5000/api/project/project/${id}`
           );
           const project = response.data.data;
           console.log(project);
@@ -65,7 +65,7 @@ const Project: React.FC = () => {
 
     try {
       const res = await axios.post(
-        "https://pixzun-ai-server.onrender.com/upload",
+        "http://localhost:5000/upload",
         formData,
         {
           headers: {
@@ -98,7 +98,7 @@ const Project: React.FC = () => {
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
     try {
       const response = await axios.post(
-        `https://pixzun-ai-server.onrender.com/api/project/${id}/generate`,
+        `http://localhost:5000/api/project/${id}/generate`,
         payload,
         { withCredentials: true }
       );

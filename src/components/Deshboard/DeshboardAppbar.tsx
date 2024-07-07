@@ -6,7 +6,6 @@ import { Brand, Leaf } from "../Svg";
 import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import axios from "axios";
 
 interface LinkItem {
@@ -29,7 +28,24 @@ const DashboardAppBar: React.FC = () => {
 
   const handleSignOut = () => {
     signOut();
-    redirect("/");
+
+    const logout = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/api/auth/logout",
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        // Redirect to the home page
+        window.location.href = "/";
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    logout();
   };
 
   // Save user and role in db if user is not exist in db
@@ -45,7 +61,7 @@ const DashboardAppBar: React.FC = () => {
     const signUpUser = async () => {
       try {
         const res = await axios.post(
-          "https://pixzun-ai-server.onrender.com/api/auth/signup",
+          "http://localhost:5000/api/auth/signup",
           newUser,
           {
             withCredentials: true,
@@ -66,7 +82,7 @@ const DashboardAppBar: React.FC = () => {
     const fetchCurrentUser = async () => {
       try {
         const res = await axios.get(
-          `https://pixzun-ai-server.onrender.com/api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`,
+          `http://localhost:5000/api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`,
           {
             withCredentials: true,
           }
