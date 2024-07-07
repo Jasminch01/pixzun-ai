@@ -27,26 +27,6 @@ const Page: React.FC = () => {
     setProjectName(e.target.value);
   };
 
-  interface Project {
-    _id: string;
-    name: string;
-    createdAt: string;
-  }
-
-  // Function to get the latest project
-  const getLatestProject = (projects: Project[]): Project | null => {
-    if (!projects || projects.length === 0) {
-      return null;
-    }
-
-    return projects.reduce((latestProject, currentProject) => {
-      return new Date(currentProject.createdAt) >
-        new Date(latestProject.createdAt)
-        ? currentProject
-        : latestProject;
-    });
-  };
-
   const handleCreateNewProjects = async () => {
     if (!projectName.trim()) {
       alert("Project name cannot be empty");
@@ -95,11 +75,11 @@ const Page: React.FC = () => {
   return (
     <div className="mt-32">
       <Container>
-        <div
-          className="flex justify-center cursor-pointer"
-          onClick={() => setIsNewProjectModalOpen(true)}
-        >
-          <div className="md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]">
+        <div className="flex justify-center">
+          <div
+            onClick={() => setIsNewProjectModalOpen(true)}
+            className="cursor-pointer md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+          >
             <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
               <div>
                 <Folder />
