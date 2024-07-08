@@ -1,5 +1,6 @@
 import DehsboardAppbar from "@/components/Deshboard/DeshboardAppbar";
 import { ContextProvider } from "../context/ContextProvider";
+import QueryProvider from "../context/QueryProvider";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout
@@ -8,10 +9,12 @@ export default function DashboardLayout({
 }) {
   return (
     <section>
-      <ContextProvider>
-        <DehsboardAppbar />
-        {children}
-      </ContextProvider>
+      <QueryProvider>
+        <ContextProvider>
+          <DehsboardAppbar />
+          {children}
+        </ContextProvider>
+      </QueryProvider>
     </section>
   );
 }
