@@ -6,8 +6,8 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import axios from "axios";
 import { useUser } from "@clerk/nextjs";
+import axiosInstance from "@/utils/axiosInstance";
 
 interface UserContextType {
   currentUser: any;
@@ -41,12 +41,9 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
 
     const fetchUser = async () => {
       try {
-        const res = await axios.get(
+        const res = await axiosInstance.get(
           //users
-          `https://pixzun-ai-server.onrender.com/api/users/me?email=${user.emailAddresses[0].emailAddress}`,
-          {
-            withCredentials: true,
-          }
+          `/users/me?email=${user.emailAddresses[0].emailAddress}`,
         );
         setCurrentUser(res.data.data);
       } catch (error) {
