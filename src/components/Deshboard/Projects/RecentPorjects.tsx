@@ -4,6 +4,8 @@ import axios from "axios";
 import { useUserContext } from "@/app/context/ContextProvider";
 import { treadmill } from "ldrs";
 import axiosInstance from "@/utils/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
+import FavouriteProject from "./FavouritePorject";
 
 interface ImageDetail {
   urls: string[];
@@ -18,32 +20,27 @@ interface Project {
 }
 
 const RecentProjects: React.FC = () => {
-  const { currentUser, loading: contextLoading } = useUserContext();
-  const [recentProjects, setRecentProjects] = useState<Project[]>([]);
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!contextLoading && currentUser) {
-      const fetchProjects = async () => {
-        try {
-          const response = await axiosInstance.get(
-            `/project`
-          );
-          setRecentProjects(response.data.data);
-          setFavoriteProjects(
-            response.data.data.filter((project: Project) => project.isFavourite)
-          );
-        } catch (error) {
-          console.error("Error during get request:", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-      fetchProjects();
+  const fetchProjects = async () => {
+    try {
+      const response = await axiosInstance.get(`/project`);
+      setFavoriteProjects(
+        response.data.data.filter((project: Project) => project.isFavourite)
+      );
+      return response.data.data;
+    } catch (error) {
+      console.error("Error during get request:", error);
+    } finally {
+      setLoading(false);
     }
-  }, [currentUser, contextLoading]);
+  };
+  const { data: recentProjects = [], refetch } = useQuery({
+    queryFn: async () => await fetchProjects(),
+    queryKey: ["recentProject"],
+  });
 
   const handleMenuToggle = (projectId: string) => {
     setMenuOpen((prevState) => ({
@@ -52,19 +49,57 @@ const RecentProjects: React.FC = () => {
     }));
   };
 
-  const handleRename = (projectId: string) => {
-    console.log(`Rename project with id: ${projectId}`);
-    // Implement rename functionality here
+  const handleRename = async (projectId: string, newName: string) => {
+    try {
+      const response = await axiosInstance.put(`/project/${projectId}`, {
+        name: newName,
+      });
+      if (response.data.data) {
+        refetch();
+      }
+    } catch (error) {
+      console.error("Error during rename request:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDelete = (projectId: string) => {
-    console.log(`Delete project with id: ${projectId}`);
-   
+    const deleteProject = async () => {
+      try {
+        const response = await axiosInstance.delete(`/project/${projectId}`);
+        if (response.data.data) {
+          refetch();
+        }
+      } catch (error) {
+        console.error("Error during delete request:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    deleteProject();
   };
 
-  const handleFavoriteToggle = (projectId: Project) => {
-    console.log(`favourite project with id: ${projectId}`);
-   
+  const handleFavoriteToggle = (projectId: string, newState: boolean) => {
+    console.log(newState);
+    const favouriteToggle = async () => {
+      try {
+        const response = await axiosInstance.put(
+          `/project/favourite/${projectId}`,
+          {
+            state: newState,
+          }
+        );
+        if (response.data.data) {
+          refetch();
+        }
+      } catch (error) {
+        console.error("Error during favorite toggle request:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    favouriteToggle();
   };
 
   if (loading) {
@@ -93,7 +128,7 @@ const RecentProjects: React.FC = () => {
       {recentProjects.length > 0 ? (
         <>
           <div className="flex gap-5 mt-5">
-            {recentProjects.map((project) => (
+            {recentProjects.map((project: Project) => (
               <ProjectCard
                 key={project._id}
                 project={project}
@@ -122,13 +157,11 @@ const RecentProjects: React.FC = () => {
         <>
           <div className="flex gap-5 mt-5">
             {favoriteProjects.map((project) => (
-              <ProjectCard
+              <FavouriteProject
                 key={project._id}
                 project={project}
                 handleMenuToggle={handleMenuToggle}
                 menuOpen={menuOpen}
-                handleRename={handleRename}
-                handleDelete={handleDelete}
                 handleFavoriteToggle={handleFavoriteToggle}
                 isFavorite={true}
               />
