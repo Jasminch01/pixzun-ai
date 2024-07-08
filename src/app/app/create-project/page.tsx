@@ -34,7 +34,7 @@ const Project: React.FC = () => {
     });
 
     try {
-      const res = await axiosInstance.post("/upload", formData, {
+      const res = await axios.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -58,7 +58,7 @@ const Project: React.FC = () => {
     const payload = { inputPrompt, uploadedImage };
 
     try {
-      const response = await axiosInstance.post(`/project/generate`, payload);
+      const response = await axiosInstance.post(`/api/project/generate`, payload);
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error during post request:", error);

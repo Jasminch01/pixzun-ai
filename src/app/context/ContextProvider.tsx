@@ -43,7 +43,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
       try {
         const res = await axiosInstance.get(
           //users
-          `/users/me?email=${user.emailAddresses[0].emailAddress}`,
+          `/api/users/me?email=${user.emailAddresses[0].emailAddress}`,
         );
         setCurrentUser(res.data.data);
       } catch (error) {

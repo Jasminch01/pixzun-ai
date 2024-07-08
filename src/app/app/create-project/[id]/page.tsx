@@ -90,7 +90,7 @@ const Project: React.FC = () => {
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
     try {
       const response = await axiosInstance.post(
-        `/project/${id}/generate`,
+        `/api/project/${id}/generate`,
         payload,
         { withCredentials: true }
       );
