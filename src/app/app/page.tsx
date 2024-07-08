@@ -5,7 +5,6 @@ import { Brand, Folder, Leaf } from "@/components/Svg";
 import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import { useUserContext } from "../context/ContextProvider";
-import axios from "axios";
 import axiosInstance from "@/utils/axiosInstance";
 
 const Page: React.FC = () => {
@@ -39,7 +38,7 @@ const Page: React.FC = () => {
     };
 
     try {
-      const res = await axiosInstance.post(`/project/create-project`, payload);
+      const res = await axiosInstance.post(`/api/project/create-project`, payload);
 
       if (res.data.data) {
         const newProject = res.data.data;
