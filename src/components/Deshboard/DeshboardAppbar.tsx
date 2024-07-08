@@ -33,7 +33,7 @@ const DashboardAppBar: React.FC = () => {
     const logout = async () => {
       try {
         const res = await axiosInstance.post(
-          "/auth/logout",
+          "/api/auth/logout",
         );
         // Redirect to the home page
         window.location.href = "/";
@@ -57,7 +57,7 @@ const DashboardAppBar: React.FC = () => {
 
     const signUpUser = async () => {
       try {
-        const res = await axiosInstance.post("/auth/signup", newUser);
+        const res = await axiosInstance.post("/api/auth/signup", newUser);
       } catch (error) {
         console.error(error);
       }
@@ -73,7 +73,7 @@ const DashboardAppBar: React.FC = () => {
     const fetchCurrentUser = async () => {
       try {
         const res = await axiosInstance.get(
-          `/users/me?email=${user?.emailAddresses[0]?.emailAddress}`
+          `api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`
         );
         setCurrentUser(res.data.data);
       } catch (error) {

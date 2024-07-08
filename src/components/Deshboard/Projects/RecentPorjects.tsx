@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import axios from "axios";
-import { useUserContext } from "@/app/context/ContextProvider";
 import { treadmill } from "ldrs";
 import axiosInstance from "@/utils/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +24,7 @@ const RecentProjects: React.FC = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axiosInstance.get(`/project`);
+      const response = await axiosInstance.get(`/api/project`);
       setFavoriteProjects(
         response.data.data.filter((project: Project) => project.isFavourite)
       );
@@ -51,7 +49,7 @@ const RecentProjects: React.FC = () => {
 
   const handleRename = async (projectId: string, newName: string) => {
     try {
-      const response = await axiosInstance.put(`/project/${projectId}`, {
+      const response = await axiosInstance.put(`/api/project/${projectId}`, {
         name: newName,
       });
       if (response.data.data) {
@@ -67,7 +65,7 @@ const RecentProjects: React.FC = () => {
   const handleDelete = (projectId: string) => {
     const deleteProject = async () => {
       try {
-        const response = await axiosInstance.delete(`/project/${projectId}`);
+        const response = await axiosInstance.delete(`/api/project/${projectId}`);
         if (response.data.data) {
           refetch();
         }
@@ -85,7 +83,7 @@ const RecentProjects: React.FC = () => {
     const favouriteToggle = async () => {
       try {
         const response = await axiosInstance.put(
-          `/project/favourite/${projectId}`,
+          `/api/project/favourite/${projectId}`,
           {
             state: newState,
           }
