@@ -93,7 +93,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         <div>
           <Image
             src={
-              project.images[0]?.urls[2] || "https://via.placeholder.com/150"
+              project.images[0]?.urls[1] || "https://via.placeholder.com/150"
             }
             alt={project.name}
             width={50}
