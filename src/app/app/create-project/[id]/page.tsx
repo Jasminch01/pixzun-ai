@@ -182,7 +182,7 @@ const Project: React.FC = () => {
       <div className="flex-1 ml-80 mr-64 mt-[5rem] p-6">
         <p className="text-white text-center text-lg">{projectName}</p>
         <div className="flex items-center justify-center mt-[5.56rem] relative">
-          <div className="absolute bg-bg-lighter blur-3xl md:w-[30rem] md:h-[20rem] w-[300px] h-[200px] rounded"></div>
+          <div className="absolute bg-bg-lighter blur-3xl md:w-[30rem] md:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           <div
             {...getRootProps()}
             className={`bg-secondary size-[20rem] text-white border-dashed border-gray-400 border-2 rounded flex flex-col justify-center items-center px-5 cursor-pointer ${
