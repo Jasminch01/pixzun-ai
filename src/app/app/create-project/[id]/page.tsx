@@ -47,7 +47,7 @@ const Project: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
 
   const { id } = useParams();
-
+  
   const fetchProjectDetails = async () => {
     setLoadingProject(true);
     try {
