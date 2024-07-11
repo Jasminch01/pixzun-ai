@@ -39,11 +39,7 @@ const Project: React.FC = () => {
   const [inputPrompt, setInputPrompt] = useState("");
   const [loadingResult, setLoadingResult] = useState(false);
   const [loadingProject, setLoadingProject] = useState(false);
-  const [generatedResults, setGeneratedResults] = useState<string[]>([
-    "https://res.cloudinary.com/ddqt9bodf/image/upload/v1720619677/uploads/ftt1v5okhjxbvk193t4r.png",
-    "https://res.cloudinary.com/ddqt9bodf/image/upload/v1720619680/uploads/ytolzubpb1nm7ai6264s.jpg",
-    "https://res.cloudinary.com/ddqt9bodf/image/upload/v1719814303/cld-sample.jpg",
-  ]);
+  const [generatedResults, setGeneratedResults] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
 
   const { id } = useParams();
