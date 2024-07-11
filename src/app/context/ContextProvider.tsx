@@ -32,7 +32,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) =>
   const { isLoaded, user } = useUser();
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
+//do with tanstack query
   useEffect(() => {
     if (!isLoaded || !user) {
       setLoading(false);

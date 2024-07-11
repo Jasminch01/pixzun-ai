@@ -38,7 +38,10 @@ const Page: React.FC = () => {
     };
 
     try {
-      const res = await axiosInstance.post(`/api/project/create-project`, payload);
+      const res = await axiosInstance.post(
+        `/api/project/create-project`,
+        payload
+      );
 
       if (res.data.data) {
         const newProject = res.data.data;
