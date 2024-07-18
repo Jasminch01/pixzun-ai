@@ -1,79 +1,61 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { Spiner } from "@/components/loadingComponent";
+import { FaWandMagicSparkles } from "react-icons/fa6";
+interface LeftSidebarProps {
+  handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  loadingResult: boolean;
+  inputPrompt: string;
+  imageUploaded: boolean;
+  countWords: (text: string) => number;
+}
 
-const images = [
-  { src: "https://via.placeholder.com/100", alt: "Image 1" },
-  { src: "https://via.placeholder.com/100", alt: "Image 2" },
-  { src: "https://via.placeholder.com/100", alt: "Image 3" },
-  { src: "https://via.placeholder.com/100", alt: "Image 4" },
-  { src: "https://via.placeholder.com/100", alt: "Image 5" },
-  { src: "https://via.placeholder.com/100", alt: "Image 6" },
-  { src: "https://via.placeholder.com/100", alt: "Image 7" },
-  { src: "https://via.placeholder.com/100", alt: "Image 8" },
-  { src: "https://via.placeholder.com/100", alt: "Image 9" },
-  { src: "https://via.placeholder.com/100", alt: "Image 10" },
-  { src: "https://via.placeholder.com/100", alt: "Image 11" },
-  { src: "https://via.placeholder.com/100", alt: "Image 12" },
-  { src: "https://via.placeholder.com/100", alt: "Image 13" },
-  { src: "https://via.placeholder.com/100", alt: "Image 14" },
-];
-
-const LeftSidebar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      // Ensure this runs only on the client side
-      const sidebar = document.getElementById("left-sidebar");
-
-      const handleScroll = () => {
-        if (sidebar && sidebar.scrollTop > 0) {
-          setIsScrolled(true);
-        } else {
-          setIsScrolled(false);
-        }
-      };
-
-      if (sidebar) {
-        sidebar.addEventListener("scroll", handleScroll);
-        return () => sidebar.removeEventListener("scroll", handleScroll);
-      }
-    }
-  }, []);
-
+const LeftSidebar: React.FC<LeftSidebarProps> = ({
+  handleInputChange,
+  handleSubmit,
+  loadingResult,
+  inputPrompt,
+  imageUploaded,
+  countWords,
+}) => {
   return (
-    <div
-      id="left-sidebar"
-      className="fixed top-40 left-0 h-[40rem] overflow-y-auto custom-scrollbar w-80 border-2 border-l-0 rounded border-gray-400 px-5 pb-5"
-    >
+    <div>
       <div
-        className={`sticky top-0 z-10 transition-colors duration-300 py-5 ${
-          isScrolled ? "bg-[#1B1D29] py-5" : ""
-        }`}
+        id="left-sidebar"
+        className="fixed top-40 left-0 overflow-y-auto custom-scrollbar w-80 border-2 border-l-0 rounded border-gray-400 px-5 pb-5"
       >
-        <p className="text-white text-base font-bold">Use Templates</p>
-        <div className="flex gap-3 mt-4">
-          <button className="w-full p-2 gradient text-white rounded">
-            Monocrome
-          </button>
-          <button className="w-full p-2 gradient text-white rounded">
-            Natural
-          </button>
+        <div className="flex justify-center mt-10">
+          <div className="w-[35rem]">
+            <textarea
+              onChange={handleInputChange}
+              rows={4}
+              className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
+              placeholder="Type whatever you want to do with AI"
+            ></textarea>
+          </div>
         </div>
-      </div>
-      <div className="mt-4 pt-4">
-        <div className="grid grid-cols-2 gap-4">
-          {images.map((image, index) => (
-            <Image
-              key={index}
-              src={image.src}
-              alt={image.alt}
-              width={200}
-              height={200}
-              className="w-full h-auto object-cover rounded-md"
-            />
-          ))}
+
+        <div className="flex justify-center mt-3">
+          <div className="w-[35rem]">
+            <div className="flex gap-5">
+              <button
+                onClick={handleSubmit}
+                disabled={
+                  !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
+                }
+                className={`text-white w-full gap-2 bg-button-gradient p-3 rounded-full ${
+                  (!imageUploaded ||
+                    !inputPrompt ||
+                    countWords(inputPrompt) < 5) &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+              >
+                <p className="text-center flex justify-center items-center gap-3">
+                  <FaWandMagicSparkles />
+                  {loadingResult ? <Spiner /> : "Generate"}
+                </p>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

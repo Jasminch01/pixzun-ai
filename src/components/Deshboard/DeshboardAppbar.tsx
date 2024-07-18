@@ -6,8 +6,8 @@ import { Brand, Leaf } from "../Svg";
 import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
-import axios from "axios";
 import axiosInstance from "@/utils/axiosInstance";
+import { useUserContext } from "@/app/context/ContextProvider";
 
 interface LinkItem {
   name: string;
@@ -19,7 +19,7 @@ const DashboardAppBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<any>(null); // Adjust type based on your API response
+  const { currentUser, loading, refetch: refatchUser } = useUserContext();
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
@@ -32,9 +32,7 @@ const DashboardAppBar: React.FC = () => {
 
     const logout = async () => {
       try {
-        const res = await axiosInstance.post(
-          "/api/auth/logout",
-        );
+        const res = await axiosInstance.post("/api/auth/logout");
         // Redirect to the home page
         window.location.href = "/";
       } catch (error) {
@@ -65,25 +63,6 @@ const DashboardAppBar: React.FC = () => {
 
     signUpUser();
   }, [isLoaded, user]);
-
-  // Get user information
-  useEffect(() => {
-    if (!isLoaded || !user) return;
-
-    const fetchCurrentUser = async () => {
-      try {
-        const res = await axiosInstance.get(
-          `api/users/me?email=${user?.emailAddresses[0]?.emailAddress}`
-        );
-        setCurrentUser(res.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchCurrentUser();
-  }, [isLoaded, user]);
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
