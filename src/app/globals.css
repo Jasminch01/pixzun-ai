@@ -148,6 +148,17 @@
 }
 
 
+.spiner-container2 {
+  --uib-size: 20px;
+  --uib-color: white;
+  --uib-speed: .9s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: var(--uib-size);
+  width: var(--uib-size);
+}
 .spiner-container {
   --uib-size: 40px;
   --uib-color: white;

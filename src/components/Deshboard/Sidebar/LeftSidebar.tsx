@@ -1,4 +1,4 @@
-import { Spiner } from "@/components/loadingComponent";
+import { Spiner, Spiner2 } from "@/components/loadingComponent";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 interface LeftSidebarProps {
   handleInputChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -49,10 +49,9 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                   "opacity-50 cursor-not-allowed"
                 }`}
               >
-                <p className="text-center flex justify-center items-center gap-3">
-                  <FaWandMagicSparkles />
-                  {loadingResult ? <Spiner /> : "Generate"}
-                </p>
+                <div className="text-center flex justify-center items-center gap-3">
+                  {loadingResult ? <Spiner2 /> : <p className="flex justify-center items-center gap-3"><FaWandMagicSparkles /> Generate </p>}
+                </div>
               </button>
             </div>
           </div>

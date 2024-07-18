@@ -21,3 +21,17 @@ export const Spiner = () => {
     </div>
   );
 };
+export const Spiner2 = () => {
+  return (
+    <div className="spiner-container2">
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+      <div className="spiner-dot"></div>
+    </div>
+  );
+};
