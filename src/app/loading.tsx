@@ -1,4 +1,3 @@
-
 import { DotPulse } from "@/components/loadingComponent";
 import React from "react";
 
