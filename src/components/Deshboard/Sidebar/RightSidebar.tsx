@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { DotPulse } from "@/components/loadingComponent";
 
 interface RightSidebarProps {
   generatedResults: string[];
@@ -16,9 +17,15 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
   return (
     <div className="fixed top-40 right-0 h-[40rem] w-80 overflow-y-auto custom-scrollbar border-r-0 border-2 border-gray-400 rounded">
       <div className="p-6 text-white text-base font-bold">My Creation</div>
-      <div className="p-4">
+      <div
+        className={`p-4 flex flex-col justify-center items-center ${
+         ( loading || generatedResults.length === 0) && "h-[50vh]"
+        } `}
+      >
         {loading ? (
-          <p className="text-white text-center">Loading...</p>
+          <div className="flex justify-center items-center">
+            <DotPulse />
+          </div>
         ) : generatedResults.length > 0 ? (
           <div className="grid grid-cols-3 gap-4">
             {generatedResults.map((image, index) => (
