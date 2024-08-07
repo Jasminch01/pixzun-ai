@@ -187,17 +187,10 @@ const Project: React.FC = () => {
 
   return (
     <div className="flex justify-center border-white border-3">
-      <LeftSidebar
-        handleInputChange={handleInputChange}
-        countWords={countWords}
-        handleSubmit={handleSubmit}
-        imageUploaded={imageUploaded}
-        inputPrompt={inputPrompt}
-        loadingResult={loadingResult}
-      />
-      <div className="mt-[5rem]">
+      <LeftSidebar/>
+      <div className="mt-[6rem]">
         <p className="text-white text-center text-lg">{projectName}</p>
-        <div className="flex items-center justify-center mt-[3.56rem] relative">
+        <div className="flex items-center justify-center mt-[8rem] relative">
           <div className="absolute bg-bg-lighter blur-3xl md:w-[25rem] md:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           <div
             {...getRootProps()}
@@ -317,25 +310,21 @@ const Project: React.FC = () => {
             </div>
           ) : null}
         </div>
-        <div className="flex justify-center mt-10">
+        {/* <div className="flex justify-center mt-10">
           {currentUser?.role === "free" && (
             <button
               className={`bg-button-gradient 
                 p-3 rounded-full
                  text-white opacity-50
-                  cursor-not-allowed ${
-                    currentUser?.role === "free" && generatedResults.length > 0
-                      ? "block"
-                      : "hidden"
-                  }`}
+                  cursor-not-allowed }`}
               onClick={openModal}
             >
               Remove Watermark
             </button>
           )}
-        </div>
+        </div> */}
 
-        <div className="flex justify-center">
+        {/* <div className="flex justify-center">
           <div className="flex flex-col w-full max-w-[60rem] mx-auto">
             <p className="text-white">Suggested</p>
             <div className="flex justify-center items-center">
@@ -370,6 +359,61 @@ const Project: React.FC = () => {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </div> */}
+
+        <div className="flex justify-center mt-10">
+          <div className="w-[35rem]">
+            <textarea
+              onChange={handleInputChange}
+              rows={4}
+              className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
+              placeholder="Type whatever you want to do with AI"
+            ></textarea>
+          </div>
+        </div>
+
+        <div className="flex justify-end mt-3">
+          <div className="">
+            <div className="flex gap-5">
+              {currentUser?.role === "free" && (
+                <button
+                  className={`bg-button-gradient 
+                p-3 rounded-full
+                 text-white opacity-50
+                  cursor-not-allowed ${
+                    currentUser?.role === "free" && generatedResults.length > 0
+                      ? "block"
+                      : "hidden"
+                  }`}
+                  onClick={openModal}
+                >
+                  Remove Watermark
+                </button>
+              )}
+
+              <button
+                onClick={handleSubmit}
+                disabled={
+                  !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
+                }
+                className={`text-white gap-2 bg-button-gradient p-3 rounded-full ${
+                  (!imageUploaded ||
+                    !inputPrompt ||
+                    countWords(inputPrompt) < 5) &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+              >
+                <div className="text-center flex justify-center items-center gap-3">
+                  {
+                    <p className="flex justify-center items-center gap-3">
+                      {" "}
+                      Generate{" "}
+                    </p>
+                  }
+                </div>
+              </button>
             </div>
           </div>
         </div>

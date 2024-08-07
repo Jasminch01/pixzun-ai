@@ -75,9 +75,10 @@ const Page: React.FC = () => {
     <div className="mt-32">
       <Container>
         <div className="flex justify-center">
+          {/* adjust height width for small devices */}
           <div
             onClick={() => setIsNewProjectModalOpen(true)}
-            className="cursor-pointer md:w-[600px] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+            className="cursor-pointer md:w-[600px] w-[15rem] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
           >
             <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
               <div>
