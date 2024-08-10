@@ -16,18 +16,9 @@ import ImageMOdal from "@/components/ImageMOdal";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { Spiner } from "@/components/loadingComponent";
 
-//dummy
-const images = [
-  { src: "https://via.placeholder.com/100", alt: "Image 1" },
-  { src: "https://via.placeholder.com/100", alt: "Image 2" },
-  { src: "https://via.placeholder.com/100", alt: "Image 3" },
-  { src: "https://via.placeholder.com/100", alt: "Image 4" },
-  { src: "https://via.placeholder.com/100", alt: "Image 5" },
-];
-
 interface Project {
   name: string;
-  createdAt: string; // or Date if you prefer to store it as Date
+  createdAt: string;
 }
 
 const Project: React.FC = () => {
@@ -113,6 +104,7 @@ const Project: React.FC = () => {
 
     setLoadingResult(true);
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
+    console.log(payload);
     try {
       const response = await axiosInstance.post(
         `/api/project/${id}/generate`,
@@ -187,7 +179,10 @@ const Project: React.FC = () => {
 
   return (
     <div className="flex justify-center border-white border-3">
-      <LeftSidebar/>
+      <LeftSidebar
+        handleSubmit={handleSubmit}
+        setInputPrompt={setInputPrompt}
+      />
       <div className="mt-[6rem]">
         <p className="text-white text-center text-lg">{projectName}</p>
         <div className="flex items-center justify-center mt-[8rem] relative">
@@ -198,6 +193,7 @@ const Project: React.FC = () => {
               (loadingResult ||
                 imageUploadLoading ||
                 imageUploaded ||
+                loadingResult ||
                 generatedResults.length > 0) &&
               "hidden"
             }`}
@@ -310,59 +306,6 @@ const Project: React.FC = () => {
             </div>
           ) : null}
         </div>
-        {/* <div className="flex justify-center mt-10">
-          {currentUser?.role === "free" && (
-            <button
-              className={`bg-button-gradient 
-                p-3 rounded-full
-                 text-white opacity-50
-                  cursor-not-allowed }`}
-              onClick={openModal}
-            >
-              Remove Watermark
-            </button>
-          )}
-        </div> */}
-
-        {/* <div className="flex justify-center">
-          <div className="flex flex-col w-full max-w-[60rem] mx-auto">
-            <p className="text-white">Suggested</p>
-            <div className="flex justify-center items-center">
-              <div className="mt-4 w-full flex justify-center">
-                <div className="grid grid-cols-5 gap-4">
-                  {images.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image.src}
-                      alt={image.alt}
-                      width={200}
-                      height={200}
-                      className="w-full h-auto object-cover rounded-md"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="mt-4">
-              <p className="text-white">Solid background</p>
-              <div className="mt-4 w-full flex justify-center">
-                <div className="grid grid-cols-5 gap-4">
-                  {images.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image.src}
-                      alt={image.alt}
-                      width={200}
-                      height={200}
-                      className="w-full h-auto object-cover rounded-md"
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
         <div className="flex justify-center mt-10">
           <div className="w-[35rem]">
             <textarea
