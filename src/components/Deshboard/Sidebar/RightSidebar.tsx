@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DotPulse } from "@/components/loadingComponent";
 
@@ -14,12 +14,39 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
   loading,
   openModal,
 }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // Ensure this runs only on the client side
+      const sidebar = document.getElementById("right-sidebar");
+
+      const handleScroll = () => {
+        if (sidebar && sidebar.scrollTop > 0) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      };
+
+      if (sidebar) {
+        sidebar.addEventListener("scroll", handleScroll);
+        return () => sidebar.removeEventListener("scroll", handleScroll);
+      }
+    }
+  }, []);
   return (
-    <div className="fixed top-40 right-0 h-[40rem] w-80 overflow-y-auto custom-scrollbar border-r-0 border-2 border-gray-400 rounded">
-      <div className="p-6 text-white text-base font-bold">My Creation</div>
+    <div id="right-sidebar" className="fixed top-40 right-0 h-[40rem] w-80 overflow-y-auto custom-scrollbar border-r-0 border-2 border-gray-400 rounded">
+      
+      <div className={`p-6 text-white text-base font-bold sticky top-0 z-10 transition-colors duration-300 py-5 ${
+          isScrolled ? "bg-[#2B2E3D] py-5" : ""
+        }`}>
+          <p>My Creation</p>
+        </div>
+
       <div
         className={`p-4 flex flex-col justify-center items-center ${
-         ( loading || generatedResults.length === 0) && "h-[50vh]"
+          (loading || generatedResults.length === 0) && "h-[50vh]"
         } `}
       >
         {loading ? (
