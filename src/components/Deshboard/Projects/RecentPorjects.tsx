@@ -121,11 +121,11 @@ const RecentProjects: React.FC = () => {
   }
 
   return (
-    <div className="text-white mt-16">
-      <p className="text-xl">Recent Projects</p>
+    <div className="text-white mt-16 px-3 md:px-0">
+      <p className="md:text-xl text-lg text-center md:text-left">Recent Projects</p>
       {recentProjects.length > 0 ? (
         <>
-          <div className="flex gap-5 mt-5">
+          <div className="md:flex md:gap-5 mt-5">
             {recentProjects.map((project: Project) => (
               <ProjectCard
                 key={project._id}
@@ -149,11 +149,11 @@ const RecentProjects: React.FC = () => {
           </p>
         </div>
       )}
-      <p className="text-xl mt-10">Favorite Projects</p>
+      <p className="md:text-xl text-lg mt-5 text-center md:text-left">Favorite Projects</p>
 
       {favoriteProjects.length > 0 ? (
         <>
-          <div className="flex gap-5 mt-5">
+          <div className="md:flex md:gap-5 mt-5">
             {favoriteProjects.map((project) => (
               <FavouriteProject
                 key={project._id}

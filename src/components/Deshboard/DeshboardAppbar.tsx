@@ -144,7 +144,7 @@ const DashboardAppBar: React.FC = () => {
                     <div className="ml-8 mt-3 text-sm">
                       <div className="my-5">
                         <p className="mb-3 flex gap-3">
-                          <Leaf /> Credit : {currentUser.cradit}
+                          <Leaf /> Credit : {currentUser?.cradit}
                         </p>
                         <p className="text-gray-400">Clude project</p>
                       </div>

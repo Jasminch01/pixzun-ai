@@ -16,18 +16,9 @@ import ImageMOdal from "@/components/ImageMOdal";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { Spiner } from "@/components/loadingComponent";
 
-//dummy
-const images = [
-  { src: "https://via.placeholder.com/100", alt: "Image 1" },
-  { src: "https://via.placeholder.com/100", alt: "Image 2" },
-  { src: "https://via.placeholder.com/100", alt: "Image 3" },
-  { src: "https://via.placeholder.com/100", alt: "Image 4" },
-  { src: "https://via.placeholder.com/100", alt: "Image 5" },
-];
-
 interface Project {
   name: string;
-  createdAt: string; // or Date if you prefer to store it as Date
+  createdAt: string;
 }
 
 const Project: React.FC = () => {
@@ -113,6 +104,7 @@ const Project: React.FC = () => {
 
     setLoadingResult(true);
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
+    console.log(payload);
     try {
       const response = await axiosInstance.post(
         `/api/project/${id}/generate`,
@@ -188,16 +180,12 @@ const Project: React.FC = () => {
   return (
     <div className="flex justify-center border-white border-3">
       <LeftSidebar
-        handleInputChange={handleInputChange}
-        countWords={countWords}
         handleSubmit={handleSubmit}
-        imageUploaded={imageUploaded}
-        inputPrompt={inputPrompt}
-        loadingResult={loadingResult}
+        setInputPrompt={setInputPrompt}
       />
-      <div className="mt-[5rem]">
+      <div className="mt-[6rem]">
         <p className="text-white text-center text-lg">{projectName}</p>
-        <div className="flex items-center justify-center mt-[3.56rem] relative">
+        <div className="flex items-center justify-center mt-[8rem] relative">
           <div className="absolute bg-bg-lighter blur-3xl md:w-[25rem] md:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           <div
             {...getRootProps()}
@@ -205,6 +193,7 @@ const Project: React.FC = () => {
               (loadingResult ||
                 imageUploadLoading ||
                 imageUploaded ||
+                loadingResult ||
                 generatedResults.length > 0) &&
               "hidden"
             }`}
@@ -318,9 +307,22 @@ const Project: React.FC = () => {
           ) : null}
         </div>
         <div className="flex justify-center mt-10">
-          {currentUser?.role === "free" && (
-            <button
-              className={`bg-button-gradient 
+          <div className="w-[35rem]">
+            <textarea
+              onChange={handleInputChange}
+              rows={4}
+              className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
+              placeholder="Type whatever you want to do with AI"
+            ></textarea>
+          </div>
+        </div>
+
+        <div className="flex justify-end mt-3">
+          <div className="">
+            <div className="flex gap-5">
+              {currentUser?.role === "free" && (
+                <button
+                  className={`bg-button-gradient 
                 p-3 rounded-full
                  text-white opacity-50
                   cursor-not-allowed ${
@@ -328,48 +330,33 @@ const Project: React.FC = () => {
                       ? "block"
                       : "hidden"
                   }`}
-              onClick={openModal}
-            >
-              Remove Watermark
-            </button>
-          )}
-        </div>
+                  onClick={openModal}
+                >
+                  Remove Watermark
+                </button>
+              )}
 
-        <div className="flex justify-center">
-          <div className="flex flex-col w-full max-w-[60rem] mx-auto">
-            <p className="text-white">Suggested</p>
-            <div className="flex justify-center items-center">
-              <div className="mt-4 w-full flex justify-center">
-                <div className="grid grid-cols-5 gap-4">
-                  {images.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image.src}
-                      alt={image.alt}
-                      width={200}
-                      height={200}
-                      className="w-full h-auto object-cover rounded-md"
-                    />
-                  ))}
+              <button
+                onClick={handleSubmit}
+                disabled={
+                  !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
+                }
+                className={`text-white gap-2 bg-button-gradient p-3 rounded-full ${
+                  (!imageUploaded ||
+                    !inputPrompt ||
+                    countWords(inputPrompt) < 5) &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+              >
+                <div className="text-center flex justify-center items-center gap-3">
+                  {
+                    <p className="flex justify-center items-center gap-3">
+                      {" "}
+                      Generate{" "}
+                    </p>
+                  }
                 </div>
-              </div>
-            </div>
-            <div className="mt-4">
-              <p className="text-white">Solid background</p>
-              <div className="mt-4 w-full flex justify-center">
-                <div className="grid grid-cols-5 gap-4">
-                  {images.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image.src}
-                      alt={image.alt}
-                      width={200}
-                      height={200}
-                      className="w-full h-auto object-cover rounded-md"
-                    />
-                  ))}
-                </div>
-              </div>
+              </button>
             </div>
           </div>
         </div>
