@@ -15,6 +15,8 @@ import { IoMdImages } from "react-icons/io";
 import ImageMOdal from "@/components/ImageMOdal";
 import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
 import { Spiner } from "@/components/loadingComponent";
+import CheckOutModal from "@/components/CheckOutModal";
+import CheckoutForm from "@/components/CheckrouForm";
 
 interface Project {
   name: string;
@@ -28,8 +30,17 @@ const Project: React.FC = () => {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [uploadedImage, setUploadedImage] = useState<string[]>([]);
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
-  const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
-  const { currentUser, loading, refetch: refatchUser } = useUserContext();
+  const {
+    currentUser,
+    loading,
+    refetch: refatchUser,
+    isPricingModalOpen,
+    setIsPricingModalOpen,
+    isPaymentModalOpen,
+    setIsPaymentModalOpen,
+    handlePayment,
+    selectedPrice,
+  } = useUserContext();
   const [projectName, setProjectName] = useState<string>("");
   const [inputPrompt, setInputPrompt] = useState("");
   const [loadingResult, setLoadingResult] = useState(false);
@@ -177,6 +188,7 @@ const Project: React.FC = () => {
     setIsModalOpen(false);
   };
 
+  const closePaymentModal = () => setIsPaymentModalOpen(false);
   return (
     <div className="flex justify-center border-white border-3">
       <LeftSidebar
@@ -325,11 +337,7 @@ const Project: React.FC = () => {
                   className={`bg-button-gradient 
                 p-3 rounded-full
                  text-white opacity-50
-                  cursor-not-allowed ${
-                    currentUser?.role === "free" && generatedResults.length > 0
-                      ? "block"
-                      : "hidden"
-                  }`}
+                  cursor-not-allowed `}
                   onClick={openModal}
                 >
                   Remove Watermark
@@ -388,8 +396,24 @@ const Project: React.FC = () => {
           />
         </ImageMOdal>
       )}
+
+      {/* Modal to confirm and process payment */}
+      {isPaymentModalOpen && (
+        <CheckOutModal isOpen={isPaymentModalOpen} onClose={closePaymentModal}>
+          <CheckoutForm
+            onPayment={handlePayment}
+            selectedPrice={selectedPrice}
+          />
+        </CheckOutModal>
+      )}
     </div>
   );
 };
 
 export default Project;
+
+// ${
+//   currentUser?.role === "free" && generatedResults.length > 0
+//     ? "block"
+//     : "hidden"
+// }
