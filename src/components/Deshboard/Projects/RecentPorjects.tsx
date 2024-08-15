@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProjectCard from "./ProjectCard";
-import { treadmill } from "ldrs";
 import axiosInstance from "@/utils/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import FavouriteProject from "./FavouritePorject";
@@ -65,7 +64,9 @@ const RecentProjects: React.FC = () => {
   const handleDelete = (projectId: string) => {
     const deleteProject = async () => {
       try {
-        const response = await axiosInstance.delete(`/api/project/${projectId}`);
+        const response = await axiosInstance.delete(
+          `/api/project/${projectId}`
+        );
         if (response.data.data) {
           refetch();
         }
@@ -122,7 +123,9 @@ const RecentProjects: React.FC = () => {
 
   return (
     <div className="text-white mt-16 px-3 md:px-0">
-      <p className="md:text-xl text-lg text-center md:text-left">Recent Projects</p>
+      <p className="md:text-xl text-lg text-center md:text-left">
+        Recent Projects
+      </p>
       {recentProjects.length > 0 ? (
         <>
           <div className="md:flex md:gap-5 mt-5">
@@ -149,7 +152,9 @@ const RecentProjects: React.FC = () => {
           </p>
         </div>
       )}
-      <p className="md:text-xl text-lg mt-5 text-center md:text-left">Favorite Projects</p>
+      <p className="md:text-xl text-lg mt-5 text-center md:text-left">
+        Favorite Projects
+      </p>
 
       {favoriteProjects.length > 0 ? (
         <>
