@@ -25,8 +25,8 @@ const pricingPlans = [
       "No watermark",
       "High quality images",
       "Enhanced images",
+      "Lifetime access to credits",
       "5000 Credits",
-      "Lifetime access to credits"
     ],
     buttonText: "Get Enterprise",
   },

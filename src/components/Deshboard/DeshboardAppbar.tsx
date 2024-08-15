@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { IoImageOutline, IoMenu } from "react-icons/io5";
 import { Brand, Leaf } from "../Svg";
@@ -19,7 +19,13 @@ const DashboardAppBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const { currentUser, loading, refetch: refatchUser } = useUserContext();
+  const profileRef = useRef<HTMLDivElement>(null);
+  const {
+    currentUser,
+    loading,
+    refetch: refetchUser,
+    setIsPricingModalOpen,
+  } = useUserContext();
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
@@ -74,6 +80,30 @@ const DashboardAppBar: React.FC = () => {
     };
   }, []);
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      profileRef.current &&
+      !profileRef.current.contains(event.target as Node)
+    ) {
+      setIsProfileOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isProfileOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isProfileOpen]);
+
+  const modalOpen = () => {
+    setIsPricingModalOpen(true);
+  };
+
   return (
     <div
       className={`fixed w-full z-[1] top-0 ${
@@ -97,13 +127,13 @@ const DashboardAppBar: React.FC = () => {
                 <Leaf />
                 <p>Credit : {currentUser?.cradit}</p>
               </Link>
-              <Link
-                href="/get-cradits"
+              <button
+                onClick={modalOpen}
                 className="text-base text-white p-3 bg-button-gradient rounded-full transition-all"
               >
                 Get Credits
-              </Link>
-              <div className="relative group">
+              </button>
+              <div className="relative group" ref={profileRef}>
                 <button
                   className="text-base text-white flex justify-center items-center rounded-full transition-all "
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -146,17 +176,16 @@ const DashboardAppBar: React.FC = () => {
                         <p className="mb-3 flex gap-3">
                           <Leaf /> Credit : {currentUser?.cradit}
                         </p>
-                        <p className="text-gray-400">Clude project</p>
                       </div>
                       <div className="space-y-2 mb-3">
                         <p className="flex items-center gap-3">
                           <IoImageOutline size={22} color="white" />
                           My Gallery
                         </p>
-                        <p className="flex items-center gap-3">
+                        <Link href={'/app'} className="flex items-center gap-3">
                           <SiGoogledocs size={22} color="white" />
                           Project
-                        </p>
+                        </Link>
                       </div>
                     </div>
                     <hr className="border-gray-400 border" />

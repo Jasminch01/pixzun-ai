@@ -1,9 +1,5 @@
 import { Check } from "@/components/Svg";
-import axiosInstance from "@/utils/axiosInstance";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useState } from "react";
-import CheckOutModal from "@/components/CheckOutModal";
-import CheckoutForm from "@/components/CheckrouForm";
+import React from "react";
 import { useUserContext } from "@/app/context/ContextProvider";
 
 interface PricingCardProps {
@@ -21,9 +17,23 @@ const PricingCard: React.FC<PricingCardProps> = ({
   features,
   buttonText,
 }) => {
-  const { setIsPaymentModalOpen, setSelectedPrice } = useUserContext();
+  const {
+    setIsPaymentModalOpen,
+    setSelectedPrice,
+    setNewRole,
+    setCreditIncrement,
+  } = useUserContext();
+
+  const getLastElement = (array: string[]): string => {
+    return array[array.length - 1];
+  };
+
+  const credit = getLastElement(features);
+
   const openModal = () => {
     setSelectedPrice(price);
+    setNewRole(title);
+    setCreditIncrement(credit);
     setIsPaymentModalOpen(true);
   };
 
@@ -84,19 +94,19 @@ const PricingCard: React.FC<PricingCardProps> = ({
               </div>
             ))}
           </ul>
-          {title === "Premium" && (
+          {/* {title === "Premium" && (
             <div className="mb-3">
               <div className="flex justify-center">
                 <div className="flex text-center items-center gap-2">
                   <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                    {/* <input
+                    <input
                       type="checkbox"
                       name="toggle"
                       id="toggle"
                       checked={isAutoRenew}
                       onChange={handleToggleAutoRenew}
                       className="toggle-checkbox absolute block size-4 rounded-full bg-button-gradient appearance-none cursor-pointer transition-transform duration-200 ease-in-out z-10 transform ${isAutoRenew ? 'translate-x-4' : ''}"
-                    /> */}
+                    />
                     <label
                       htmlFor="toggle"
                       className="toggle-label block overflow-hidden h-6 w-10 rounded-full bg-white cursor-pointer"
@@ -107,7 +117,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
               </div>
               <p className="text-center">Next renewal: 1 July 2024</p>
             </div>
-          )}
+          )} */}
         </div>
         <div className="text-center relative z-10">
           <button

@@ -9,7 +9,11 @@ import React, {
 import { useUser } from "@clerk/nextjs";
 import axiosInstance from "@/utils/axiosInstance";
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
-import { useStripe, useElements, CardNumberElement,} from "@stripe/react-stripe-js";
+import {
+  useStripe,
+  useElements,
+  CardNumberElement,
+} from "@stripe/react-stripe-js";
 
 interface UserContextType {
   currentUser: any;
@@ -23,6 +27,8 @@ interface UserContextType {
   handlePayment: () => Promise<void>;
   clientSecret: string;
   selectedPrice: string;
+  setNewRole: React.Dispatch<React.SetStateAction<string>>;
+  setCreditIncrement: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -47,9 +53,10 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [newRole, setNewRole] = useState("");
+  const [creditIncrement, setCreditIncrement] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
   useEffect(() => {
     if (isPaymentModalOpen) {
       setIsPricingModalOpen(false);
@@ -62,6 +69,16 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     );
     return res.data.data;
   };
+
+  const {
+    data: currentUser = null,
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryFn: fetchUser,
+    queryKey: ["user", user?.emailAddresses[0].emailAddress],
+    enabled: !!isLoaded && !!user,
+  });
 
   const handlePayment = async () => {
     if (!stripe || !elements) {
@@ -95,25 +112,22 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
         console.error("Payment error:", result.error.message);
         // Handle error (e.g., display message to user)
       } else if (result.paymentIntent?.status === "succeeded") {
-        setIsPaymentModalOpen(false)
-        console.log("Payment successful!");
+        // console.log("Payment successful!");
 
         // Handle success (e.g., show confirmation message, redirect)
+        const res = await axiosInstance.post(`/api/get-credit`, {
+          newRole,
+          creditIncrement,
+        });
+        if (res.data.data.modifiedCount) {
+          refetch();
+          setIsPaymentModalOpen(false);
+        }
       }
     } catch (error) {
       console.error("Payment error:", error);
     }
   };
-
-  const {
-    data: currentUser = null,
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryFn: fetchUser,
-    queryKey: ["user", user?.emailAddresses[0].emailAddress],
-    enabled: !!isLoaded && !!user,
-  });
 
   // Set loading based on the query's loading state
   const loading = isLoading || !isLoaded;
@@ -132,6 +146,8 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
         selectedPrice,
         handlePayment,
         clientSecret,
+        setNewRole,
+        setCreditIncrement,
       }}
     >
       {children}
