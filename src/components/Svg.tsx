@@ -122,6 +122,62 @@ export const Leaf: React.FC = () => {
     </svg>
   );
 };
+export const LeafWhite: React.FC = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="size-5"
+      viewBox="0 0 37 37"
+      fill="none"
+    >
+      <path
+        d="M36.9973 0.00274326C36.9973 0.00274326 37.4358 17.0044 27.2201 27.2202C17.0043 37.436 0.00274329 36.9973 0.00274329 36.9973C0.00274329 36.9973 -0.435892 19.9957 9.77985 9.77992C19.9956 -0.435892 36.9973 0.00274326 36.9973 0.00274326Z"
+        fill="white"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_464_13"
+          x1="18.5"
+          y1="0"
+          x2="18.5"
+          y2="37"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#A22BD8" />
+          <stop offset="0.794118" stop-color="#4641E3" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+};
+export const LeafBright: React.FC = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="size-4"
+      viewBox="0 0 10 10"
+      fill="none"
+    >
+      <path
+        d="M9.99926 0.000741421C9.99926 0.000741421 10.1178 4.59579 7.35677 7.35681C4.59576 10.1178 0.000741429 9.99926 0.000741429 9.99926C0.000741429 9.99926 -0.117809 5.40424 2.6432 2.64322C5.40421 -0.117809 9.99926 0.000741421 9.99926 0.000741421Z"
+        fill="url(#paint0_linear_866_105)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_866_105"
+          x1="5"
+          y1="0"
+          x2="5"
+          y2="10"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#A22BD8" />
+          <stop offset="0.794118" stop-color="#4641E3" />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+};
 export const Brand: React.FC = () => {
   return (
     <svg

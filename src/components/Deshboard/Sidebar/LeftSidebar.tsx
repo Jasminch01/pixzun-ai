@@ -80,7 +80,7 @@ const images = [
     alt: "Image 13",
     prompt:
       "A breathtaking 4K mountain landscape background, featuring towering snow-capped peaks, rolling green hills, and a crystal-clear lake reflecting the surrounding scenery. The sky is a vibrant blue with wisps of clouds, and the lighting casts natural shadows across the terrain. The scene is peaceful and majestic, with detailed textures on the rocks, trees, and water. --v 5 --ar 16:9 --q 2 --style realistic.",
-  }, 
+  },
 ];
 
 interface ModalProps {
@@ -122,34 +122,34 @@ const LeftSidebar: React.FC<ModalProps> = ({
   return (
     <div
       id="left-sidebar"
-      className="fixed top-40 left-0 h-[40rem] overflow-y-auto custom-scrollbar w-80 border-2 border-l-0 rounded border-gray-400 px-5 pb-5"
+      className="lg:fixed md:top-40 lg:left-0 lg:h-[40rem] lg:overflow-y-auto custom-scrollbar lg:w-60 xl:w-80 lg:border-2 lg:border-l-0 lg:rounded lg:border-gray-400 lg:px-5 lg:pb-5 order-3 mt-5 lg:mt-0"
     >
       <div
-        className={`sticky top-0 z-10 transition-colors duration-300 py-5 ${
-          isScrolled ? "bg-[#1B1D29] py-5" : ""
+        className={`lg:sticky top-0 z-10 transition-colors lg:duration-300 py-5 ${
+          isScrolled ? "lg:bg-[#1B1D29] lg:py-5" : ""
         }`}
       >
-        <p className="text-white text-base font-bold">Use Templates</p>
+        <p className="text-white md:text-base md:font-bold">Use Templates</p>
         <div className="flex gap-3 mt-4">
-          <button className="w-full p-2 gradient text-white rounded">
+          <button className="lg:w-full p-2 gradient text-white rounded lg:text-base text-sm">
             Monocrome
           </button>
-          <button className="w-full p-2 gradient text-white rounded">
+          <button className="lg:w-full p-2 gradient text-white rounded lg:text-base text-sm">
             Natural
           </button>
         </div>
       </div>
       <div className="mt-4 pt-4">
-        <div className="grid grid-cols-2 gap-4">
-          {images.map((image, index) => (
+        <div className="lg:grid lg:grid-cols-2 flex gap-4">
+          {images.slice(0, 5).map((image, index) => (
             <Image
               key={index}
               src={image.src}
               alt={image.alt}
-              width={200}
-              height={200}
+              width={20}
+              height={20}
               onClick={() => handleImageClick(image.prompt || "")}
-              className="w-full h-auto object-cover rounded-md cursor-pointer"
+              className="lg:w-full h-auto object-cover rounded-md cursor-pointer w-24"
             />
           ))}
         </div>

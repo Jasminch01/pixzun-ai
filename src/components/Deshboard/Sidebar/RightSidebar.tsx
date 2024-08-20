@@ -36,16 +36,20 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
     }
   }, []);
   return (
-    <div id="right-sidebar" className="fixed top-40 right-0 h-[40rem] w-80 overflow-y-auto custom-scrollbar border-r-0 border-2 border-gray-400 rounded">
-      
-      <div className={`p-6 text-white text-base font-bold sticky top-0 z-10 transition-colors duration-300 py-5 ${
-          isScrolled ? "bg-[#2B2E3D] py-5" : ""
-        }`}>
-          <p>My Creation</p>
-        </div>
+    <div
+      id="right-sidebar"
+      className="lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] lg:w-60 xl:w-80 lg:overflow-y-auto xl:custom-scrollbar lg:border-r-0 lg:border-2 lg:border-gray-400 lg:rounded order-1"
+    >
+      <div
+        className={`lg:p-6 text-white text-base font-bold lg:sticky top-0 z-10 lg:transition-colors lg:duration-300 py-5 ${
+          isScrolled ? "lg:bg-[#2B2E3D] lg:py-5" : ""
+        }`}
+      >
+        <p>My Creation</p>
+      </div>
 
       <div
-        className={`p-4 flex flex-col justify-center items-center ${
+        className={`xl:p-4 flex flex-col justify-center items-center ${
           (loading || generatedResults.length === 0) && "h-[50vh]"
         } `}
       >
@@ -54,15 +58,15 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
             <DotPulse />
           </div>
         ) : generatedResults.length > 0 ? (
-          <div className="grid grid-cols-3 gap-4">
-            {generatedResults.map((image, index) => (
+          <div className="lg:grid lg:grid-cols-2 xl:grid-cols-3 flex gap-4">
+            {generatedResults.slice(0, 3).map((image, index) => (
               <div key={index} onClick={() => openModal(index)}>
                 <Image
                   src={image}
                   alt={"generatedImage"}
                   width={200}
                   height={200}
-                  className="w-[104px] h-[118px] rounded-md cursor-pointer object-cover"
+                  className="xl:w-[104px] xl:h-[118px] rounded cursor-pointer object-cover border w-24"
                 />
               </div>
             ))}

@@ -1,4 +1,3 @@
-
 const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -35,6 +34,8 @@ const config = {
           "linear-gradient(0deg, #232633 -70.5%, #2E3037 198.56%)",
         "join-button":
           "linear-gradient(104deg, #BB25D8 -4.77%, #A536E6 47.09%, #9146F3 100%)",
+        "gredient-button":
+          "linear-gradient(319deg, #3444D8 -41.2%, #E458FF 134.95%)",
       },
       fontFamily: {
         poppins: "var(--font-poppins)",
