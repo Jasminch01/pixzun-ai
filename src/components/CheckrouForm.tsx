@@ -7,16 +7,19 @@ import {
 
 interface CheckoutFormProps {
   onPayment: () => void; // Pass the payment handler
-  selectedPrice : string;
+  selectedPrice: string;
 }
-const CheckoutForm: React.FC<CheckoutFormProps> = ({ onPayment, selectedPrice}) => {
+const CheckoutForm: React.FC<CheckoutFormProps> = ({
+  onPayment,
+  selectedPrice,
+}) => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onPayment();
   };
 
   return (
-    <div className="w-[30rem]">
+    <div className="md:w-[30rem] w-[15rem]">
       <form onSubmit={handleSubmit}>
         {/* Card Number */}
         <label>
@@ -28,7 +31,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onPayment, selectedPrice}) 
         </label>
 
         {/* Expiration Date */}
-        <div className=" flex gap-5 my-5">
+        <div className=" md:flex gap-5 my-5">
           <div className="w-full">
             <label>
               Expiry Date

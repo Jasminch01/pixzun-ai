@@ -54,7 +54,8 @@ const PricingCard: React.FC<PricingCardProps> = ({
         `}
       >
         {title === "Enterprise" && (
-          <button className="text-white bg-button-gradient rounded-full px-3 py-2 absolute right-24 top-[5.50rem]">
+          <button className="text-white bg-button-gradient rounded-full
+           px-3 py-2 absolute right-24 -top-5">
             Best value
           </button>
         )}
@@ -86,7 +87,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
             {features.map((feature, idx) => (
               <div key={idx} className="flex items-center gap-5">
                 <Check
-                  strokeColour={`${
+                  strokeColour={`${ 
                     price === "0" ? "#ffffff" : "url(#gradient)"
                   }`}
                 />

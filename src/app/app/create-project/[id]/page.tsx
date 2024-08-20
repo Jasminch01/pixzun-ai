@@ -227,7 +227,11 @@ const Project: React.FC = () => {
                   className={`bg-button-gradient
                 p-3 rounded-full
                  text-white opacity-50
-                  cursor-not-allowed `}
+                  cursor-not-allowed  ${
+                    currentUser?.role === "free" && generatedResults.length > 0
+                      ? "block"
+                      : "hidden"
+                  }`}
                   onClick={openModal}
                 >
                   Remove Watermark
@@ -408,7 +412,11 @@ const Project: React.FC = () => {
                     className={`bg-button-gradient
                 p-3 rounded-full
                  text-white opacity-50
-                  cursor-not-allowed `}
+                  cursor-not-allowed ${
+                    currentUser?.role === "free" && generatedResults.length > 0
+                      ? "block"
+                      : "hidden"
+                  }`}
                     onClick={openModal}
                   >
                     Remove Watermark
@@ -521,9 +529,3 @@ const Project: React.FC = () => {
 };
 
 export default Project;
-
-// // ${
-// //   currentUser?.role === "free" && generatedResults.length > 0
-// //     ? "block"
-// //     : "hidden"
-// // }

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Container from "@/components/Container";
-import { Brand, Folder, Leaf } from "@/components/Svg";
+import { Brand, Folder, Leaf, LeafBright } from "@/components/Svg";
 import { Modal } from "@/components/Modal";
 import RecentProjects from "@/components/Deshboard/Projects/RecentPorjects";
 import { useUserContext } from "../context/ContextProvider";
@@ -111,7 +111,8 @@ const Page: React.FC = () => {
               </p>
               <div className="flex justify-center items-center space-x-2">
                 <p className="md:text-2xl text-center text-sm">+1</p>
-                <Leaf />
+                <LeafBright/>
+                <Leaf/>
               </div>
             </div>
           </Modal>
@@ -121,7 +122,7 @@ const Page: React.FC = () => {
           <Modal
             isOpen={isNewProjectModalOpen}
             onClose={handleNewProjectModalClose}
-            modalSize={"md:h-[15rem] md:w-[30rem]"}
+            modalSize={"md:h-[15rem] md:w-[30rem] w-[20rem]"}
             gradientSize={"md:h-[10rem] md:w-[25rem] h-[15rem] w-[20rem]"}
             marginTop={"-mt-[7rem]"}
           >
