@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { DotPulse } from "@/components/loadingComponent";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 interface RightSidebarProps {
   generatedResults: string[];
@@ -18,7 +20,6 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Ensure this runs only on the client side
       const sidebar = document.getElementById("right-sidebar");
 
       const handleScroll = () => {
@@ -35,6 +36,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
       }
     }
   }, []);
+
   return (
     <div
       id="right-sidebar"
@@ -58,19 +60,59 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
             <DotPulse />
           </div>
         ) : generatedResults.length > 0 ? (
-          <div className="lg:grid lg:grid-cols-2 xl:grid-cols-3 flex gap-4">
-            {generatedResults.slice(0, 3).map((image, index) => (
-              <div key={index} onClick={() => openModal(index)}>
-                <Image
-                  src={image}
-                  alt={"generatedImage"}
-                  width={200}
-                  height={200}
-                  className="xl:w-[104px] xl:h-[118px] rounded cursor-pointer object-cover border w-24"
-                />
-              </div>
-            ))}
-          </div>
+          <>
+            {/* Swiper for mobile and tablet devices */}
+            <div className="lg:hidden w-full">
+              <Swiper
+                spaceBetween={5}
+                breakpoints={{
+                  320: {
+                    slidesPerView: 4.5,
+                    spaceBetween: 10,
+                  },
+                  420: {
+                    slidesPerView: 4.5,
+                    spaceBetween: 10,
+                  },
+                  640: {
+                    slidesPerView: 3.5,
+                    spaceBetween: 10,
+                  },
+                  768: {
+                    slidesPerView: 5,
+                    spaceBetween: 10,
+                  },
+                }}
+              >
+                {generatedResults.map((image, index) => (
+                  <SwiperSlide key={index} onClick={() => openModal(index)}>
+                    <Image
+                      src={image}
+                      alt={"generatedImage"}
+                      width={200}
+                      height={200}
+                      className="size-20 md:size-32 rounded cursor-pointer object-cover border"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
+            {/* Grid for large devices */}
+            <div className="hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-4">
+              {generatedResults.map((image, index) => (
+                <div key={index} onClick={() => openModal(index)}>
+                  <Image
+                    src={image}
+                    alt={"generatedImage"}
+                    width={200}
+                    height={200}
+                    className="xl:w-[104px] xl:h-[118px] rounded cursor-pointer object-cover border w-24"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
         ) : (
           <p className="text-white text-center text-sm">
             You don’t created anything yet

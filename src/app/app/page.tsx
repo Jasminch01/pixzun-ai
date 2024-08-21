@@ -12,7 +12,7 @@ const Page: React.FC = () => {
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [projectName, setProjectName] = useState<string>("");
 
-  const { currentUser, loading } = useUserContext();
+  const { currentUser } = useUserContext();
 
   // Handle modal close
   const handleWelcomeModalClose = () => {
@@ -111,8 +111,8 @@ const Page: React.FC = () => {
               </p>
               <div className="flex justify-center items-center space-x-2">
                 <p className="md:text-2xl text-center text-sm">+1</p>
-                <LeafBright/>
-                <Leaf/>
+                <LeafBright />
+                <Leaf />
               </div>
             </div>
           </Modal>

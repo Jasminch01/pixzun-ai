@@ -21,7 +21,7 @@ interface ProjectCardProps {
   menuOpen: { [key: string]: boolean };
   handleRename: (projectId: string, newName: string) => void;
   handleDelete: (projectId: string) => void;
-  handleFavoriteToggle: (projectId : string, newState: boolean) => void;
+  handleFavoriteToggle: (projectId: string, newState: boolean) => void;
   isFavorite: boolean;
 }
 
@@ -89,7 +89,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       className="relative p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#4940D8] rounded-md cursor-pointer my-5"
       onClick={handleCardClick}
     >
-      <div className="relative bg-[#1E202D] md:w-60 h-64 rounded-md p-3 flex flex-col justify-center items-center">
+      <div className="relative bg-[#1E202D] w-full h-64 rounded-md p-3 flex flex-col justify-center items-center">
         <div>
           <Image
             src={
@@ -145,7 +145,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               }}
             />
             {menuOpen[project._id] && (
-              <div className="absolute right-0 bg-gray-800 rounded-md shadow-lg mt-2 options-menu">
+              <div className="absolute bottom-0 right-0 bg-gray-800 rounded-md shadow-lg mt-2 options-menu">
                 <button
                   className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-700"
                   onClick={(e) => {

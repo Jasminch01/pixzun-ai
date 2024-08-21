@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ProjectCard from "./ProjectCard";
 import axiosInstance from "@/utils/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import FavouriteProject from "./FavouritePorject";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 interface ImageDetail {
   urls: string[];
@@ -21,6 +23,8 @@ const RecentProjects: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
   const [loading, setLoading] = useState(true);
 
+  const containerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
   const fetchProjects = async () => {
     try {
       const response = await axiosInstance.get(`/api/project`);
@@ -34,6 +38,7 @@ const RecentProjects: React.FC = () => {
       setLoading(false);
     }
   };
+
   const { data: recentProjects = [], refetch } = useQuery({
     queryFn: async () => await fetchProjects(),
     queryKey: ["recentProject"],
@@ -80,7 +85,6 @@ const RecentProjects: React.FC = () => {
   };
 
   const handleFavoriteToggle = (projectId: string, newState: boolean) => {
-    console.log(newState);
     const favouriteToggle = async () => {
       try {
         const response = await axiosInstance.put(
@@ -100,6 +104,29 @@ const RecentProjects: React.FC = () => {
     };
     favouriteToggle();
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      for (const key in containerRefs.current) {
+        if (
+          menuOpen[key] &&
+          containerRefs.current[key] &&
+          !containerRefs.current[key]?.contains(target)
+        ) {
+          setMenuOpen((prevState) => ({
+            ...prevState,
+            [key]: false,
+          }));
+        }
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [menuOpen]);
 
   if (loading) {
     return (
@@ -122,29 +149,44 @@ const RecentProjects: React.FC = () => {
   }
 
   return (
-    <div className="text-white mt-16 px-3 md:px-0">
+    <div className="text-white mt-16 px-5">
       <p className="md:text-xl text-lg text-center md:text-left">
         Recent Projects
       </p>
+
       {recentProjects.length > 0 ? (
-        <>
-          <div className="md:flex md:gap-5 mt-5">
-            {recentProjects.map((project: Project) => (
-              <ProjectCard
-                key={project._id}
-                project={project}
-                handleMenuToggle={handleMenuToggle}
-                menuOpen={menuOpen}
-                handleRename={handleRename}
-                handleDelete={handleDelete}
-                handleFavoriteToggle={handleFavoriteToggle}
-                isFavorite={favoriteProjects.some(
-                  (favProject) => favProject._id === project._id
-                )}
-              />
-            ))}
-          </div>
-        </>
+        <Swiper
+          spaceBetween={15}
+          breakpoints={{
+            320: { slidesPerView: 1.2, spaceBetween: 10 },
+            640: { slidesPerView: 2.2, spaceBetween: 10 },
+            768: { slidesPerView: 3.2, spaceBetween: 10 },
+            1024: { slidesPerView: 4.5, spaceBetween: 10 },
+          }}
+          className="mt-5"
+        >
+          {recentProjects.map((project: Project) => (
+            <SwiperSlide key={project._id}>
+              <div
+                ref={(el) => {
+                  containerRefs.current[project._id] = el;
+                }}
+              >
+                <ProjectCard
+                  project={project}
+                  handleMenuToggle={handleMenuToggle}
+                  menuOpen={menuOpen}
+                  handleRename={handleRename}
+                  handleDelete={handleDelete}
+                  handleFavoriteToggle={handleFavoriteToggle}
+                  isFavorite={favoriteProjects.some(
+                    (favProject) => favProject._id === project._id
+                  )}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       ) : (
         <div className="mt-10">
           <p className="text-gray-400 text-center text-sm md:text-base">
@@ -152,25 +194,39 @@ const RecentProjects: React.FC = () => {
           </p>
         </div>
       )}
+
       <p className="md:text-xl text-lg mt-5 text-center md:text-left">
         Favorite Projects
       </p>
 
       {favoriteProjects.length > 0 ? (
-        <>
-          <div className="md:flex md:gap-5 mt-5">
-            {favoriteProjects.map((project) => (
-              <FavouriteProject
-                key={project._id}
-                project={project}
-                handleMenuToggle={handleMenuToggle}
-                menuOpen={menuOpen}
-                handleFavoriteToggle={handleFavoriteToggle}
-                isFavorite={true}
-              />
-            ))}
-          </div>
-        </>
+        <Swiper
+          breakpoints={{
+            320: { slidesPerView: 1.2, spaceBetween: 10 },
+            640: { slidesPerView: 2.2, spaceBetween: 10 },
+            768: { slidesPerView: 3.2, spaceBetween: 10 },
+            1024: { slidesPerView: 4.5, spaceBetween: 10 },
+          }}
+          className="mt-5"
+        >
+          {favoriteProjects.map((project: Project) => (
+            <SwiperSlide key={project._id}>
+              <div
+                ref={(el) => {
+                  containerRefs.current[project._id] = el;
+                }}
+              >
+                <FavouriteProject
+                  project={project}
+                  handleMenuToggle={handleMenuToggle}
+                  menuOpen={menuOpen}
+                  handleFavoriteToggle={handleFavoriteToggle}
+                  isFavorite={true}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       ) : (
         <div className="mt-10">
           <p className="text-gray-400 text-center text-sm md:text-base">

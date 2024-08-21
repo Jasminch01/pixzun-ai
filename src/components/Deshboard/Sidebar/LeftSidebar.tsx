@@ -1,6 +1,8 @@
 "use client";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const images = [
   {
@@ -96,7 +98,6 @@ const LeftSidebar: React.FC<ModalProps> = ({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Ensure this runs only on the client side
       const sidebar = document.getElementById("left-sidebar");
 
       const handleScroll = () => {
@@ -109,7 +110,9 @@ const LeftSidebar: React.FC<ModalProps> = ({
 
       if (sidebar) {
         sidebar.addEventListener("scroll", handleScroll);
-        return () => sidebar.removeEventListener("scroll", handleScroll);
+        return () => {
+          sidebar.removeEventListener("scroll", handleScroll);
+        };
       }
     }
   }, []);
@@ -132,24 +135,52 @@ const LeftSidebar: React.FC<ModalProps> = ({
         <p className="text-white md:text-base md:font-bold">Use Templates</p>
         <div className="flex gap-3 mt-4">
           <button className="lg:w-full p-2 gradient text-white rounded lg:text-base text-sm">
-            Monocrome
+            Monochrome
           </button>
           <button className="lg:w-full p-2 gradient text-white rounded lg:text-base text-sm">
             Natural
           </button>
         </div>
       </div>
+
       <div className="mt-4 pt-4">
-        <div className="lg:grid lg:grid-cols-2 flex gap-4">
-          {images.slice(0, 5).map((image, index) => (
+        {/* Swiper for mobile and tablet devices */}
+        <div className="block lg:hidden">
+          <Swiper
+            spaceBetween={10}
+            breakpoints={{
+              320: { slidesPerView: 4.5, spaceBetween: 10 },
+              420: { slidesPerView: 4.5, spaceBetween: 10 },
+              640: { slidesPerView: 3.5, spaceBetween: 10 },
+              768: { slidesPerView: 5, spaceBetween: 10 },
+            }}
+          >
+            {images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={200}
+                  height={200}
+                  onClick={() => handleImageClick(image.prompt || "")}
+                  className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Grid layout for large screens */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-4">
+          {images.map((image, index) => (
             <Image
               key={index}
               src={image.src}
               alt={image.alt}
-              width={20}
-              height={20}
+              width={200}
+              height={200}
               onClick={() => handleImageClick(image.prompt || "")}
-              className="lg:w-full h-auto object-cover rounded-md cursor-pointer w-24"
+              className="lg:w-full h-auto object-cover rounded-md cursor-pointer"
             />
           ))}
         </div>
