@@ -36,7 +36,9 @@ export const Modal: React.FC<ModalProps> = ({
           <div className="fixed inset-0 z-40 bg-black opacity-50"></div>
 
           {/* Modal Container */}
-          <div className= {` fixed inset-0 z-50 flex items-center justify-center ${marginTop}`}>
+          <div
+            className={` fixed inset-0 z-50 flex items-center justify-center ${marginTop}`}
+          >
             {/* Gradient Background */}
             <div
               className={`absolute bg-gradient-to-b from-[#A82AD8] to-[#A82AD8] blur-3xl rounded opacity-50 ${gradientSize}`}
@@ -45,9 +47,9 @@ export const Modal: React.FC<ModalProps> = ({
             {/* Modal */}
             <dialog
               ref={modalRef}
-              className={`z-40 rounded modal p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#A82AD8] border-none shadow-none outline-none ${modalSize}`}
+              className={`z-40 rounded modal p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#A82AD8] border-none shadow-none outline-none ${modalSize} fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 m-0`}
             >
-              <div className="rounded p-5 h-full bg-[#222532] flex flex-col justify-center items-center space-y-5">
+              <div className="rounded p-5 lg:h-full md:h-full bg-[#222532] flex flex-col justify-center items-center space-y-5">
                 <IoClose
                   onClick={onClose}
                   className="modal-close-btn z-30 fill-white text-2xl absolute top-2 right-2 cursor-pointer"

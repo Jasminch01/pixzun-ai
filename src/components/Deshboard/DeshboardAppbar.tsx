@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { IoImageOutline, IoMenu } from "react-icons/io5";
-import { Brand, Leaf } from "../Svg";
+import { Brand, Leaf, LeafBright, LeafWhite } from "../Svg";
 import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
@@ -106,19 +106,19 @@ const DashboardAppBar: React.FC = () => {
 
   return (
     <div
-      className={`fixed w-full z-[1] top-0 ${
+      className={`fixed w-full z-50 top-0 ${
         isScrolled ? "bg-bg-gradient" : ""
       }`}
     >
       <div className="px-5">
         <div className="flex justify-between items-center py-5">
-          <div className="flex justify-center gap-2">
+          <Link href={"/app"} className="flex justify-center gap-2">
             <Brand />
-            <Link href={"/app"} className="md:text-2xl text-xl text-white">
+            <p className="md:text-2xl text-xl text-white hidden lg:flex">
               pixzun
-            </Link>
-          </div>
-          <div className="hidden md:flex items-center">
+            </p>
+          </Link>
+          <div className="hidden lg:flex items-center">
             <nav className="flex items-center space-x-3">
               <Link
                 href="/cradit"
@@ -182,7 +182,7 @@ const DashboardAppBar: React.FC = () => {
                           <IoImageOutline size={22} color="white" />
                           My Gallery
                         </p>
-                        <Link href={'/app'} className="flex items-center gap-3">
+                        <Link href={"/app"} className="flex items-center gap-3">
                           <SiGoogledocs size={22} color="white" />
                           Project
                         </Link>
@@ -201,7 +201,8 @@ const DashboardAppBar: React.FC = () => {
               </div>
             </nav>
           </div>
-          <div className="relative md:hidden">
+          {/* menu bar for small devices */}
+          {/* <div className="relative md:hidden">
             <div className="btn btn-ghost btn-circle">
               <IoMenu
                 color="white"
@@ -226,6 +227,10 @@ const DashboardAppBar: React.FC = () => {
                 </li>
               ))}
             </ul>
+          </div> */}
+          <div className="flex gap-2 lg:hidden items-center">
+            <LeafBright />
+            <p className="text-white">{currentUser?.cradit}</p>
           </div>
         </div>
       </div>
