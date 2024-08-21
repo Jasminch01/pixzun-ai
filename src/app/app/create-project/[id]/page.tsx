@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -13,10 +13,19 @@ import RightSidebar from "@/components/Deshboard/Sidebar/RightSidebar";
 import PricingModal from "@/components/Deshboard/Projects/PricingModal";
 import { IoMdImages } from "react-icons/io";
 import ImageMOdal from "@/components/ImageMOdal";
-import { IoChevronBackSharp, IoChevronForwardSharp } from "react-icons/io5";
+import {
+  IoArrowBack,
+  IoChevronBackSharp,
+  IoChevronForwardSharp,
+} from "react-icons/io5";
 import { Spiner } from "@/components/loadingComponent";
 import CheckOutModal from "@/components/CheckOutModal";
 import CheckoutForm from "@/components/CheckrouForm";
+import { FaRegCopy } from "react-icons/fa6";
+import { useUser } from "@clerk/nextjs";
+import { Leaf, LeafWhite } from "@/components/Svg";
+import { HiOutlinePlusSm } from "react-icons/hi";
+import Link from "next/link";
 
 interface Project {
   name: string;
@@ -47,6 +56,7 @@ const Project: React.FC = () => {
   const [loadingProject, setLoadingProject] = useState(true);
   const [generatedResults, setGeneratedResults] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
+  const { isLoaded, user } = useUser();
 
   const { id } = useParams();
   
@@ -188,20 +198,86 @@ const Project: React.FC = () => {
     setIsModalOpen(false);
   };
 
+  const openGetCreditMOdal = () => {
+    setIsPricingModalOpen(true);
+  };
+
   const closePaymentModal = () => setIsPaymentModalOpen(false);
   return (
-    <div className="flex justify-center border-white border-3">
+    <div className="flex justify-center flex-col-reverse lg:flex-row-reverse border-white border-3 px-5">
       <LeftSidebar
         handleSubmit={handleSubmit}
         setInputPrompt={setInputPrompt}
       />
-      <div className="mt-[6rem]">
-        <p className="text-white text-center text-lg">{projectName}</p>
-        <div className="flex items-center justify-center mt-[8rem] relative">
-          <div className="absolute bg-bg-lighter blur-3xl md:w-[25rem] md:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
+      {/* input for mobile device */}
+      <div className="flex flex-col justify-center mt-10 md:px-0 order-2 lg:hidden ">
+        <div className="lg:w-[35rem]">
+          <textarea
+            onChange={handleInputChange}
+            rows={2}
+            className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
+            placeholder="Type whatever you want to do with AI"
+          ></textarea>
+        </div>
+        <div className="flex justify-end mt-3">
+          <div className="">
+            <div className="flex gap-5">
+              {currentUser?.role === "free" && (
+                <button
+                  className={`bg-button-gradient
+                p-3 rounded-full
+                 text-white opacity-50
+                  cursor-not-allowed  ${
+                    currentUser?.role === "free" && generatedResults.length > 0
+                      ? "block"
+                      : "hidden"
+                  }`}
+                  onClick={openModal}
+                >
+                  Remove Watermark
+                </button>
+              )}
+
+              <button
+                onClick={handleSubmit}
+                disabled={
+                  !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
+                }
+                className={`text-white gap-2 bg-button-gradient lg:p-3 p-2 rounded-full ${
+                  (!imageUploaded ||
+                    !inputPrompt ||
+                    countWords(inputPrompt) < 5) &&
+                  "opacity-50 cursor-not-allowed"
+                }`}
+              >
+                <div className="text-center flex justify-center items-center gap-3">
+                  {
+                    <p className="flex justify-center items-center gap-3">
+                      {" "}
+                      Generate{" "}
+                    </p>
+                  }
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* dnd components */}
+      <div className="mt-[6rem] order-4 relative">
+        <Link
+          href={"/app"}
+          className="text-white lg:hidden text-lg text-left top-1 absolute cursor-pointer"
+        >
+          <IoArrowBack />
+        </Link>
+        <p className="text-white text-lg text-center">{projectName}</p>
+        <div className="flex items-center justify-center lg:mt-[8rem] mt-5 relative">
+          <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
+          {/* dnd component */}
           <div
             {...getRootProps()}
-            className={`bg-secondary size-[20rem] text-white border-dashed border-gray-400 border-2 rounded flex flex-col justify-center items-center px-5 cursor-pointer ${
+            className={`bg-secondary size-[16rem] xl:size-[20rem] text-white border-dashed border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
               (loadingResult ||
                 imageUploadLoading ||
                 imageUploaded ||
@@ -223,7 +299,7 @@ const Project: React.FC = () => {
             </div>
           </div>
           {imageUploadLoading || loadingResult ? (
-            <div className="size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 flex flex-col justify-center items-center">
+            <div className="size-[16rem] xl:size[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 flex flex-col justify-center items-center">
               <Spiner />
               {/* <p className="text-white mt-3">
               </p> */}
@@ -231,7 +307,7 @@ const Project: React.FC = () => {
           ) : generatedResults.length > 0 ? (
             <div className="flex bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3">
               {/* Always display the first image */}
-              <div className="size-[20rem]">
+              <div className="size-[16rem] xl:size-[20rem]">
                 <div
                   className="relative w-full h-full rounded-l"
                   style={{
@@ -265,7 +341,7 @@ const Project: React.FC = () => {
               </div>
 
               {/* Display the current image with navigation buttons */}
-              <div className="size-[20rem]">
+              <div className="size-[16rem] xl:size-[20rem]">
                 <div className="relative w-full h-full rounded-l bg-white">
                   <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
                     <a
@@ -306,7 +382,7 @@ const Project: React.FC = () => {
               </div>
             </div>
           ) : imageUploaded ? (
-            <div className="bg-secondary size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
+            <div className="bg-secondary size-[16rem] xl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
               <div className="relative w-full h-full">
                 <Image
                   src={uploadedImage[0]}
@@ -318,53 +394,59 @@ const Project: React.FC = () => {
             </div>
           ) : null}
         </div>
-        <div className="flex justify-center mt-10">
-          <div className="w-[35rem]">
+        {/* input for large divices */}
+        <div className="lg:flex flex-col justify-center mt-10 px-5 lg:px-0 hidden">
+          <div className="lg:w-[20rem] xl:w-[35rem]">
             <textarea
               onChange={handleInputChange}
-              rows={4}
+              rows={3}
               className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
               placeholder="Type whatever you want to do with AI"
             ></textarea>
           </div>
-        </div>
-
-        <div className="flex justify-end mt-3">
-          <div className="">
-            <div className="flex gap-5">
-              {currentUser?.role === "free" && (
-                <button
-                  className={`bg-button-gradient 
+          <div className="flex justify-end mt-3">
+            <div className="">
+              <div className="flex gap-5">
+                {currentUser?.role === "free" && (
+                  <button
+                    className={`bg-button-gradient
                 p-3 rounded-full
                  text-white opacity-50
-                  cursor-not-allowed `}
-                  onClick={openModal}
-                >
-                  Remove Watermark
-                </button>
-              )}
+                  cursor-not-allowed ${
+                    currentUser?.role === "free" && generatedResults.length > 0
+                      ? "block"
+                      : "hidden"
+                  }`}
+                    onClick={openModal}
+                  >
+                    Remove Watermark
+                  </button>
+                )}
 
-              <button
-                onClick={handleSubmit}
-                disabled={
-                  !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
-                }
-                className={`text-white gap-2 bg-button-gradient p-3 rounded-full ${
-                  (!imageUploaded ||
+                <button
+                  onClick={handleSubmit}
+                  disabled={
+                    !imageUploaded ||
                     !inputPrompt ||
-                    countWords(inputPrompt) < 5) &&
-                  "opacity-50 cursor-not-allowed"
-                }`}
-              >
-                <div className="text-center flex justify-center items-center gap-3">
-                  {
-                    <p className="flex justify-center items-center gap-3">
-                      {" "}
-                      Generate{" "}
-                    </p>
+                    countWords(inputPrompt) < 5
                   }
-                </div>
-              </button>
+                  className={`text-white gap-2 bg-button-gradient md:p-3 p-2 rounded-full ${
+                    (!imageUploaded ||
+                      !inputPrompt ||
+                      countWords(inputPrompt) < 5) &&
+                    "opacity-50 cursor-not-allowed"
+                  }`}
+                >
+                  <div className="text-center flex justify-center items-center gap-3">
+                    {
+                      <p className="flex justify-center items-center gap-3">
+                        {" "}
+                        Generate{" "}
+                      </p>
+                    }
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -375,6 +457,42 @@ const Project: React.FC = () => {
         loading={loadingProject}
         openModal={openImageModal}
       />
+      {/* profile for mobile devices */}
+      <div className="px-5 my-10">
+        <div className="w-full p-3 lg:hidden bg-gray-50/5 rounded-full">
+          <div className="flex justify-between items-center relative">
+            <div>
+              <FaRegCopy size={20} color="white" />
+            </div>
+            <div
+              className="size-12 bg-gredient-button rounded-full absolute bottom-5 left-1/2 transform -translate-x-1/2 ring-4 ring-[#222432] flex justify-center items-center cursor-pointer"
+              onClick={openGetCreditMOdal}
+            >
+              <div className="flex">
+                <LeafWhite />
+                <div className="mt-2">
+                  <HiOutlinePlusSm color="white" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <Link
+                href={"/app/profile"}
+                className="text-base text-white flex justify-center items-center rounded-full transition-all "
+              >
+                <img
+                  src={user?.imageUrl}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <PricingModal isOpen={isPricingModalOpen} onClose={closeModal} />
 
@@ -411,9 +529,3 @@ const Project: React.FC = () => {
 };
 
 export default Project;
-
-// ${
-//   currentUser?.role === "free" && generatedResults.length > 0
-//     ? "block"
-//     : "hidden"
-// }

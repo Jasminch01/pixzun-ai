@@ -39,7 +39,7 @@ const FavouriteProject: React.FC<ProjectCardProps> = ({
       className="relative p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#4940D8] rounded-md cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="relative bg-[#1E202D] md:w-60 h-64 rounded-md p-3 flex flex-col justify-center items-center">
+      <div className="relative bg-[#1E202D] w-full h-64 rounded-md p-3 flex flex-col justify-center items-center">
         <div>
           <Image
             src={
@@ -49,7 +49,7 @@ const FavouriteProject: React.FC<ProjectCardProps> = ({
             width={50}
             height={50}
             className="size-28 object-cover rounded-full"
-          />
+          /> 
         </div>
         <div className="absolute bottom-2 left-2">
           <p className="text-white">{project.name}</p>
