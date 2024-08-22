@@ -1,6 +1,7 @@
 "use client";
 import { useUserContext } from "@/app/context/ContextProvider";
 import axiosInstance from "@/utils/axiosInstance";
+import { useUser } from "@clerk/nextjs";
 import React, { useState } from "react";
 
 const Profile: React.FC = () => {
@@ -8,6 +9,7 @@ const Profile: React.FC = () => {
   const { currentUser, loading, refetch } = useUserContext();
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(currentUser?.name || "");
+  const { user } = useUser();
 
   const updateName = async (update: any) => {
     try {
@@ -33,11 +35,13 @@ const Profile: React.FC = () => {
       case "personalInfo":
         return (
           <div className="bg-[#292B3A] px-10 py-20">
-            <h2 className="text-2xl mb-10 text-white">Personal Info</h2>
+            <h2 className="md:text-2xl text-lg mb-10 text-white">
+              Personal Info
+            </h2>
             <div className="space-y-10">
               <div className="">
                 <p className="text-gray-300">User Name</p>
-                <div className="flex justify-between items-center">
+                <div className="md:flex justify-between items-center">
                   {isEditing ? (
                     <input
                       type="text"
@@ -49,7 +53,7 @@ const Profile: React.FC = () => {
                     <p className="text-white">Name: {`${currentUser?.name}`}</p>
                   )}
                   <button
-                    className="py-2 rounded-md px-4 border border-gray-400"
+                    className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400"
                     onClick={handleEditClick}
                   >
                     {isEditing ? "Save" : "Edit"}
@@ -59,19 +63,19 @@ const Profile: React.FC = () => {
               <div>
                 <div>
                   <p className="text-gray-300">User Email</p>
-                  <div className="flex justify-between">
+                  <div className="md:flex justify-between">
                     <p className="text-white">
                       Email: {`${currentUser?.email}`}
                     </p>
-                    <button className="py-2 rounded-md px-4 border border-gray-400">
+                    <button className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
                       Modify email addrerss
                     </button>
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between">
+              <div className="md:flex justify-between">
                 <p className="text-gray-300 font-bold">Delete Account</p>
-                <button className="py-2 rounded-md px-4 border border-gray-400">
+                <button className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
                   Delete
                 </button>
               </div>
@@ -108,12 +112,18 @@ const Profile: React.FC = () => {
   return (
     <div className="flex flex-col items-center p-6 mt-[10rem] text-white">
       <div className="flex justify-center items-center space-x-5">
-        <div className="text-base text-white size-11 flex justify-center items-center bg-purple-500 rounded-full transition-all px-3 py-2">
-          <p>ST</p>
+        <div className="text-base text-white size-11 flex justify-center items-center rounded-full transition-all">
+          <img
+            src={user?.imageUrl}
+            alt="Profile"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
         </div>
         <div>
-          <h1 className="text-2xl">{currentUser?.name}</h1>
-          <p className="text-lg">{currentUser?.email}</p>
+          <h1 className="md:text-2xl text-base">{currentUser?.name}</h1>
+          <p className="md:text-lg text-base">{currentUser?.email}</p>
         </div>
       </div>
       <div className="w-full mt-10">
