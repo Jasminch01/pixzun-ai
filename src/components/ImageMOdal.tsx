@@ -55,7 +55,7 @@ const ImageMOdal: React.FC<ModalProps> = ({
   return (
     <>
       {/* Overlay */}
-      <div className="fixed inset-0 z-10 bg-black"></div>
+      <div className="fixed inset-0 z-20 bg-black"></div>
 
       {/* Modal Container */}
       <div className={`fixed inset-0 z-20 flex items-center justify-center`}>
