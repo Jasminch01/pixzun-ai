@@ -106,7 +106,7 @@ const DashboardAppBar: React.FC = () => {
 
   return (
     <div
-      className={`fixed w-full z-50 top-0 ${
+      className={`fixed w-full md:z-20 z-20 top-0 ${
         isScrolled ? "bg-bg-gradient" : ""
       }`}
     >

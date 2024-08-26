@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import FavouriteProject from "./FavouritePorject";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { DotPulse } from "@/components/loadingComponent";
 
 interface ImageDetail {
   urls: string[];
@@ -131,9 +132,7 @@ const RecentProjects: React.FC = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center mt-44">
-        <p className="text-gray-400 text-center text-sm md:text-base">
-          Loading...
-        </p>
+        <DotPulse />
       </div>
     );
   }
@@ -207,7 +206,7 @@ const RecentProjects: React.FC = () => {
             768: { slidesPerView: 3.2, spaceBetween: 10 },
             1024: { slidesPerView: 4.5, spaceBetween: 10 },
           }}
-          className="mt-5"
+          className="mt-5 mb-5 lg:mb-0"
         >
           {favoriteProjects.map((project: Project) => (
             <SwiperSlide key={project._id}>

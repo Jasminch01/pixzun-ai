@@ -1,8 +1,9 @@
 "use client";
 import { useUserContext } from "@/app/context/ContextProvider";
 import axiosInstance from "@/utils/axiosInstance";
-import { useUser } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import React, { useState } from "react";
+import { TbLogout } from "react-icons/tb";
 
 const Profile: React.FC = () => {
   const [activeTab, setActiveTab] = useState("personalInfo");
@@ -10,11 +11,28 @@ const Profile: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(currentUser?.name || "");
   const { user } = useUser();
+  const { signOut } = useClerk();
+
+  const handleSignOut = () => {
+    signOut();
+
+    const logout = async () => {
+      try {
+        const res = await axiosInstance.post("/api/auth/logout");
+        // Redirect to the home page
+        window.location.href = "/";
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    logout();
+  };
 
   const updateName = async (update: any) => {
     try {
       const response = await axiosInstance.put(`/api/users/update/me`, update);
-      console.log(response.data.data);
+      // console.log(response.data.data);
       return response.data.data;
     } catch (error) {
       console.error("Error during get request:", error);
@@ -79,6 +97,13 @@ const Profile: React.FC = () => {
                   Delete
                 </button>
               </div>
+              <button
+                className="flex text-base items-center gap-3 lg:hidden border border-gray-400 p-2 rounded-md"
+                onClick={() => handleSignOut()}
+              >
+                <TbLogout size={25} color="white" />
+                Logout
+              </button>
             </div>
           </div>
         );
