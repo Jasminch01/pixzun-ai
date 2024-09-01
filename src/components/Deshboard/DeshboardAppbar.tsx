@@ -1,8 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { IoImageOutline, IoMenu } from "react-icons/io5";
-import { Brand, Leaf, LeafBright, LeafWhite } from "../Svg";
+import { Brand, Leaf, LeafBright } from "../Svg";
 import { TbLogout } from "react-icons/tb";
 import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
@@ -12,16 +11,12 @@ import CheckOutModal from "../CheckOutModal";
 import CheckoutForm from "../CheckrouForm";
 import PricingModal from "./Projects/PricingModal";
 
-interface LinkItem {
-  name: string;
-  href: string;
-}
-
 const DashboardAppBar: React.FC = () => {
   const { signOut } = useClerk();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
+
   const {
     currentUser,
     loading,
@@ -34,11 +29,6 @@ const DashboardAppBar: React.FC = () => {
     setIsPaymentModalOpen,
   } = useUserContext();
 
-  const links: LinkItem[] = [
-    { name: "Cradit", href: "/cradit" },
-    { name: "Get Cradits", href: "/getcradit" },
-    // { name: "Profile", href: "" },
-  ];
   const { isLoaded, user } = useUser();
 
   const handleSignOut = () => {
@@ -132,7 +122,7 @@ const DashboardAppBar: React.FC = () => {
           </Link>
           <div className="hidden lg:flex items-center">
             <nav className="flex items-center space-x-3">
-              <div className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white">
+              <div className="text-base space-x-2 px-5 py-3 gradient-border transition-colors text-white">
                 <Leaf />
                 <p>Credit : {currentUser?.cradit}</p>
               </div>
@@ -157,10 +147,11 @@ const DashboardAppBar: React.FC = () => {
                   />
                 </button>
                 {isProfileOpen && (
-                  <div className="absolute right-4 top-[4rem] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] py-3">
+                  <div className="absolute right-4 top-[4rem] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] pb-3">
                     <Link
                       href={"/app/profile"}
-                      className="flex items-center justify-center gap-5"
+                      onClick={() => setIsProfileOpen(false)}
+                      className="flex items-center justify-center gap-5 hover:bg-gray-50/5 py-3"
                     >
                       <div className="text-base text-white  flex justify-center items-center rounded-full transition-all ">
                         <img
@@ -187,11 +178,11 @@ const DashboardAppBar: React.FC = () => {
                         </p>
                       </div>
                       <div className="space-y-2 mb-3">
-                        <p className="flex items-center gap-3">
-                          <IoImageOutline size={22} color="white" />
-                          My Gallery
-                        </p>
-                        <Link href={"/app"} className="flex items-center gap-3">
+                        <Link
+                          href={"/app"}
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center gap-3 "
+                        >
                           <SiGoogledocs size={22} color="white" />
                           Project
                         </Link>

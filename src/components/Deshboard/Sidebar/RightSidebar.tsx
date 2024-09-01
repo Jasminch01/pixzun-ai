@@ -41,7 +41,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
   }, []);
 
   return (
-    <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] order-1 mt-5 lg:mt-0">
+    <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
       {/* Arrow Icon positioned absolutely on the left of the sidebar */}
       <div
         className={`${

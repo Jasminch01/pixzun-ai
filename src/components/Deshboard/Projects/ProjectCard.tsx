@@ -89,7 +89,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       className="relative p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#4940D8] rounded-md cursor-pointer my-5"
       onClick={handleCardClick}
     >
-      <div className="relative bg-[#1E202D] w-full h-64 rounded-md p-3 flex flex-col justify-center items-center">
+      <div className="relative bg-[#1E202D] w-full xl:h-64 lg:h-52 h-52 rounded-md p-3 flex flex-col justify-center items-center">
         <div>
           <Image
             src={

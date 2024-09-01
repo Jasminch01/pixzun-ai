@@ -40,6 +40,26 @@
 .gradient:hover {
   z-index: 0;
 }
+/* gradient border */
+.gradient-border {
+  position: relative;
+  background-color: #2b2e3d;
+  border: none;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gradient-border::after {
+  content: "";
+  position: absolute;
+  height: 104%;
+  width: 102%;
+  border-radius: 1000px;
+  background-image: linear-gradient(to right, #a82ad8, #4940d8);
+  z-index: -1;
+}
 
 /* off default swiper button */
 .swiper-button-prev,

@@ -305,6 +305,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
                     width={200}
                     height={200}
                     className="lg:w-full h-auto object-cover rounded-md cursor-pointer"
+                    onClick={() => handleImageClick(image.prompt || "")}
                   />
                 ))
               : naturalImages.map((image, index) => (
@@ -315,6 +316,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
                     width={200}
                     height={200}
                     className="lg:w-full h-auto object-cover rounded-md cursor-pointer"
+                    onClick={() => handleImageClick(image.prompt || "")}
                   />
                 ))}
           </div>

@@ -72,15 +72,15 @@ const Page: React.FC = () => {
   }, [currentUser]);
 
   return (
-    <div className="mt-32">
+    <div className="xl:mt-32 lg:mt-2 mt-28">
       <Container>
         <div className="flex justify-center">
           {/* adjust height width for small devices */}
           <div
             onClick={() => setIsNewProjectModalOpen(true)}
-            className="cursor-pointer md:w-[600px] w-[15rem] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+            className="cursor-pointer xl:w-[32rem] w-[15rem] lg:w-[25rem] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
           >
-            <div className="rounded md:p-5 p-2 bg-[#222532] flex justify-center items-center space-x-5">
+            <div className="rounded xl:p-5 p-2 lg:p-3 bg-[#222532] flex justify-center items-center space-x-5">
               <div>
                 <Folder />
               </div>
