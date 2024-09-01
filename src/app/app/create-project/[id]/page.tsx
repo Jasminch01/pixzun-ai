@@ -125,7 +125,6 @@ const Project: React.FC = () => {
 
     setLoadingResult(true);
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
-    console.log(payload);
     try {
       const response = await axiosInstance.post(
         `/api/project/${id}/generate`,

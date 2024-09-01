@@ -8,6 +8,9 @@ import { SiGoogledocs } from "react-icons/si";
 import { useClerk, useUser } from "@clerk/nextjs";
 import axiosInstance from "@/utils/axiosInstance";
 import { useUserContext } from "@/app/context/ContextProvider";
+import CheckOutModal from "../CheckOutModal";
+import CheckoutForm from "../CheckrouForm";
+import PricingModal from "./Projects/PricingModal";
 
 interface LinkItem {
   name: string;
@@ -16,7 +19,6 @@ interface LinkItem {
 
 const DashboardAppBar: React.FC = () => {
   const { signOut } = useClerk();
-  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
@@ -25,7 +27,13 @@ const DashboardAppBar: React.FC = () => {
     loading,
     refetch: refetchUser,
     setIsPricingModalOpen,
+    isPricingModalOpen,
+    isPaymentModalOpen,
+    handlePayment,
+    selectedPrice,
+    setIsPaymentModalOpen,
   } = useUserContext();
+
   const links: LinkItem[] = [
     { name: "Cradit", href: "/cradit" },
     { name: "Get Cradits", href: "/getcradit" },
@@ -103,6 +111,10 @@ const DashboardAppBar: React.FC = () => {
   const modalOpen = () => {
     setIsPricingModalOpen(true);
   };
+  const closeModal = () => {
+    setIsPricingModalOpen(false);
+  };
+  const closePaymentModal = () => setIsPaymentModalOpen(false);
 
   return (
     <div
@@ -120,13 +132,10 @@ const DashboardAppBar: React.FC = () => {
           </Link>
           <div className="hidden lg:flex items-center">
             <nav className="flex items-center space-x-3">
-              <Link
-                href="/cradit"
-                className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white"
-              >
+              <div className="text-base space-x-2 px-5 py-3 gradient transition-colors text-white">
                 <Leaf />
                 <p>Credit : {currentUser?.cradit}</p>
-              </Link>
+              </div>
               <button
                 onClick={modalOpen}
                 className="text-base text-white p-3 bg-button-gradient rounded-full transition-all"
@@ -233,6 +242,19 @@ const DashboardAppBar: React.FC = () => {
             <p className="text-white">{currentUser?.cradit}</p>
           </div>
         </div>
+        <PricingModal isOpen={isPricingModalOpen} onClose={closeModal} />
+
+        {isPaymentModalOpen && (
+          <CheckOutModal
+            isOpen={isPaymentModalOpen}
+            onClose={closePaymentModal}
+          >
+            <CheckoutForm
+              onPayment={handlePayment}
+              selectedPrice={selectedPrice}
+            />
+          </CheckOutModal>
+        )}
       </div>
     </div>
   );
