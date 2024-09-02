@@ -17,13 +17,11 @@ import {
   IoArrowBack,
   IoChevronBackSharp,
   IoChevronForwardSharp,
+  IoDocumentsSharp,
 } from "react-icons/io5";
 import { Spiner } from "@/components/loadingComponent";
-import CheckOutModal from "@/components/CheckOutModal";
-import CheckoutForm from "@/components/CheckrouForm";
-import { FaRegCopy } from "react-icons/fa6";
 import { useUser } from "@clerk/nextjs";
-import { Leaf, LeafWhite } from "@/components/Svg";
+import { LeafWhite } from "@/components/Svg";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import Link from "next/link";
 
@@ -45,10 +43,6 @@ const Project: React.FC = () => {
     refetch: refatchUser,
     isPricingModalOpen,
     setIsPricingModalOpen,
-    isPaymentModalOpen,
-    setIsPaymentModalOpen,
-    handlePayment,
-    selectedPrice,
   } = useUserContext();
   const [projectName, setProjectName] = useState<string>("");
   const [inputPrompt, setInputPrompt] = useState("");
@@ -125,7 +119,6 @@ const Project: React.FC = () => {
 
     setLoadingResult(true);
     const payload = { propmt: inputPrompt, image: uploadedImage[0] };
-    console.log(payload);
     try {
       const response = await axiosInstance.post(
         `/api/project/${id}/generate`,
@@ -201,10 +194,8 @@ const Project: React.FC = () => {
   const openGetCreditMOdal = () => {
     setIsPricingModalOpen(true);
   };
-
-  const closePaymentModal = () => setIsPaymentModalOpen(false);
   return (
-    <div className="flex justify-center flex-col-reverse lg:flex-row-reverse border-white border-3 px-5">
+    <div className="flex justify-center flex-col-reverse lg:flex-row-reverse border-white border-3 px-5 relative lg:static">
       <LeftSidebar
         handleSubmit={handleSubmit}
         setInputPrompt={setInputPrompt}
@@ -271,7 +262,9 @@ const Project: React.FC = () => {
         >
           <IoArrowBack />
         </Link>
-        <p className="text-white text-lg text-center">{projectName}</p>
+        <p className="text-white text-lg font-bold text-center">
+          {projectName}
+        </p>
         <div className="flex items-center justify-center lg:mt-[8rem] mt-5 relative">
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
@@ -299,7 +292,7 @@ const Project: React.FC = () => {
             </div>
           </div>
           {imageUploadLoading || loadingResult ? (
-            <div className="size-[16rem] xl:size[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 flex flex-col justify-center items-center">
+            <div className="size-[16rem] xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
               <Spiner />
               {/* <p className="text-white mt-3">
               </p> */}
@@ -458,37 +451,39 @@ const Project: React.FC = () => {
         openModal={openImageModal}
       />
       {/* profile for mobile devices */}
-      <div className="px-5 my-10">
-        <div className="w-full p-3 lg:hidden bg-gray-50/5 rounded-full">
-          <div className="flex justify-between items-center relative">
-            <div>
-              <FaRegCopy size={20} color="white" />
-            </div>
-            <div
-              className="size-12 bg-gredient-button rounded-full absolute bottom-5 left-1/2 transform -translate-x-1/2 ring-4 ring-[#222432] flex justify-center items-center cursor-pointer"
-              onClick={openGetCreditMOdal}
-            >
-              <div className="flex">
-                <LeafWhite />
-                <div className="mt-2">
-                  <HiOutlinePlusSm color="white" />
+      <div className="fixed z-30 bottom-0 w-full left-0 px-5">
+        <div className="">
+          <div className="w-full p-3 lg:hidden bg-[#373b4e] rounded-full">
+            <div className="flex justify-between items-center relative">
+              <div>
+                <IoDocumentsSharp size={20} color="white" />
+              </div>
+              <div
+                className="size-12 bg-gredient-button rounded-full absolute bottom-5 left-1/2 transform -translate-x-1/2 ring-4 ring-[#222432] flex justify-center items-center cursor-pointer"
+                onClick={openGetCreditMOdal}
+              >
+                <div className="flex">
+                  <LeafWhite />
+                  <div className="mt-2">
+                    <HiOutlinePlusSm color="white" />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div>
-              <Link
-                href={"/app/profile"}
-                className="text-base text-white flex justify-center items-center rounded-full transition-all "
-              >
-                <img
-                  src={user?.imageUrl}
-                  alt="Profile"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-              </Link>
+              <div>
+                <Link
+                  href={"/app/profile"}
+                  className="text-base text-white flex justify-center items-center rounded-full transition-all "
+                >
+                  <img
+                    src={user?.imageUrl}
+                    alt="Profile"
+                    width={40}
+                    height={40}
+                    className="rounded-full"
+                  />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -513,16 +508,6 @@ const Project: React.FC = () => {
             className="rounded"
           />
         </ImageMOdal>
-      )}
-
-      {/* Modal to confirm and process payment */}
-      {isPaymentModalOpen && (
-        <CheckOutModal isOpen={isPaymentModalOpen} onClose={closePaymentModal}>
-          <CheckoutForm
-            onPayment={handlePayment}
-            selectedPrice={selectedPrice}
-          />
-        </CheckOutModal>
       )}
     </div>
   );

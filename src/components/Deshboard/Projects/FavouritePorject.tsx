@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
-import { AiOutlineEllipsis } from "react-icons/ai";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 
 interface ImageDetail {
@@ -25,8 +24,6 @@ interface ProjectCardProps {
 
 const FavouriteProject: React.FC<ProjectCardProps> = ({
   project,
-  handleMenuToggle,
-  menuOpen,
   handleFavoriteToggle,
   isFavorite,
 }) => {
@@ -39,7 +36,7 @@ const FavouriteProject: React.FC<ProjectCardProps> = ({
       className="relative p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#4940D8] rounded-md cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="relative bg-[#1E202D] w-full h-64 rounded-md p-3 flex flex-col justify-center items-center">
+      <div className="relative bg-[#1E202D] w-full xl:h-64 lg:h-52 h-52 rounded-md p-3 flex flex-col justify-center items-center">
         <div>
           <Image
             src={
