@@ -148,7 +148,7 @@ const RecentProjects: React.FC = () => {
   }
 
   return (
-    <div className="text-white mt-16 px-5">
+    <div className="text-white xl:mt-16 px-5 lg:mt-5 mt-10">
       <p className="md:text-xl text-lg text-center md:text-left">
         Recent Projects
       </p>
@@ -162,7 +162,7 @@ const RecentProjects: React.FC = () => {
             768: { slidesPerView: 3.2, spaceBetween: 10 },
             1024: { slidesPerView: 4.5, spaceBetween: 10 },
           }}
-          className="mt-5"
+          className="xl:mt-5 lg:mt-0"
         >
           {recentProjects.map((project: Project) => (
             <SwiperSlide key={project._id}>
@@ -194,7 +194,7 @@ const RecentProjects: React.FC = () => {
         </div>
       )}
 
-      <p className="md:text-xl text-lg mt-5 text-center md:text-left">
+      <p className="md:text-xl text-lg mt-5 xl:mt-5 lg:mt-0 text-center md:text-left">
         Favorite Projects
       </p>
 

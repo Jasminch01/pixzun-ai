@@ -68,7 +68,7 @@ const Profile: React.FC = () => {
                       onChange={(e) => setNewName(e.target.value)}
                     />
                   ) : (
-                    <p className="text-white">Name: {`${currentUser?.name}`}</p>
+                    <p className="text-white">{`${currentUser?.name}`}</p>
                   )}
                   <button
                     className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400"
@@ -82,9 +82,7 @@ const Profile: React.FC = () => {
                 <div>
                   <p className="text-gray-300">User Email</p>
                   <div className="md:flex justify-between">
-                    <p className="text-white">
-                      Email: {`${currentUser?.email}`}
-                    </p>
+                    <p className="text-white">{`${currentUser?.email}`}</p>
                     <button className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
                       Modify email addrerss
                     </button>
@@ -92,9 +90,9 @@ const Profile: React.FC = () => {
                 </div>
               </div>
               <div className="md:flex justify-between">
-                <p className="text-gray-300 font-bold">Delete Account</p>
+                <p className="text-gray-300 font-bold">Disable Account</p>
                 <button className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
-                  Delete
+                  Apply
                 </button>
               </div>
               <button
@@ -152,26 +150,26 @@ const Profile: React.FC = () => {
         </div>
       </div>
       <div className="w-full mt-10">
-        <div className="flex justify-center mb-4 border-b border-gray-600">
+        <div className="flex justify-center mb-4 space-x-5 border-b border-gray-600">
           <button
-            className={`p-2 ${
-              activeTab === "personalInfo" ? "border-b-2 border-white" : ""
+            className={`p-2 md:text-lg ${
+              activeTab === "personalInfo" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
             }`}
             onClick={() => setActiveTab("personalInfo")}
           >
             Personal Info
           </button>
           <button
-            className={`p-2 ${
-              activeTab === "credits" ? "border-b-2 border-white" : ""
+            className={`p-2 md:text-lg ${
+              activeTab === "credits" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
             }`}
             onClick={() => setActiveTab("credits")}
           >
             Credits
           </button>
           <button
-            className={`p-2 ${
-              activeTab === "subscription" ? "border-b-2 border-white" : ""
+            className={`p-2 md:text-lg ${
+              activeTab === "subscription" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
             }`}
             onClick={() => setActiveTab("subscription")}
           >
