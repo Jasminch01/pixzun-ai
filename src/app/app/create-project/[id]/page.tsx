@@ -20,8 +20,6 @@ import {
   IoDocumentsSharp,
 } from "react-icons/io5";
 import { Spiner } from "@/components/loadingComponent";
-import CheckOutModal from "@/components/CheckOutModal";
-import CheckoutForm from "@/components/CheckrouForm";
 import { useUser } from "@clerk/nextjs";
 import { LeafWhite } from "@/components/Svg";
 import { HiOutlinePlusSm } from "react-icons/hi";
@@ -45,10 +43,6 @@ const Project: React.FC = () => {
     refetch: refatchUser,
     isPricingModalOpen,
     setIsPricingModalOpen,
-    isPaymentModalOpen,
-    setIsPaymentModalOpen,
-    handlePayment,
-    selectedPrice,
   } = useUserContext();
   const [projectName, setProjectName] = useState<string>("");
   const [inputPrompt, setInputPrompt] = useState("");
@@ -200,8 +194,6 @@ const Project: React.FC = () => {
   const openGetCreditMOdal = () => {
     setIsPricingModalOpen(true);
   };
-
-  const closePaymentModal = () => setIsPaymentModalOpen(false);
   return (
     <div className="flex justify-center flex-col-reverse lg:flex-row-reverse border-white border-3 px-5 relative lg:static">
       <LeftSidebar
@@ -516,16 +508,6 @@ const Project: React.FC = () => {
             className="rounded"
           />
         </ImageMOdal>
-      )}
-
-      {/* Modal to confirm and process payment */}
-      {isPaymentModalOpen && (
-        <CheckOutModal isOpen={isPaymentModalOpen} onClose={closePaymentModal}>
-          <CheckoutForm
-            onPayment={handlePayment}
-            selectedPrice={selectedPrice}
-          />
-        </CheckOutModal>
       )}
     </div>
   );
