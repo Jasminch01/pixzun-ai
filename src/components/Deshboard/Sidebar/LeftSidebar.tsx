@@ -3,7 +3,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward, IoMdArrowBack } from "react-icons/io";
+import { MdArrowLeft } from "react-icons/md";
 
 const naturalImages = [
   {

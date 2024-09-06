@@ -71,7 +71,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   };
 
   const {
-    data: currentUser = null,
+    data: currentUser = {},
     refetch,
     isLoading,
   } = useQuery({
