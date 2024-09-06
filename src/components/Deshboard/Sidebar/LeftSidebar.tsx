@@ -3,8 +3,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { LuMinimize2 } from "react-icons/lu";
-import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const naturalImages = [
   {
@@ -200,16 +199,17 @@ const LeftSidebar: React.FC<ModalProps> = ({
 
   return (
     <div className="relative lg:fixed lg:top-40 lg:left-0 lg:h-[40rem] order-3 mt-5 lg:mt-0">
-      {/* Arrow Icon positioned absolutely within the sidebar */}
+      {/* Arrow Icon position absolutely within the sidebar */}
       <div
-        className={`${
-          !isMinimize
-            ? "hidden"
-            : "absolute top-1/2 transform -translate-y-1/2 bg-[#1B1D29] size-7 border border-white -right-3 z-30 cursor-pointer rounded-full flex items-center justify-center"
-        }`}
+        className={`
+            absolute top-1/2 transform -translate-y-1/2 bg-[#1B1D29] size-7 border border-white -right-3 z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden`}
         onClick={() => setIsMinimize(!isMinimize)}
       >
-        <IoIosArrowForward color="white" size={20} />
+        {!isMinimize ? (
+          <IoIosArrowBack color="white" />
+        ) : (
+          <IoIosArrowForward color="white" size={20} />
+        )}
       </div>
 
       <div
@@ -223,16 +223,10 @@ const LeftSidebar: React.FC<ModalProps> = ({
             isScrolled && "bg-[#1B1D29]"
           } ${isMinimize ? "hidden" : ""}`}
         >
-          <div className="flex justify-between">
+          <div className="">
             <p className="text-white md:text-base md:font-bold">
               Use Templates
             </p>
-            <LuMinimize2
-              color="white"
-              className="cursor-pointer hidden lg:flex"
-              size={20}
-              onClick={() => setIsMinimize(!isMinimize)}
-            />
           </div>
           <div className="gap-3 mt-4 flex">
             {/* Monochrome Tab */}
