@@ -54,9 +54,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         <div className="text-center">
           <button
             type="submit"
-            className="bg-black w-full py-3 rounded text-white"
+            className="bg-bg-gradient w-full py-3 rounded text-white"
           >
-            Pay {` $${selectedPrice}`}
+            Pay {` $${selectedPrice}.00`}
           </button>
         </div>
       </form>

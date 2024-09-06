@@ -4,8 +4,7 @@ import Image from "next/image";
 import { DotPulse } from "@/components/loadingComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { IoIosArrowBack } from "react-icons/io";
-import { LuMinimize2 } from "react-icons/lu";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface RightSidebarProps {
   generatedResults: string[];
@@ -42,16 +41,16 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 
   return (
     <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
-      {/* Arrow Icon positioned absolutely on the left of the sidebar */}
+      {/* Arrow Icon position absolutely on the left of the sidebar */}
       <div
-        className={`${
-          !isMinimize
-            ? "hidden"
-            : "absolute top-1/2 transform -translate-y-1/2 bg-[#1B1D29] size-7 border border-white -left-3 z-30 cursor-pointer  rounded-full flex items-center justify-center "
-        }`}
+        className={` absolute top-1/2 transform -translate-y-1/2 bg-[#1B1D29] size-7 border border-white -left-3 z-30 cursor-pointer  rounded-full lg:flex items-center justify-center hidden`}
         onClick={() => setIsMinimize(!isMinimize)}
       >
-        <IoIosArrowBack color="white" size={20} />
+        {!isMinimize ? (
+          <IoIosArrowBack color="white" />
+        ) : (
+          <IoIosArrowForward color="white" size={20} />
+        )}
       </div>
 
       {/* Sidebar Content */}
@@ -68,14 +67,8 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
             isScrolled ? "lg:bg-[#2B2E3D] lg:py-5" : ""
           }`}
         >
-          <div className={`flex justify-between`}>
+          <div className={``}>
             <p>My Creation</p>
-            <LuMinimize2
-              color="white"
-              className="cursor-pointer hidden lg:flex"
-              size={20}
-              onClick={() => setIsMinimize(!isMinimize)}
-            />
           </div>
         </div>
 

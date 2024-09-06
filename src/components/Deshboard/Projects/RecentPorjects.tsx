@@ -6,6 +6,8 @@ import FavouriteProject from "./FavouritePorject";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { DotPulse } from "@/components/loadingComponent";
+import axios from "axios";
+import { useClerk } from "@clerk/nextjs";
 
 interface ImageDetail {
   urls: string[];
@@ -23,18 +25,22 @@ const RecentProjects: React.FC = () => {
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
   const [loading, setLoading] = useState(true);
+  const { user } = useClerk();
 
   const containerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const fetchProjects = async () => {
     try {
-      const response = await axiosInstance.get(`/api/project`);
+      const response = await axiosInstance(
+        `/api/project?email=${user?.emailAddresses[0].emailAddress}`
+      );
       setFavoriteProjects(
         response.data.data.filter((project: Project) => project.isFavourite)
       );
       return response.data.data;
     } catch (error) {
-      console.error("Error during get request:", error);
+      console.error("Error during get project :", error);
+      return [];
     } finally {
       setLoading(false);
     }

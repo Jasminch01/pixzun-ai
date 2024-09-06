@@ -39,7 +39,13 @@ interface PricingModalProps {
 
 const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} modalSize=" w-[55rem] h-[46rem] static" gradientSize=" w-[50rem] h-[30rem]" marginTop="lg:-mt-[18rem]">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      modalSize=" w-[55rem] h-[46rem] static"
+      gradientSize=" w-[50rem] h-[30rem]"
+      marginTop="lg:-mt-[18rem]"
+    >
       <p className="text-white text-2xl font-bold">Subscribe</p>
       <div className="pricing-cards flex flex-col md:flex-row justify-around items-center space-y-10 md:space-y-0 md:space-x-4">
         {pricingPlans.map((plan, index) => (

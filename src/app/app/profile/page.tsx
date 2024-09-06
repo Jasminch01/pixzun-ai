@@ -38,6 +38,23 @@ const Profile: React.FC = () => {
       console.error("Error during get request:", error);
     }
   };
+  const userId = user?.id;
+  // const updateEmail = async () => {
+  //   const update = {
+  //     newEmail: "jasminchakma@gmail",
+  //     userId,
+  //   };
+  //   try {
+  //     const response = await axiosInstance.put(
+  //       `/api/users/update/email`,
+  //       update
+  //     );
+  //     console.log(response.data.data);
+  //     return response.data.data;
+  //   } catch (error) {
+  //     console.error("Error during get request:", error);
+  //   }
+  // };
 
   const handleEditClick = async () => {
     if (isEditing) {
@@ -83,9 +100,12 @@ const Profile: React.FC = () => {
                   <p className="text-gray-300">User Email</p>
                   <div className="md:flex justify-between">
                     <p className="text-white">{`${currentUser?.email}`}</p>
-                    <button className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
+                    {/* <button
+                      onClick={updateEmail}
+                      className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400"
+                    >
                       Modify email addrerss
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>
@@ -105,28 +125,28 @@ const Profile: React.FC = () => {
             </div>
           </div>
         );
-      case "credits":
-        return (
-          <div className="text-center">
-            <h2 className="text-2xl mb-4 text-white">Credits</h2>
-            <div className="bg-[#292B3A] p-4 rounded">
-              <p className="text-white">
-                Available Credits: {currentUser?.cradit}
-              </p>
-              {/* <p className="text-white">Credits Used: 5</p> */}
-            </div>
-          </div>
-        );
-      case "subscription":
-        return (
-          <div className="text-center">
-            <h2 className="text-2xl mb-4 text-white">Subscription</h2>
-            <div className="bg-[#292B3A] p-4 rounded">
-              <p className="text-white">Plan: {currentUser?.role}</p>
-              {/* <p className="text-white">Next Billing Date: 01/01/2024</p> */}
-            </div>
-          </div>
-        );
+      // case "credits":
+      //   return (
+      //     <div className="text-center">
+      //       <h2 className="text-2xl mb-4 text-white">Credits</h2>
+      //       <div className="bg-[#292B3A] p-4 rounded">
+      //         <p className="text-white">
+      //           Available Credits: {currentUser?.cradit}
+      //         </p>
+      //         {/* <p className="text-white">Credits Used: 5</p> */}
+      //       </div>
+      //     </div>
+      //   );
+      // case "subscription":
+      // return (
+      //   <div className="text-center">
+      //     <h2 className="text-2xl mb-4 text-white">Subscription</h2>
+      //     <div className="bg-[#292B3A] p-4 rounded">
+      //       <p className="text-white">Plan: {currentUser?.role}</p>
+      //       {/* <p className="text-white">Next Billing Date: 01/01/2024</p> */}
+      //     </div>
+      //   </div>
+      // );
       default:
         return null;
     }
@@ -153,13 +173,15 @@ const Profile: React.FC = () => {
         <div className="flex justify-center mb-4 space-x-5 border-b border-gray-600">
           <button
             className={`p-2 md:text-lg ${
-              activeTab === "personalInfo" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
+              activeTab === "personalInfo"
+                ? "border-b-2 border-white"
+                : "border-b-2 border-[#242735]"
             }`}
             onClick={() => setActiveTab("personalInfo")}
           >
             Personal Info
           </button>
-          <button
+          {/* <button
             className={`p-2 md:text-lg ${
               activeTab === "credits" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
             }`}
@@ -174,7 +196,7 @@ const Profile: React.FC = () => {
             onClick={() => setActiveTab("subscription")}
           >
             Subscription
-          </button>
+          </button> */}
         </div>
         <div className="max-w-5xl mx-auto">
           <div className="mt-10">{renderContent()}</div>
