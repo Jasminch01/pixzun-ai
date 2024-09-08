@@ -69,13 +69,13 @@ const Profile: React.FC = () => {
     switch (activeTab) {
       case "personalInfo":
         return (
-          <div className="bg-[#292B3A] px-10 py-20">
-            <h2 className="md:text-2xl text-lg mb-10 text-white">
+          <div className="bg-[#292B3A] px-10 md:py-20 py-10">
+            <h2 className="md:text-2xl text-base font-bold mb-10 text-white">
               Personal Info
             </h2>
             <div className="space-y-10">
               <div className="">
-                <p className="text-gray-300">User Name</p>
+                <p className="text-gray-300 text-sm md:text-base">User Name</p>
                 <div className="md:flex justify-between items-center">
                   {isEditing ? (
                     <input
@@ -85,10 +85,10 @@ const Profile: React.FC = () => {
                       onChange={(e) => setNewName(e.target.value)}
                     />
                   ) : (
-                    <p className="text-white">{`${currentUser?.name}`}</p>
+                    <p className="text-white text-sm md:text-base">{`${currentUser?.name}`}</p>
                   )}
                   <button
-                    className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400"
+                    className="py-2 text-sm md:text-base mt-3 md:mt-0 rounded-md px-4 border border-gray-400"
                     onClick={handleEditClick}
                   >
                     {isEditing ? "Save" : "Edit"}
@@ -97,9 +97,9 @@ const Profile: React.FC = () => {
               </div>
               <div>
                 <div>
-                  <p className="text-gray-300">User Email</p>
+                  <p className="text-gray-300 text-sm md:text-base">User Email</p>
                   <div className="md:flex justify-between">
-                    <p className="text-white">{`${currentUser?.email}`}</p>
+                    <p className="text-white text-sm md:text-base">{`${currentUser?.email}`}</p>
                     {/* <button
                       onClick={updateEmail}
                       className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400"
@@ -110,13 +110,13 @@ const Profile: React.FC = () => {
                 </div>
               </div>
               <div className="md:flex justify-between">
-                <p className="text-gray-300 font-bold">Disable Account</p>
-                <button className="py-2 mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
+                <p className="text-gray-300 font-bold text-sm md:text-base">Disable Account</p>
+                <button className="py-2 md:text-base text-sm mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
                   Apply
                 </button>
               </div>
               <button
-                className="flex text-base items-center gap-3 lg:hidden border border-gray-400 p-2 rounded-md"
+                className="flex md:text-base text-sm items-center gap-3 lg:hidden border border-gray-400 p-2 rounded-md"
                 onClick={() => handleSignOut()}
               >
                 <TbLogout size={25} color="white" />
@@ -153,7 +153,7 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 mt-[10rem] text-white">
+    <div className="flex flex-col items-center p-6 lg:mt-[10rem] mt-[5rem] text-white">
       <div className="flex justify-center items-center space-x-5">
         <div className="text-base text-white size-11 flex justify-center items-center rounded-full transition-all">
           <img
@@ -165,14 +165,14 @@ const Profile: React.FC = () => {
           />
         </div>
         <div>
-          <h1 className="md:text-2xl text-base">{currentUser?.name}</h1>
-          <p className="md:text-lg text-base">{currentUser?.email}</p>
+          <h1 className="md:text-xl font-bold text-sm">{currentUser?.name}</h1>
+          <p className="md:text-lg text-sm">{currentUser?.email}</p>
         </div>
       </div>
       <div className="w-full mt-10">
         <div className="flex justify-center mb-4 space-x-5 border-b border-gray-600">
           <button
-            className={`p-2 md:text-lg ${
+            className={`p-2 md:text-lg text-base font-bold ${
               activeTab === "personalInfo"
                 ? "border-b-2 border-white"
                 : "border-b-2 border-[#242735]"

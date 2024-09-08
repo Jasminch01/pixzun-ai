@@ -15,7 +15,7 @@ const Pricing: React.FC = () => {
     {
       title: "Premium",
       price: "19",
-      // period: "Per month",
+      period: "Per month",
       features: [
         "Generate 25 pictures a day",
         "No watermark",
@@ -28,7 +28,7 @@ const Pricing: React.FC = () => {
     {
       title: "Enterprise",
       price: "99",
-      // period: "Per year",
+      period: "Per month",
       features: [
         "Generate unlimited pictures",
         "No watermark",
@@ -68,7 +68,7 @@ const Pricing: React.FC = () => {
                   >
                     {plan.price}
                   </span>
-                  {/* <span className="font-normal ml-3">{plan.period}</span> */}
+                  <span className="font-normal ml-3">{plan.period}</span>
                 </p>
                 <p className="font-bold text-lg mt-3">Features:</p>
               </div>

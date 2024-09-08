@@ -298,7 +298,7 @@ const Project: React.FC = () => {
               </p> */}
             </div>
           ) : generatedResults.length > 0 ? (
-            <div className="flex bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3">
+            <div className="md:flex-row gap-5 md:gap-0 flex flex-col bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3">
               {/* Always display the first image */}
               <div className="size-[16rem] xl:size-[20rem]">
                 <div
@@ -451,13 +451,13 @@ const Project: React.FC = () => {
         openModal={openImageModal}
       />
       {/* profile for mobile devices */}
-      <div className="fixed z-30 bottom-0 w-full left-0 px-5">
+      <div className="fixed z-30 bottom-3 w-full left-0 px-5">
         <div className="">
           <div className="w-full p-3 lg:hidden bg-[#373b4e] rounded-full">
             <div className="flex justify-between items-center relative">
-              <div>
+              <Link href={'/app'}>
                 <IoDocumentsSharp size={20} color="white" />
-              </div>
+              </Link>
               <div
                 className="size-12 bg-gredient-button rounded-full absolute bottom-5 left-1/2 transform -translate-x-1/2 ring-4 ring-[#222432] flex justify-center items-center cursor-pointer"
                 onClick={openGetCreditMOdal}

@@ -1,8 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { IoMenu } from "react-icons/io5";
 import { Brand } from "./Svg";
+import { CgMenuRight } from "react-icons/cg";
+import { MdOutlineClose } from "react-icons/md";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 interface LinkItem {
   name: string;
@@ -34,6 +37,10 @@ const Appbar: React.FC = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
 
   return (
     <div
@@ -44,7 +51,7 @@ const Appbar: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-4">
           <div className="flex justify-center gap-2">
-            <Brand/>
+            <Brand />
             <p className="md:text-2xl text-xl text-white">pixzun</p>
           </div>
           <div className="hidden md:flex items-center">
@@ -64,25 +71,39 @@ const Appbar: React.FC = () => {
           </div>
           <div className="relative md:hidden">
             <div className="btn btn-ghost btn-circle">
-              <IoMenu color="white" size={25} onClick={() => setIsOpen(!isOpen)} />
+              {isOpen ? (
+                <MdOutlineClose
+                  color="white"
+                  size={30}
+                  onClick={() => setIsOpen(false)}
+                />
+              ) : (
+                <CgMenuRight
+                  color="white"
+                  size={30}
+                  onClick={() => setIsOpen(true)}
+                />
+              )}
             </div>
-            <ul
-              tabIndex={0}
-              className={`absolute right-0 z-[1] bg-white text-black px-5 rounded transition-transform duration-300 ease-in-out transform ${
-                isOpen
-                  ? "block scale-100 opacity-100"
-                  : "hidden scale-95 opacity-0"
-              }`}
-            >
-              {links.map((link, index) => (
-                <li
-                  key={index}
-                  className="text-right my-2 text-sm hover:bg-secondary hover:text-white w-full"
-                >
-                  <Link href={link.href}>{link.name}</Link>
-                </li>
-              ))}
-            </ul>
+            {isOpen && (
+              <div
+                data-aos="fade-right"
+                data-aos-duration="1000"
+                tabIndex={0}
+                className={`fixed md:hidden inset-x-0 h-full right-0 z-50 bg-bg-gradient text-white px-5 rounded transition-transform duration-300 ease-in-out text-center transform `}
+              >
+                <div className="mt-20">
+                  {links.map((link, index) => (
+                    <p
+                      key={index}
+                      className="my-2 text-lg hover:bg-secondary hover:text-white w-full"
+                    >
+                      <Link href={link.href}>{link.name}</Link>
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

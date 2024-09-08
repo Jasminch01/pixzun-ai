@@ -80,7 +80,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
               >
                 {price}
               </span>
-              {/* <span className="font-normal ml-3">{period}</span> */}
+              <span className="font-normal ml-3">{period}</span>
             </p>
             <p className="font-bold text-lg mt-3">Features:</p>
           </div>
