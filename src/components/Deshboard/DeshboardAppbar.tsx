@@ -10,6 +10,7 @@ import { useUserContext } from "@/app/context/ContextProvider";
 import CheckOutModal from "../CheckOutModal";
 import CheckoutForm from "../CheckrouForm";
 import PricingModal from "./Projects/PricingModal";
+import { Toaster } from "react-hot-toast";
 
 const DashboardAppBar: React.FC = () => {
   const { signOut } = useClerk();
@@ -113,6 +114,7 @@ const DashboardAppBar: React.FC = () => {
         isScrolled ? "bg-bg-gradient" : ""
       }`}
     >
+      <Toaster />
       <div className="px-5">
         <div className="flex justify-between items-center py-5">
           <Link href={"/app"} className="flex justify-center gap-2">
@@ -138,7 +140,6 @@ const DashboardAppBar: React.FC = () => {
                   className="text-base text-white flex justify-center items-center rounded-full transition-all "
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                 >
-                  {/* <p>ST</p> */}
                   <img
                     src={user?.imageUrl}
                     alt="Profile"
@@ -202,33 +203,7 @@ const DashboardAppBar: React.FC = () => {
               </div>
             </nav>
           </div>
-          {/* menu bar for small devices */}
-          {/* <div className="relative md:hidden">
-            <div className="btn btn-ghost btn-circle">
-              <IoMenu
-                color="white"
-                size={25}
-                onClick={() => setIsOpen(!isOpen)}
-              />
-            </div>
-            <ul
-              tabIndex={0}
-              className={`absolute right-0 z-[1] bg-white text-black px-5 rounded transition-transform duration-300 ease-in-out transform ${
-                isOpen
-                  ? "block scale-100 opacity-100"
-                  : "hidden scale-95 opacity-0"
-              }`}
-            >
-              {links.map((link, index) => (
-                <li
-                  key={index}
-                  className="text-right my-2 text-sm hover:bg-secondary hover:text-white w-full"
-                >
-                  <Link href={link.href}>{link.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
+          {/* appbar for small devices */}
           <div className="flex gap-2 lg:hidden items-center">
             <LeafBright />
             <p className="text-white">{currentUser?.cradit}</p>

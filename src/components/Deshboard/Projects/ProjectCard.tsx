@@ -145,7 +145,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               }}
             />
             {menuOpen[project._id] && (
-              <div className="absolute bottom-0 right-0 bg-gray-800 rounded-md shadow-lg mt-2 options-menu">
+              <div className="absolute bottom-0 right-0 bg-gray-800 rounded-md shadow-lg mt-2 options-menu border border-primary z-50">
                 <button
                   className="block w-full text-left px-4 py-2 text-sm text-white hover:bg-gray-700"
                   onClick={(e) => {

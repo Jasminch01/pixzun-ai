@@ -3,8 +3,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { IoIosArrowBack, IoIosArrowForward, IoMdArrowBack } from "react-icons/io";
-import { MdArrowLeft } from "react-icons/md";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const naturalImages = [
   {
@@ -272,6 +271,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
                         width={200}
                         height={200}
                         className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
+                        onClick={() => handleImageClick(image.prompt || "")}
                       />
                     </SwiperSlide>
                   ))
