@@ -8,6 +8,7 @@ interface PricingCardProps {
   period: string;
   features: string[];
   buttonText: string;
+  pricingId : string;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
@@ -16,9 +17,11 @@ const PricingCard: React.FC<PricingCardProps> = ({
   period,
   features,
   buttonText,
+  pricingId,
 }) => {
   const {
     setIsPaymentModalOpen,
+    setSelectedPriceId,
     setSelectedPrice,
     setNewRole,
     setCreditIncrement,
@@ -32,6 +35,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
   const openModal = () => {
     setSelectedPrice(price);
+    setSelectedPriceId(pricingId)
     setNewRole(title);
     setCreditIncrement(credit);
     setIsPaymentModalOpen(true);

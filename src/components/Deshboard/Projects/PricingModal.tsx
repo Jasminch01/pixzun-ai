@@ -15,6 +15,7 @@ const pricingPlans = [
       "1000 Credits",
     ],
     buttonText: "Get premium",
+    pricingId : 'price_1Px0HIA1JY3LMKw5Q2MuSLmE'
   },
   {
     title: "Enterprise",
@@ -29,6 +30,7 @@ const pricingPlans = [
       "5000 Credits",
     ],
     buttonText: "Get Enterprise",
+    pricingId : 'price_1Px16FA1JY3LMKw5eQnEwePG'
   },
 ];
 
@@ -56,6 +58,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
             period={plan.period}
             features={plan.features}
             buttonText={plan.buttonText}
+            pricingId= {plan.pricingId}
           />
         ))}
       </div>
