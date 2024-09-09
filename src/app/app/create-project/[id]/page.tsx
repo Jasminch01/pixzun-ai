@@ -53,7 +53,7 @@ const Project: React.FC = () => {
   const { isLoaded, user } = useUser();
 
   const { id } = useParams();
-
+  
   const fetchProjectDetails = async () => {
     setLoadingProject(true);
     try {
