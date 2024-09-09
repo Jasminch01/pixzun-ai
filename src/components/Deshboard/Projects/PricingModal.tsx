@@ -19,7 +19,7 @@ const pricingPlans = [
   {
     title: "Enterprise",
     price: "99",
-    period: "Per year",
+    period: "Per month",
     features: [
       "Generate unlimited pictures",
       "No watermark",
