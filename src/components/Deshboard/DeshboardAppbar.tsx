@@ -24,8 +24,9 @@ const DashboardAppBar: React.FC = () => {
     setIsPricingModalOpen,
     isPricingModalOpen,
     isPaymentModalOpen,
-    handlePayment,
     selectedPrice,
+    handleSubscriptionPayment,
+    setSelectedPriceId,
     setIsPaymentModalOpen,
   } = useUserContext();
   const { isLoaded, user } = useUser();
@@ -241,7 +242,7 @@ const DashboardAppBar: React.FC = () => {
             onClose={closePaymentModal}
           >
             <CheckoutForm
-              onPayment={handlePayment}
+              onPayment={handleSubscriptionPayment}
               selectedPrice={selectedPrice}
             />
           </CheckOutModal>
