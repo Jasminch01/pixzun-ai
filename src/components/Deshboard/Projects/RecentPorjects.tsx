@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 import axiosInstance from "@/utils/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
@@ -6,6 +6,7 @@ import FavouriteProject from "./FavouritePorject";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { DotPulse } from "@/components/loadingComponent";
+import { useClerk } from "@clerk/nextjs";
 
 interface ImageDetail {
   urls: string[];
@@ -22,27 +23,29 @@ interface Project {
 const RecentProjects: React.FC = () => {
   const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
   const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
-  const [loading, setLoading] = useState(true);
+  const { user } = useClerk();
 
   const containerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const fetchProjects = async () => {
-    try {
-      const response = await axiosInstance.get(`/api/project`);
-      setFavoriteProjects(
-        response.data.data.filter((project: Project) => project.isFavourite)
-      );
-      return response.data.data;
-    } catch (error) {
-      console.error("Error during get request:", error);
-    } finally {
-      setLoading(false);
-    }
+    const response = await axiosInstance(
+      `/api/project?email=${user?.emailAddresses[0].emailAddress}`
+    );
+    setFavoriteProjects(
+      response.data.data.filter((project: Project) => project.isFavourite)
+    );
+    return response.data.data;
   };
 
-  const { data: recentProjects = [], refetch } = useQuery({
-    queryFn: async () => await fetchProjects(),
+  const {
+    data: recentProjects = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
+    queryFn: fetchProjects,
     queryKey: ["recentProject"],
+    retry: 1, // Retry only once if there's an error
   });
 
   const handleMenuToggle = (projectId: string) => {
@@ -62,8 +65,6 @@ const RecentProjects: React.FC = () => {
       }
     } catch (error) {
       console.error("Error during rename request:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -78,8 +79,6 @@ const RecentProjects: React.FC = () => {
         }
       } catch (error) {
         console.error("Error during delete request:", error);
-      } finally {
-        setLoading(false);
       }
     };
     deleteProject();
@@ -99,8 +98,6 @@ const RecentProjects: React.FC = () => {
         }
       } catch (error) {
         console.error("Error during favorite toggle request:", error);
-      } finally {
-        setLoading(false);
       }
     };
     favouriteToggle();
@@ -129,10 +126,20 @@ const RecentProjects: React.FC = () => {
     };
   }, [menuOpen]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center mt-44">
         <DotPulse />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex justify-center items-center mt-44">
+        <p className="text-gray-400 text-center text-sm md:text-base">
+          Something went wrong while fetching projects!
+        </p>
       </div>
     );
   }

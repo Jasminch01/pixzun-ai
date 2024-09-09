@@ -8,7 +8,7 @@ const Pricing: React.FC = () => {
     {
       title: "Free",
       price: "0",
-      period: "Per month",
+      // period: "Per month",
       features: ["Generate 2 pictures", "Watermark", "High quality images"],
       buttonText: "Get free",
     },
@@ -28,7 +28,7 @@ const Pricing: React.FC = () => {
     {
       title: "Enterprise",
       price: "99",
-      period: "Per year",
+      period: "Per month",
       features: [
         "Generate unlimited pictures",
         "No watermark",

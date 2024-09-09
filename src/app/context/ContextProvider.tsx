@@ -23,10 +23,12 @@ interface UserContextType {
   setIsPricingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isPaymentModalOpen: boolean;
   setIsPaymentModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedPriceId: React.Dispatch<React.SetStateAction<string>>;
   setSelectedPrice: React.Dispatch<React.SetStateAction<string>>;
-  handlePayment: () => Promise<void>;
+  handleSubscriptionPayment: () => Promise<void>;
   clientSecret: string;
   selectedPrice: string;
+  selectedPriceId: string;
   setNewRole: React.Dispatch<React.SetStateAction<string>>;
   setCreditIncrement: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -52,6 +54,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
+  const [selectedPriceId, setSelectedPriceId] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [newRole, setNewRole] = useState("");
   const [creditIncrement, setCreditIncrement] = useState("");
@@ -71,7 +74,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   };
 
   const {
-    data: currentUser = null,
+    data: currentUser = {},
     refetch,
     isLoading,
   } = useQuery({
@@ -80,7 +83,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     enabled: !!isLoaded && !!user,
   });
 
-  const handlePayment = async () => {
+  const handleSubscriptionPayment = async () => {
     if (!stripe || !elements) {
       console.error("Stripe or Elements not loaded.");
       return;
@@ -93,15 +96,28 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     }
 
     try {
-      // Create PaymentIntent on the server
-      const response = await axiosInstance.post("/api/create-payment-intent", {
-        amount: parseFloat(selectedPrice),
+      // Collect necessary data for subscription creation
+      const paymentMethod = await stripe.createPaymentMethod({
+        type: "card",
+        card: cardElement,
+        billing_details: {
+          email: user?.emailAddresses[0].emailAddress,
+          name: user?.fullName,
+        },
+      });
+      // Create a subscription on the server
+      const response = await axiosInstance.post("/api/create-subscription", {
+        email: user?.emailAddresses[0].emailAddress,
+        priceId: selectedPriceId,
+        name: user?.fullName,
+        paymentMethod : paymentMethod.paymentMethod?.id
+        
       });
 
-      const clientSecret = response.data.clientSecret;
+      const { clientSecret, subscriptionId } = response.data;
       setClientSecret(clientSecret);
 
-      // Confirm the payment using the CardElement
+      // Confirm the payment using the CardElement if required
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
@@ -110,26 +126,29 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
 
       if (result.error) {
         console.error("Payment error:", result.error.message);
-        // Handle error (e.g., display message to user)
+        // Handle error (e.g., display error message to the user)
       } else if (result.paymentIntent?.status === "succeeded") {
-        // console.log("Payment successful!");
+        console.log("Payment succeeded!");
+        // Handle success (e.g., update user's subscription status)
 
-        // Handle success (e.g., show confirmation message, redirect)
+        // Optionally, update the user’s credits or role based on subscription
         const res = await axiosInstance.post(`/api/get-credit`, {
           newRole,
           creditIncrement,
+          subscriptionId,
         });
+
         if (res.data.data.modifiedCount) {
-          refetch();
-          setIsPaymentModalOpen(false);
+          refetch(); // Refetch user data or subscription status
+          setIsPaymentModalOpen(false); // Close payment modal
         }
       }
     } catch (error) {
       console.error("Payment error:", error);
+      // Handle error (e.g., display a generic error message to the user with toast)
     }
   };
 
-  // Set loading based on the query's loading state
   const loading = isLoading || !isLoaded;
 
   return (
@@ -142,9 +161,11 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
         setIsPricingModalOpen,
         isPaymentModalOpen,
         setIsPaymentModalOpen,
+        setSelectedPriceId,
+        selectedPriceId,
         setSelectedPrice,
         selectedPrice,
-        handlePayment,
+        handleSubscriptionPayment,
         clientSecret,
         setNewRole,
         setCreditIncrement,

@@ -15,11 +15,12 @@ const pricingPlans = [
       "1000 Credits",
     ],
     buttonText: "Get premium",
+    pricingId : 'price_1Px0HIA1JY3LMKw5Q2MuSLmE'
   },
   {
     title: "Enterprise",
     price: "99",
-    period: "Per year",
+    period: "Per month",
     features: [
       "Generate unlimited pictures",
       "No watermark",
@@ -29,6 +30,7 @@ const pricingPlans = [
       "5000 Credits",
     ],
     buttonText: "Get Enterprise",
+    pricingId : 'price_1Px16FA1JY3LMKw5eQnEwePG'
   },
 ];
 
@@ -39,7 +41,13 @@ interface PricingModalProps {
 
 const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} modalSize=" w-[55rem] h-[46rem] static" gradientSize=" w-[50rem] h-[30rem]" marginTop="lg:-mt-[18rem]">
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      modalSize=" w-[55rem] h-[46rem] static"
+      gradientSize=" w-[50rem] h-[30rem]"
+      marginTop="lg:-mt-[18rem]"
+    >
       <p className="text-white text-2xl font-bold">Subscribe</p>
       <div className="pricing-cards flex flex-col md:flex-row justify-around items-center space-y-10 md:space-y-0 md:space-x-4">
         {pricingPlans.map((plan, index) => (
@@ -50,6 +58,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
             period={plan.period}
             features={plan.features}
             buttonText={plan.buttonText}
+            pricingId= {plan.pricingId}
           />
         ))}
       </div>

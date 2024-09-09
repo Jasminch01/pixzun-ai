@@ -8,6 +8,7 @@ interface PricingCardProps {
   period: string;
   features: string[];
   buttonText: string;
+  pricingId : string;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
@@ -16,9 +17,11 @@ const PricingCard: React.FC<PricingCardProps> = ({
   period,
   features,
   buttonText,
+  pricingId,
 }) => {
   const {
     setIsPaymentModalOpen,
+    setSelectedPriceId,
     setSelectedPrice,
     setNewRole,
     setCreditIncrement,
@@ -32,6 +35,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
   const openModal = () => {
     setSelectedPrice(price);
+    setSelectedPriceId(pricingId)
     setNewRole(title);
     setCreditIncrement(credit);
     setIsPaymentModalOpen(true);
@@ -44,7 +48,6 @@ const PricingCard: React.FC<PricingCardProps> = ({
   return (
     <>
       <div
-        onClick={openModal} // Open modal instead of triggering payment directly
         className={`relative flex flex-col
         justify-between bg-pricing-gradient
         text-white
@@ -54,8 +57,10 @@ const PricingCard: React.FC<PricingCardProps> = ({
         `}
       >
         {title === "Enterprise" && (
-          <button className="text-white bg-button-gradient rounded-full
-           px-3 py-2 absolute right-24 -top-5">
+          <button
+            className="text-white bg-button-gradient rounded-full
+           px-3 py-2 absolute right-24 -top-5"
+          >
             Best value
           </button>
         )}
@@ -87,7 +92,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
             {features.map((feature, idx) => (
               <div key={idx} className="flex items-center gap-5">
                 <Check
-                  strokeColour={`${ 
+                  strokeColour={`${
                     price === "0" ? "#ffffff" : "url(#gradient)"
                   }`}
                 />
@@ -122,6 +127,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
         </div>
         <div className="text-center relative z-10">
           <button
+            onClick={openModal}
             className={`${
               price === "0" ? "border" : "bg-button-gradient"
             } cursor-pointer rounded-full md:w-44 md:h-[54px] px-3 py-2`}
