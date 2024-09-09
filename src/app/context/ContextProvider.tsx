@@ -14,6 +14,7 @@ import {
   useElements,
   CardNumberElement,
 } from "@stripe/react-stripe-js";
+import toast from "react-hot-toast";
 
 interface UserContextType {
   currentUser: any;
@@ -60,6 +61,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   const [creditIncrement, setCreditIncrement] = useState("");
   const stripe = useStripe();
   const elements = useElements();
+
   useEffect(() => {
     if (isPaymentModalOpen) {
       setIsPricingModalOpen(false);
@@ -94,7 +96,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
       console.error("CardElement not found.");
       return;
     }
-
+    const toastId = toast.loading("Processing...");
     try {
       // Collect necessary data for subscription creation
       const paymentMethod = await stripe.createPaymentMethod({
@@ -110,9 +112,9 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
         email: user?.emailAddresses[0].emailAddress,
         priceId: selectedPriceId,
         name: user?.fullName,
-        paymentMethod : paymentMethod.paymentMethod?.id
-        
+        paymentMethod: paymentMethod.paymentMethod?.id,
       });
+      // setIsPaymentModalOpen(false);
 
       const { clientSecret, subscriptionId } = response.data;
       setClientSecret(clientSecret);
@@ -125,11 +127,10 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
       });
 
       if (result.error) {
-        console.error("Payment error:", result.error.message);
-        // Handle error (e.g., display error message to the user)
+        console.log(result.error);
       } else if (result.paymentIntent?.status === "succeeded") {
-        console.log("Payment succeeded!");
         // Handle success (e.g., update user's subscription status)
+        toast.success("Payment succeeded!", { duration: 3000, id: toastId });
 
         // Optionally, update the user’s credits or role based on subscription
         const res = await axiosInstance.post(`/api/get-credit`, {
@@ -143,12 +144,12 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
           setIsPaymentModalOpen(false); // Close payment modal
         }
       }
-    } catch (error) {
-      console.error("Payment error:", error);
+    } catch (error: any) {
+      toast.error(`Payment error`, { duration: 3000, id: toastId });
+      setIsPaymentModalOpen(false); // Close payment modal
       // Handle error (e.g., display a generic error message to the user with toast)
     }
   };
-
   const loading = isLoading || !isLoaded;
 
   return (
