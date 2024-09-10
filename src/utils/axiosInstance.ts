@@ -9,9 +9,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (err) => {
-    toast.error(`${err.response.data.message || err.response.data.error}`, {
-      duration: 5000,
-    });
+    // toast.error(`${err.response.data.message || err.response.data.error}`, {
+    //   duration: 5000,
+    // });
     console.log(err);
     if (
       err.response &&
