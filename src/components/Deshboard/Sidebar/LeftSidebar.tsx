@@ -10,147 +10,148 @@ const naturalImages = [
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 1",
     prompt:
-      "Create a 4K realistic background of a majestic mountain landscape. Include snow-capped peaks, rolling green hills, and a clear blue lake reflecting the scenery. Add a bright blue sky with a few clouds. Ensure the textures of the rocks, trees, and water are detailed and realistic.",
+      "Majestic mountain landscape+ with snow-capped peaks+, green hills+, and a clear blue lake- reflecting the scenery.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 2",
     prompt:
-      "A moody 4K rainy street background, capturing the reflective surfaces of wet pavement and the soft glow of streetlights. The scene includes rows of buildings, with raindrops falling and puddles forming on the ground. Umbrellas, cars with headlights on, and blurred figures moving through the rain add to the realism. The atmosphere is melancholic yet beautiful, with detailed textures on the wet surfaces and the overall scene. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "Rainy street+ with reflective pavement+, soft streetlight glow+, and figures moving through the rain-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 3",
     prompt:
-      "A stunning 4K Mediterranean seaside background, featuring white-washed buildings with blue accents overlooking a sparkling blue sea. The scene includes narrow cobblestone streets, colorful flowers in pots, and a small harbor with boats gently bobbing in the water. The sky is clear, and the sunlight casts warm, golden light across the scene. The atmosphere is idyllic and peaceful, with attention to detail in the architecture, water, and landscape. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "Mediterranean seaside+ with white-washed buildings+, blue accents+, and a small harbor with boats+.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 4",
     prompt:
-      "A lush 4K tropical rainforest background, showcasing dense vegetation with tall trees, broadleaf plants, and vibrant flowers. A waterfall cascades into a clear pool, surrounded by moss-covered rocks. The light filters through the thick canopy, creating a rich, humid atmosphere. The scene is vibrant and full of life, with detailed textures on the plants, water, and rocks. --v 5 --ar 16:9 --q 2 --style realistic",
+      "Tropical rainforest+ with tall trees+, vibrant flowers+, and a waterfall+ cascading into a clear pool-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 5",
     prompt:
-      "A tranquil 4K Japanese garden background, featuring a serene koi pond surrounded by meticulously manicured plants, stone lanterns, and wooden bridges. Cherry blossom trees are in full bloom, with petals gently falling into the water. The scene captures the essence of Zen, with a calm and peaceful atmosphere. The details in the plants, water, and garden elements are highly realistic. --v 5 --ar 16:9 --q 2 --style realistic",
+      "Japanese garden+ with koi pond+, blooming cherry trees+, and stone lanterns+ creating a peaceful scene-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 6",
     prompt:
-      "A 4K city park background, featuring well-maintained green lawns, tall trees providing shade, and winding paths for walking. The scene includes benches, a small pond with ducks, and people enjoying the outdoors. The urban skyline is visible in the background, adding a blend of nature and city life to the scene. The atmosphere is relaxed and inviting, with realistic details in the foliage, water, and people. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "City park+ with green lawns+, tall trees+, a pond+, and urban skyline- in the background.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 7",
     prompt:
-      'A dramatic 4K coastal cliffside background, featuring towering cliffs overlooking the ocean. The waves crash against the rocky shore, and seagulls can be seen flying above. The sky is partly cloudy, with sunlight breaking through to illuminate the cliffs and water. The scene is powerful and awe-inspiring, with detailed textures on the rocks, waves, and sky. --v 5 --ar 16:9 --q 2 --style realistic.."',
+      "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 8",
     prompt:
-      "A magical 4K winter wonderland background, showcasing a snow-covered forest with tall evergreen trees and a frozen lake. The sky is a soft, pale blue with a hint of sunset colors, and the snow glistens under the gentle light. The scene feels peaceful and serene, with detailed textures on the snow, ice, and trees. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "Winter wonderland+ with snow-covered trees+, frozen lake+, and soft sunset colors- in the sky.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 9",
     prompt:
-      "A picturesque 4K countryside farm background, featuring a rustic barn, rolling green fields, and rows of crops ready for harvest. The scene includes a wooden fence, grazing animals, and a dirt path leading through the landscape. The sky is clear with a few clouds, and the lighting is warm, capturing the peaceful simplicity of rural life. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
     alt: "Image 10",
     prompt:
-      "rose petals scattered across a flat, pure white background. The background should be completely white, smooth, and uninterrupted. The rose petals should be vibrant, with deep red and pink hues, and should be naturally spread out across the surface. Ensure the white background is crisp and clean, with no other colors or textures visible. The image should emphasize the contrast between the colorful petals and the solid white background, with detailed textures on the petals and soft shadows to add depth.",
+      "Rose petals+ scattered across a pure white background- with vibrant red and pink hues+.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
     alt: "Image 11",
     prompt:
-      "A serene 4K forest clearing background, featuring tall trees surrounding an open grassy area bathed in soft, dappled sunlight. Wildflowers bloom throughout the clearing, and a small stream winds through the scene, adding a gentle flow of water. The atmosphere is calm and peaceful, with detailed textures on the tree bark, leaves, and grass. --v 5 --ar 16:9 --q 2 --style realistic",
+      "Forest clearing+ with tall trees+, wildflowers+, and a stream winding through the grass-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
     alt: "Image 12",
     prompt:
-      "A 4K urban nightscape background, capturing the energy of a bustling city after dark. The scene includes skyscrapers illuminated with glowing windows, neon signs, and streetlights casting a warm glow on the streets below. Cars and pedestrians move through the scene, with reflections on wet pavement adding to the realism. The atmosphere is vibrant and dynamic, perfect for a lively city setting. --v 5 --ar 16:9 --q 2 --style realistic",
+      "Urban nightscape+ with illuminated skyscrapers+, neon signs+, and wet pavement- reflecting streetlights.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
     alt: "Image 13",
     prompt:
-      "A breathtaking 4K mountain landscape background, featuring towering snow-capped peaks, rolling green hills, and a crystal-clear lake reflecting the surrounding scenery. The sky is a vibrant blue with wisps of clouds, and the lighting casts natural shadows across the terrain. The scene is peaceful and majestic, with detailed textures on the rocks, trees, and water. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
   },
 ];
+
 const monochromeImages = [
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
     alt: "Image 10",
     prompt:
-      "rose petals scattered across a flat, pure white background. The background should be completely white, smooth, and uninterrupted. The rose petals should be vibrant, with deep red and pink hues, and should be naturally spread out across the surface. Ensure the white background is crisp and clean, with no other colors or textures visible. The image should emphasize the contrast between the colorful petals and the solid white background, with detailed textures on the petals and soft shadows to add depth.",
+      "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
     alt: "Image 11",
     prompt:
-      "A serene 4K forest clearing background, featuring tall trees surrounding an open grassy area bathed in soft, dappled sunlight. Wildflowers bloom throughout the clearing, and a small stream winds through the scene, adding a gentle flow of water. The atmosphere is calm and peaceful, with detailed textures on the tree bark, leaves, and grass. --v 5 --ar 16:9 --q 2 --style realistic",
+      "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
     alt: "Image 12",
     prompt:
-      "A 4K urban nightscape background, capturing the energy of a bustling city after dark. The scene includes skyscrapers illuminated with glowing windows, neon signs, and streetlights casting a warm glow on the streets below. Cars and pedestrians move through the scene, with reflections on wet pavement adding to the realism. The atmosphere is vibrant and dynamic, perfect for a lively city setting. --v 5 --ar 16:9 --q 2 --style realistic",
+      "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
     alt: "Image 13",
     prompt:
-      "A breathtaking 4K mountain landscape background, featuring towering snow-capped peaks, rolling green hills, and a crystal-clear lake reflecting the surrounding scenery. The sky is a vibrant blue with wisps of clouds, and the lighting casts natural shadows across the terrain. The scene is peaceful and majestic, with detailed textures on the rocks, trees, and water. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 3",
     prompt:
-      "A stunning 4K Mediterranean seaside background, featuring white-washed buildings with blue accents overlooking a sparkling blue sea. The scene includes narrow cobblestone streets, colorful flowers in pots, and a small harbor with boats gently bobbing in the water. The sky is clear, and the sunlight casts warm, golden light across the scene. The atmosphere is idyllic and peaceful, with attention to detail in the architecture, water, and landscape. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 4",
     prompt:
-      "A lush 4K tropical rainforest background, showcasing dense vegetation with tall trees, broadleaf plants, and vibrant flowers. A waterfall cascades into a clear pool, surrounded by moss-covered rocks. The light filters through the thick canopy, creating a rich, humid atmosphere. The scene is vibrant and full of life, with detailed textures on the plants, water, and rocks. --v 5 --ar 16:9 --q 2 --style realistic",
+      "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 5",
     prompt:
-      "A tranquil 4K Japanese garden background, featuring a serene koi pond surrounded by meticulously manicured plants, stone lanterns, and wooden bridges. Cherry blossom trees are in full bloom, with petals gently falling into the water. The scene captures the essence of Zen, with a calm and peaceful atmosphere. The details in the plants, water, and garden elements are highly realistic. --v 5 --ar 16:9 --q 2 --style realistic",
+      "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 6",
     prompt:
-      "A 4K city park background, featuring well-maintained green lawns, tall trees providing shade, and winding paths for walking. The scene includes benches, a small pond with ducks, and people enjoying the outdoors. The urban skyline is visible in the background, adding a blend of nature and city life to the scene. The atmosphere is relaxed and inviting, with realistic details in the foliage, water, and people. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 7",
     prompt:
-      'A dramatic 4K coastal cliffside background, featuring towering cliffs overlooking the ocean. The waves crash against the rocky shore, and seagulls can be seen flying above. The sky is partly cloudy, with sunlight breaking through to illuminate the cliffs and water. The scene is powerful and awe-inspiring, with detailed textures on the rocks, waves, and sky. --v 5 --ar 16:9 --q 2 --style realistic.."',
+      "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 8",
     prompt:
-      "A magical 4K winter wonderland background, showcasing a snow-covered forest with tall evergreen trees and a frozen lake. The sky is a soft, pale blue with a hint of sunset colors, and the snow glistens under the gentle light. The scene feels peaceful and serene, with detailed textures on the snow, ice, and trees. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 9",
     prompt:
-      "A picturesque 4K countryside farm background, featuring a rustic barn, rolling green fields, and rows of crops ready for harvest. The scene includes a wooden fence, grazing animals, and a dirt path leading through the landscape. The sky is clear with a few clouds, and the lighting is warm, capturing the peaceful simplicity of rural life. --v 5 --ar 16:9 --q 2 --style realistic.",
+      "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
   },
 ];
 
