@@ -5,6 +5,7 @@ import { DotPulse } from "@/components/loadingComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { Panel } from "@/components/Svg";
 
 interface RightSidebarProps {
   generatedResults: string[];
@@ -41,15 +42,19 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
   return (
     <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
       {/* Arrow Icon position absolutely on the left of the sidebar */}
+
       <div
-        className={` absolute top-1/2 transform -translate-y-1/2 bg-[#1B1D29] size-7 border border-white -left-3 z-30 cursor-pointer  rounded-full lg:flex items-center justify-center hidden`}
+        className={`absolute top-1/2 transform -translate-y-1/2 size-7 -left-6 z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden rotate-180`}
         onClick={() => setIsMinimize(!isMinimize)}
       >
+        {/* 
         {!isMinimize ? (
           <IoIosArrowBack color="white" />
         ) : (
           <IoIosArrowForward color="white" size={20} />
-        )}
+        )} */}
+
+        <Panel />
       </div>
 
       {/* Sidebar Content */}
@@ -57,7 +62,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
         id="right-sidebar"
         className={`lg:h-full lg:overflow-y-auto custom-scrollbar-right relative ${
           isMinimize ? "lg:w-10 xl:w-10" : "lg:w-60 xl:w-80"
-        } lg:border-2 lg:border-r-0 lg:rounded lg:border-gray-400 lg:px-0`}
+        } lg:border lg:border-r-0 border-2 lg:rounded lg:border-primary lg:px-0`}
       >
         <div
           className={` ${

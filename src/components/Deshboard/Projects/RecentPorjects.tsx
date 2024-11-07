@@ -12,22 +12,28 @@ interface ImageDetail {
   urls: string[];
   _id: string;
 }
-
+// Define types for the project
 interface Project {
   _id: string;
   name: string;
   isFavourite: boolean;
   images: ImageDetail[];
+  // Add any other fields that your project object contains
 }
 
-const RecentProjects: React.FC = () => {
-  const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
-  const [menuOpen, setMenuOpen] = useState<{ [key: string]: boolean }>({});
-  const { user } = useClerk();
+type MenuOpenState = {
+  [projectId: string]: boolean;
+};
 
+const RecentProjects: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<"recent" | "favourite">("recent");
+  const [favoriteProjects, setFavoriteProjects] = useState<Project[]>([]);
+  const [menuOpen, setMenuOpen] = useState<MenuOpenState>({});
+  const { user } = useClerk();
   const containerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const fetchProjects = async () => {
+  // Function to fetch projects
+  const fetchProjects = async (): Promise<Project[]> => {
     const response = await axiosInstance(
       `/api/project?email=${user?.emailAddresses[0].emailAddress}`
     );
@@ -37,6 +43,7 @@ const RecentProjects: React.FC = () => {
     return response.data.data;
   };
 
+  // Use React Query to fetch data
   const {
     data: recentProjects = [],
     isLoading,
@@ -45,9 +52,10 @@ const RecentProjects: React.FC = () => {
   } = useQuery({
     queryFn: fetchProjects,
     queryKey: ["recentProject"],
-    retry: 1, // Retry only once if there's an error
+    retry: 1,
   });
 
+  // Function to toggle the menu open/close state
   const handleMenuToggle = (projectId: string) => {
     setMenuOpen((prevState) => ({
       ...prevState,
@@ -55,6 +63,7 @@ const RecentProjects: React.FC = () => {
     }));
   };
 
+  // Function to rename a project
   const handleRename = async (projectId: string, newName: string) => {
     try {
       const response = await axiosInstance.put(`/api/project/${projectId}`, {
@@ -68,6 +77,7 @@ const RecentProjects: React.FC = () => {
     }
   };
 
+  // Function to delete a project
   const handleDelete = (projectId: string) => {
     const deleteProject = async () => {
       try {
@@ -84,14 +94,13 @@ const RecentProjects: React.FC = () => {
     deleteProject();
   };
 
+  // Function to toggle a project as favorite
   const handleFavoriteToggle = (projectId: string, newState: boolean) => {
     const favouriteToggle = async () => {
       try {
         const response = await axiosInstance.put(
           `/api/project/favourite/${projectId}`,
-          {
-            state: newState,
-          }
+          { state: newState }
         );
         if (response.data.data) {
           refetch();
@@ -103,6 +112,7 @@ const RecentProjects: React.FC = () => {
     favouriteToggle();
   };
 
+  // Handle clicking outside of the menu to close it
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -156,89 +166,112 @@ const RecentProjects: React.FC = () => {
 
   return (
     <div className="text-white xl:mt-16 px-5 lg:mt-5 mt-10">
-      <p className="md:text-xl text-lg text-center md:text-left">
-        Recent Projects
-      </p>
-
-      {recentProjects.length > 0 ? (
-        <Swiper
-          spaceBetween={15}
-          breakpoints={{
-            320: { slidesPerView: 1.2, spaceBetween: 10 },
-            640: { slidesPerView: 2.2, spaceBetween: 10 },
-            768: { slidesPerView: 3.2, spaceBetween: 10 },
-            1024: { slidesPerView: 4.5, spaceBetween: 10 },
-          }}
-          className="xl:mt-5 lg:mt-0"
+      {/* Tabs */}
+      <div className="flex mb-4 space-x-5">
+        <button
+          className={`relative py-2 text-lg text-white ${
+            activeTab === "recent"
+              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-1 before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+              : ""
+          }`}
+          onClick={() => setActiveTab("recent")}
         >
-          {recentProjects.map((project: Project) => (
-            <SwiperSlide key={project._id}>
-              <div
-                ref={(el) => {
-                  containerRefs.current[project._id] = el;
-                }}
-              >
-                <ProjectCard
-                  project={project}
-                  handleMenuToggle={handleMenuToggle}
-                  menuOpen={menuOpen}
-                  handleRename={handleRename}
-                  handleDelete={handleDelete}
-                  handleFavoriteToggle={handleFavoriteToggle}
-                  isFavorite={favoriteProjects.some(
-                    (favProject) => favProject._id === project._id
-                  )}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        <div className="mt-10">
-          <p className="text-gray-400 text-center text-sm md:text-base">
-            You don't have any recent projects!
-          </p>
-        </div>
-      )}
-
-      <p className="md:text-xl text-lg mt-5 xl:mt-5 lg:mt-0 text-center md:text-left">
-        Favorite Projects
-      </p>
-
-      {favoriteProjects.length > 0 ? (
-        <Swiper
-          breakpoints={{
-            320: { slidesPerView: 1.2, spaceBetween: 10 },
-            640: { slidesPerView: 2.2, spaceBetween: 10 },
-            768: { slidesPerView: 3.2, spaceBetween: 10 },
-            1024: { slidesPerView: 4.5, spaceBetween: 10 },
-          }}
-          className="mt-5 mb-5 lg:mb-0"
+          Recent Projects
+        </button>
+        <button
+          className={`relative py-2 text-lg text-white ${
+            activeTab === "favourite"
+              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-1 before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+              : ""
+          }`}
+          onClick={() => setActiveTab("favourite")}
         >
-          {favoriteProjects.map((project: Project) => (
-            <SwiperSlide key={project._id}>
-              <div
-                ref={(el) => {
-                  containerRefs.current[project._id] = el;
-                }}
-              >
-                <FavouriteProject
-                  project={project}
-                  handleMenuToggle={handleMenuToggle}
-                  menuOpen={menuOpen}
-                  handleFavoriteToggle={handleFavoriteToggle}
-                  isFavorite={true}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          Favorite Projects
+        </button>
+      </div>
+
+      {/* Content */}
+      {activeTab === "recent" ? (
+        <>
+          {recentProjects.length > 0 ? (
+            <Swiper
+              spaceBetween={15}
+              breakpoints={{
+                320: { slidesPerView: 1.2, spaceBetween: 10 },
+                640: { slidesPerView: 2.2, spaceBetween: 10 },
+                768: { slidesPerView: 3.2, spaceBetween: 10 },
+                1024: { slidesPerView: 4.5, spaceBetween: 10 },
+              }}
+              className="xl:mt-5 lg:mt-0"
+            >
+              {recentProjects.map((project) => (
+                <SwiperSlide key={project._id}>
+                  <div
+                    ref={(el) => {
+                      containerRefs.current[project._id] = el;
+                    }}
+                  >
+                    <ProjectCard
+                      project={project}
+                      handleMenuToggle={handleMenuToggle}
+                      menuOpen={menuOpen}
+                      handleRename={handleRename}
+                      handleDelete={handleDelete}
+                      handleFavoriteToggle={handleFavoriteToggle}
+                      isFavorite={favoriteProjects.some(
+                        (favProject) => favProject._id === project._id
+                      )}
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="mt-10">
+              <p className="text-gray-400 text-center text-sm md:text-base">
+                You don't have any recent projects!
+              </p>
+            </div>
+          )}
+        </>
       ) : (
-        <div className="mt-10">
-          <p className="text-gray-400 text-center text-sm md:text-base">
-            You don't have any favorite projects!
-          </p>
-        </div>
+        <>
+          {favoriteProjects.length > 0 ? (
+            <Swiper
+              breakpoints={{
+                320: { slidesPerView: 1.2, spaceBetween: 10 },
+                640: { slidesPerView: 2.2, spaceBetween: 10 },
+                768: { slidesPerView: 3.2, spaceBetween: 10 },
+                1024: { slidesPerView: 4.5, spaceBetween: 10 },
+              }}
+              className="xl:mt-10 lg:mt-0"
+            >
+              {favoriteProjects.map((project) => (
+                <SwiperSlide key={project._id}>
+                  <div
+                    ref={(el) => {
+                      containerRefs.current[project._id] = el;
+                    }}
+                  >
+                    <FavouriteProject
+                      project={project}
+                      handleMenuToggle={handleMenuToggle}
+                      menuOpen={menuOpen}
+                      handleFavoriteToggle={handleFavoriteToggle}
+                      isFavorite={true}
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="mt-10">
+              <p className="text-gray-400 text-center text-sm md:text-base">
+                You don't have any favorite projects!
+              </p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
