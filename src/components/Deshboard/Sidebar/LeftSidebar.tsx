@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { Panel } from "@/components/Svg";
 
 const naturalImages = [
   {
@@ -203,21 +204,22 @@ const LeftSidebar: React.FC<ModalProps> = ({
       {/* Arrow Icon position absolutely within the sidebar */}
       <div
         className={`
-            absolute top-1/2 transform -translate-y-1/2 bg-[#1B1D29] size-7 border border-white -right-3 z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden`}
+            absolute top-1/2 transform -translate-y-1/2  size-7 -right-6 z-30 cursor-pointer  lg:flex items-center justify-center hidden `}
         onClick={() => setIsMinimize(!isMinimize)}
       >
-        {!isMinimize ? (
+        {/* {!isMinimize ? (
           <IoIosArrowBack color="white" />
         ) : (
           <IoIosArrowForward color="white" size={20} />
-        )}
+        )} */}
+        <Panel />
       </div>
 
       <div
         id="left-sidebar"
         className={`relative overflow-hidden lg:overflow-y-auto lg:overflow-x-hidden lg:h-full custom-scrollbar ${
           isMinimize ? "lg:w-10 xl:w-10" : "lg:w-60 xl:w-80"
-        } lg:border-2 lg:border-l-0 lg:rounded lg:border-gray-400 lg:px-5 lg:pb-5`}
+        } lg:border lg:border-l-0 lg:rounded lg:border-primary lg:px-5 lg:pb-5`}
       >
         <div
           className={`lg:sticky top-0 z-10 transition-colors lg:duration-300 py-5 ${

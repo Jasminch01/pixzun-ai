@@ -24,6 +24,7 @@ import { useUser } from "@clerk/nextjs";
 import { LeafWhite } from "@/components/Svg";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import Link from "next/link";
+import { GrPowerReset } from "react-icons/gr";
 
 interface Project {
   name: string;
@@ -53,7 +54,7 @@ const Project: React.FC = () => {
   const { isLoaded, user } = useUser();
 
   const { id } = useParams();
-  
+
   const fetchProjectDetails = async () => {
     setLoadingProject(true);
     try {
@@ -194,6 +195,10 @@ const Project: React.FC = () => {
   const openGetCreditMOdal = () => {
     setIsPricingModalOpen(true);
   };
+  const resetGenerate = () => {
+    setImageUploaded(false);
+    setGeneratedResults([]);
+  };
   return (
     <div className="flex justify-center flex-col-reverse lg:flex-row-reverse border-white border-3 px-5 relative lg:static">
       <LeftSidebar
@@ -268,124 +273,152 @@ const Project: React.FC = () => {
         <div className="flex items-center justify-center lg:mt-[8rem] mt-5 relative">
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
-          <div
-            {...getRootProps()}
-            className={`bg-secondary size-[16rem] xl:size-[20rem] text-white border-dashed border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
-              (loadingResult ||
-                imageUploadLoading ||
-                imageUploaded ||
-                loadingResult ||
-                generatedResults.length > 0) &&
-              "hidden"
-            }`}
-          >
-            <div className="flex flex-col justify-center items-center">
-              <input {...getInputProps()} />
-              <IoMdImages size={70} className="mb-9 text-2xl" />
-              <p className="text-center mb-3">
-                <span className="font-bold">Click to upload </span>or drag and
-                drop
-              </p>
-              <p className="text-sm text-center">
-                Supported format: JPG, PNG <br /> (MAX 10MB)
-              </p>
+          <div className="bg-white/10 border-primary/25 border-[0.3px] rounded size-[17.5rem] xl:size-[21.5rem] flex justify-center items-center relative">
+            <div
+              {...getRootProps()}
+              className={`bg-secondary size-[16rem] xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
+                (loadingResult ||
+                  imageUploadLoading ||
+                  imageUploaded ||
+                  loadingResult ||
+                  generatedResults.length > 0) &&
+                "hidden"
+              }`}
+            >
+              <div className="flex flex-col justify-center items-center">
+                <input {...getInputProps()} />
+                <IoMdImages size={70} className="mb-9 text-2xl" />
+                <p className="text-center mb-3">
+                  <span className="font-bold">Click to upload </span>or drag and
+                  drop
+                </p>
+                <p className="text-sm text-center">
+                  Supported format: JPG, PNG <br /> (MAX 10MB)
+                </p>
+              </div>
+            </div>
+
+            {imageUploadLoading || loadingResult ? (
+              <div className="size-[16rem] xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
+                <Spiner />
+                {/* <p className="text-white mt-3">
+              </p> */}
+              </div>
+            ) : generatedResults.length > 0 ? (
+              <div className="md:flex-row gap-5 md:gap-0 flex flex-col bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 relative">
+                {/* Always display the first image */}
+                <div className="size-[16rem] xl:size-[20rem]">
+                  <div
+                    className="relative w-full h-full rounded-l"
+                    style={{
+                      backgroundImage: `url(https://res.cloudinary.com/ddqt9bodf/image/upload/v1720623874/bg_cwjxjb.jpg)`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  >
+                    <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
+                      <a
+                        href={generatedResults[0]}
+                        download={
+                          generatedResults[0].split("/").pop() || "image.jpg"
+                        }
+                        className="cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDownload(generatedResults[0]);
+                        }}
+                      >
+                        <MdOutlineFileDownload
+                          size={24}
+                          className="text-white"
+                        />
+                      </a>
+                    </div>
+                    <Image
+                      src={generatedResults[0]}
+                      alt="generated image 0"
+                      layout="fill"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+
+                {/* Display the current image with navigation buttons */}
+                <div className="size-[16rem] xl:size-[20rem]">
+                  <div className="relative w-full h-full rounded-l bg-white">
+                    <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
+                      <a
+                        href={generatedResults[currentImageIndex]}
+                        download={
+                          generatedResults[0].split("/").pop() || "image.jpg"
+                        }
+                        className="cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDownload(generatedResults[currentImageIndex]);
+                        }}
+                      >
+                        <MdOutlineFileDownload
+                          size={24}
+                          className="text-white"
+                        />
+                      </a>
+                    </div>
+                    <button
+                      onClick={handlePrevImage}
+                      disabled={selectedImage === 0}
+                      className="absolute z-[1] left-2 top-1/2 transform -translate-y-1/2  text-black rounded-full p-2"
+                    >
+                      <IoChevronBackSharp size={26} />
+                    </button>
+                    <button
+                      onClick={handleNextImage}
+                      disabled={selectedImage === generatedResults.length - 1}
+                      className="absolute z-[1] right-2 top-1/2 transform -translate-y-1/2 text-black rounded-full p-2 cursor-pointer"
+                    >
+                      <IoChevronForwardSharp size={26} />
+                    </button>
+                    <Image
+                      src={generatedResults[currentImageIndex]}
+                      alt="generated image 0"
+                      layout="fill"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                {/*reset button */}
+                <div className="absolute -right-7 bottom-0">
+                  <GrPowerReset
+                    color="white"
+                    className="cursor-pointer"
+                    onClick={resetGenerate}
+                  />
+                </div>
+              </div>
+            ) : imageUploaded ? (
+              <div className="bg-secondary size-[16rem] xl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={uploadedImage[0]}
+                    alt="uploaded image"
+                    layout="fill"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            ) : null}
+            <div
+              className={`absolute -right-7 bottom-0 ${
+                generatedResults.length > 0 || !imageUploaded ? "hidden" : ""
+              }`}
+            >
+              <GrPowerReset
+                color="white"
+                className="cursor-pointer"
+                onClick={resetGenerate}
+              />
             </div>
           </div>
-          {imageUploadLoading || loadingResult ? (
-            <div className="size-[16rem] xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
-              <Spiner />
-              {/* <p className="text-white mt-3">
-              </p> */}
-            </div>
-          ) : generatedResults.length > 0 ? (
-            <div className="md:flex-row gap-5 md:gap-0 flex flex-col bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3">
-              {/* Always display the first image */}
-              <div className="size-[16rem] xl:size-[20rem]">
-                <div
-                  className="relative w-full h-full rounded-l"
-                  style={{
-                    backgroundImage: `url(https://res.cloudinary.com/ddqt9bodf/image/upload/v1720623874/bg_cwjxjb.jpg)`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
-                    <a
-                      href={generatedResults[0]}
-                      download={
-                        generatedResults[0].split("/").pop() || "image.jpg"
-                      }
-                      className="cursor-pointer"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleDownload(generatedResults[0]);
-                      }}
-                    >
-                      <MdOutlineFileDownload size={24} className="text-white" />
-                    </a>
-                  </div>
-                  <Image
-                    src={generatedResults[0]}
-                    alt="generated image 0"
-                    layout="fill"
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Display the current image with navigation buttons */}
-              <div className="size-[16rem] xl:size-[20rem]">
-                <div className="relative w-full h-full rounded-l bg-white">
-                  <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
-                    <a
-                      href={generatedResults[currentImageIndex]}
-                      download={
-                        generatedResults[0].split("/").pop() || "image.jpg"
-                      }
-                      className="cursor-pointer"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleDownload(generatedResults[currentImageIndex]);
-                      }}
-                    >
-                      <MdOutlineFileDownload size={24} className="text-white" />
-                    </a>
-                  </div>
-                  <button
-                    onClick={handlePrevImage}
-                    disabled={selectedImage === 0}
-                    className="absolute z-[1] left-2 top-1/2 transform -translate-y-1/2  text-black rounded-full p-2"
-                  >
-                    <IoChevronBackSharp size={26} />
-                  </button>
-                  <button
-                    onClick={handleNextImage}
-                    disabled={selectedImage === generatedResults.length - 1}
-                    className="absolute z-[1] right-2 top-1/2 transform -translate-y-1/2 text-black rounded-full p-2 cursor-pointer"
-                  >
-                    <IoChevronForwardSharp size={26} />
-                  </button>
-                  <Image
-                    src={generatedResults[currentImageIndex]}
-                    alt="generated image 0"
-                    layout="fill"
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            </div>
-          ) : imageUploaded ? (
-            <div className="bg-secondary size-[16rem] xl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
-              <div className="relative w-full h-full">
-                <Image
-                  src={uploadedImage[0]}
-                  alt="uploaded image"
-                  layout="fill"
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          ) : null}
         </div>
         {/* input for large divices */}
         <div className="lg:flex flex-col justify-center mt-10 px-5 lg:px-0 hidden">
@@ -455,7 +488,7 @@ const Project: React.FC = () => {
         <div className="">
           <div className="w-full p-3 lg:hidden bg-[#373b4e] rounded-full">
             <div className="flex justify-between items-center relative">
-              <Link href={'/app'}>
+              <Link href={"/app"}>
                 <IoDocumentsSharp size={20} color="white" />
               </Link>
               <div
