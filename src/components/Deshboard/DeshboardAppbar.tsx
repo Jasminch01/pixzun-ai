@@ -125,7 +125,7 @@ const DashboardAppBar: React.FC = () => {
           </Link>
           <div className="hidden lg:flex items-center">
             <nav className="flex items-center space-x-3">
-              <div className="text-base space-x-2 px-5 py-3 gradient-border transition-colors text-white">
+              <div className="text-base space-x-2 px-5 py-3 flex text-white">
                 <Leaf />
                 <p>Credit : {currentUser?.cradit}</p>
               </div>
@@ -150,53 +150,75 @@ const DashboardAppBar: React.FC = () => {
                 </button>
                 {currentUser && isProfileOpen && (
                   <div className="absolute right-4 top-[4rem] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] pb-3">
-                    <Link
-                      href={"/app/profile"}
-                      onClick={() => setIsProfileOpen(false)}
-                      className="flex items-center justify-center gap-5 hover:bg-gray-50/5 py-3"
-                    >
-                      <div className="text-base text-white  flex justify-center items-center rounded-full transition-all ">
-                        <img
-                          src={user?.imageUrl}
-                          alt="Profile"
-                          width={40}
-                          height={40}
-                          className="rounded-full"
-                        />
-                      </div>
-                      <div>
-                        <p>{user?.fullName}</p>
-                        {user?.emailAddresses.map((email, index) => (
-                          <p key={index} className="text-sm">
-                            {email.emailAddress}
+                    <div className="pl-5">
+                      <Link
+                        href={"/app/profile"}
+                        onClick={() => setIsProfileOpen(false)}
+                        className="flex items-center gap-3 hover:bg-gray-50/5 py-3"
+                      >
+                        {/* Profile Image */}
+                        <div className="text-base text-white flex-shrink-0 rounded-full">
+                          <img
+                            src={user?.imageUrl}
+                            alt="Profile"
+                            width={40}
+                            height={40}
+                            className="rounded-full"
+                          />
+                        </div>
+
+                        {/* Username and Email Container */}
+                        <div className="flex flex-col flex-1 min-w-0">
+                          <p className="truncate">{user?.fullName}</p>
+                          {user?.emailAddresses.map((email, index) => (
+                            <p key={index} className="text-sm truncate">
+                              {email.emailAddress}
+                            </p>
+                          ))}
+                        </div>
+                      </Link>
+
+                      <div className=" mt-3 text-sm">
+                        <div className="my-5">
+                          {/* Credit Section */}
+                          <p className="mb-3 flex items-center gap-3">
+                            <Leaf />
+                            {/* Make sure Leaf icon is aligned */}
+                            <span>Credit: {currentUser?.credit}</span>
                           </p>
-                        ))}
-                      </div>
-                    </Link>
-                    <div className="ml-8 mt-3 text-sm">
-                      <div className="my-5">
-                        <p className="mb-3 flex gap-3">
-                          <Leaf /> Credit : {currentUser?.cradit}
-                        </p>
-                      </div>
-                      <div className="space-y-2 mb-3">
-                        <Link
-                          href={"/app"}
-                          onClick={() => setIsProfileOpen(false)}
-                          className="flex items-center gap-3 "
-                        >
-                          <SiGoogledocs size={22} color="white" />
-                          Project
-                        </Link>
+                        </div>
+                        <div className="space-y-2 mb-7">
+                          {/* Project Link */}
+                          <Link
+                            href={"/app"}
+                            onClick={() => setIsProfileOpen(false)}
+                            className="flex items-center gap-3"
+                          >
+                            <SiGoogledocs
+                              size={22}
+                              className="flex-shrink-0"
+                              color="white"
+                            />{" "}
+                            {/* Align Project Icon */}
+                            <span>Project</span>
+                          </Link>
+                        </div>
                       </div>
                     </div>
+
                     <hr className="border-gray-400 border" />
+
                     <button
-                      className="flex text-sm ml-8 items-center gap-3 my-2"
+                      className="flex items-center text-sm ml-5 gap-3 mt-2"
                       onClick={() => handleSignOut()}
                     >
-                      <TbLogout size={25} color="white" />
-                      Logout
+                      <TbLogout
+                        size={25}
+                        className="flex-shrink-0"
+                        color="white"
+                      />{" "}
+                      {/* Align Logout Icon */}
+                      <span>Logout</span>
                     </button>
                   </div>
                 )}

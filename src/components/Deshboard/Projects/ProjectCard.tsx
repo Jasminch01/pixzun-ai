@@ -86,10 +86,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 
   return (
     <div
-      className="relative p-[1px] bg-gradient-to-r from-[#A82AD8] to-[#4940D8] rounded-md cursor-pointer my-5"
+      className={`relative p-[1px] rounded-md cursor-pointer my-5 transition-all duration-300 ${
+        menuOpen[project._id] ? "border-gray-700" : "border-transparent"
+      } hover:border-transparent hover:bg-gradient-to-r hover:from-[#A82AD8] hover:to-[#4940D8] transition-all`}
       onClick={handleCardClick}
     >
-      <div className="relative bg-[#1E202D] w-full xl:h-64 lg:h-52 h-52 rounded-md p-3 flex flex-col justify-center items-center">
+      <div className="relative bg-[#1E202D] w-full xl:h-64 lg:h-52 h-52 rounded-md p-3 flex flex-col justify-center items-center border hover:border-[#969696] hover:border-0 transition-all">
         <div>
           <Image
             src={
