@@ -181,10 +181,10 @@ const DashboardAppBar: React.FC = () => {
                       <div className=" mt-3 text-sm">
                         <div className="my-5">
                           {/* Credit Section */}
-                          <p className="mb-3 flex items-center gap-3">
+                          <p className="mb-3 flex items-center gap-3 text-white">
                             <Leaf />
                             {/* Make sure Leaf icon is aligned */}
-                            <span>Credit: {currentUser?.credit}</span>
+                            <span>Credit: {currentUser?.cradit}</span>
                           </p>
                         </div>
                         <div className="space-y-2 mb-7">
