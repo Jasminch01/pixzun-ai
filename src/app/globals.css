@@ -37,9 +37,6 @@
   z-index: -1;
 }
 
-.gradient:hover {
-  z-index: 0;
-}
 /* gradient border */
 .gradient-border {
   position: relative;
