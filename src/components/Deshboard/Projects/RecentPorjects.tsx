@@ -171,8 +171,8 @@ const RecentProjects: React.FC = () => {
         <button
           className={`relative py-2 text-white ${
             activeTab === "recent"
-              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8] opacity-75"
-              : ""
+              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+              : "opacity-75 hover:opacity-100"
           }`}
           onClick={() => setActiveTab("recent")}
         >
@@ -181,8 +181,8 @@ const RecentProjects: React.FC = () => {
         <button
           className={`relative py-2 text-white ${
             activeTab === "favourite"
-              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8] opacity-75"
-              : ""
+              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+              : "opacity-75 hover:opacity-100"
           }`}
           onClick={() => setActiveTab("favourite")}
         >
