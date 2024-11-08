@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={`bg-bg-gradient ${poppins.variable} font-poppins`}>
+        <body className={`bg-[#1B1D29] ${poppins.variable} font-poppins`}>
           {children}
         </body>
       </AuthProvider>
