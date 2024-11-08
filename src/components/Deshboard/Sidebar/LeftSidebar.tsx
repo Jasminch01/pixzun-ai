@@ -234,8 +234,8 @@ const LeftSidebar: React.FC<ModalProps> = ({
           <div className="gap-3 mt-4 flex">
             {/* Monochrome Tab */}
             <button
-              className={`lg:w-full p-2 gradient text-white rounded lg:text-base text-sm ${
-                activeTab === "Monochrome" ? "bg-blue-500" : ""
+              className={`lg:w-full p-2  text-white rounded lg:text-base text-sm ${
+                activeTab === "Monochrome" ? "gradient" : " border border-[#595959] rounded-full"
               }`}
               onClick={() => handleTabClick("Monochrome")}
             >
@@ -243,8 +243,8 @@ const LeftSidebar: React.FC<ModalProps> = ({
             </button>
             {/* Natural Tab */}
             <button
-              className={`lg:w-full p-2 gradient text-white rounded lg:text-base text-sm ${
-                activeTab === "Natural" ? "bg-blue-500" : ""
+              className={`lg:w-full p-2  text-white rounded lg:text-base text-sm ${
+                activeTab === "Natural" ? "gradient" : " border border-[#595959] rounded-full"
               }`}
               onClick={() => handleTabClick("Natural")}
             >

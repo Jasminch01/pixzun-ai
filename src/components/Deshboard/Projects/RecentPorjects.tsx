@@ -167,11 +167,11 @@ const RecentProjects: React.FC = () => {
   return (
     <div className="text-white xl:mt-16 px-5 lg:mt-5 mt-10">
       {/* Tabs */}
-      <div className="flex mb-4 space-x-5">
+      <div className="flex mb-4 space-x-10">
         <button
-          className={`relative py-2 text-lg text-white ${
+          className={`relative py-2 text-white ${
             activeTab === "recent"
-              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-1 before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8] opacity-75"
               : ""
           }`}
           onClick={() => setActiveTab("recent")}
@@ -179,9 +179,9 @@ const RecentProjects: React.FC = () => {
           Recent Projects
         </button>
         <button
-          className={`relative py-2 text-lg text-white ${
+          className={`relative py-2 text-white ${
             activeTab === "favourite"
-              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-1 before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
+              ? "before:content-[''] before:absolute before:left-0 before:bottom-0 before:h-[2px] before:w-full before:bg-gradient-to-r from-[#A82AD8] to-[#4940D8] opacity-75"
               : ""
           }`}
           onClick={() => setActiveTab("favourite")}
