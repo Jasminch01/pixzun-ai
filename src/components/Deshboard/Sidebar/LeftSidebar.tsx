@@ -217,7 +217,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
 
       <div
         id="left-sidebar"
-        className={`relative overflow-hidden lg:overflow-y-auto lg:overflow-x-hidden lg:h-full custom-scrollbar ${
+        className={`relative transition-all duration-300 ease-in-out overflow-hidden lg:overflow-y-auto lg:overflow-x-hidden lg:h-full custom-scrollbar ${
           isMinimize ? "lg:w-10 xl:w-10" : "lg:w-60 xl:w-80"
         } lg:border lg:border-l-0 lg:rounded lg:border-primary lg:px-5 lg:pb-5`}
       >
@@ -235,7 +235,9 @@ const LeftSidebar: React.FC<ModalProps> = ({
             {/* Monochrome Tab */}
             <button
               className={`lg:w-full p-2  text-white rounded lg:text-base text-sm ${
-                activeTab === "Monochrome" ? "gradient" : " border border-[#595959] rounded-full"
+                activeTab === "Monochrome"
+                  ? "gradient"
+                  : " border border-[#595959] rounded-full"
               }`}
               onClick={() => handleTabClick("Monochrome")}
             >
@@ -244,7 +246,9 @@ const LeftSidebar: React.FC<ModalProps> = ({
             {/* Natural Tab */}
             <button
               className={`lg:w-full p-2  text-white rounded lg:text-base text-sm ${
-                activeTab === "Natural" ? "gradient" : " border border-[#595959] rounded-full"
+                activeTab === "Natural"
+                  ? "gradient"
+                  : " border border-[#595959] rounded-full"
               }`}
               onClick={() => handleTabClick("Natural")}
             >
