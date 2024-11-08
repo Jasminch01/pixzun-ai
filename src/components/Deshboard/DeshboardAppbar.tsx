@@ -150,59 +150,61 @@ const DashboardAppBar: React.FC = () => {
                 </button>
                 {currentUser && isProfileOpen && (
                   <div className="absolute right-4 top-[4rem] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] pb-3">
-                    <div className="pl-5">
-                      <Link
-                        href={"/app/profile"}
-                        onClick={() => setIsProfileOpen(false)}
-                        className="flex items-center gap-3 hover:bg-gray-50/5 py-3"
-                      >
-                        {/* Profile Image */}
-                        <div className="text-base text-white flex-shrink-0 rounded-full">
-                          <img
-                            src={user?.imageUrl}
-                            alt="Profile"
-                            width={40}
-                            height={40}
-                            className="rounded-full"
-                          />
-                        </div>
+                    <div className="hover:bg-gray-50/5">
+                      <div className="pl-5">
+                        <Link
+                          href={"/app/profile"}
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center gap-3  py-3"
+                        >
+                          {/* Profile Image */}
+                          <div className="text-base text-white flex-shrink-0 rounded-full">
+                            <img
+                              src={user?.imageUrl}
+                              alt="Profile"
+                              width={40}
+                              height={40}
+                              className="rounded-full"
+                            />
+                          </div>
 
-                        {/* Username and Email Container */}
-                        <div className="flex flex-col flex-1 min-w-0">
-                          <p className="truncate">{user?.fullName}</p>
-                          {user?.emailAddresses.map((email, index) => (
-                            <p key={index} className="text-sm truncate">
-                              {email.emailAddress}
-                            </p>
-                          ))}
-                        </div>
-                      </Link>
+                          {/* Username and Email Container */}
+                          <div className="flex flex-col flex-1 min-w-0">
+                            <p className="truncate">{user?.fullName}</p>
+                            {user?.emailAddresses.map((email, index) => (
+                              <p key={index} className="text-sm truncate">
+                                {email.emailAddress}
+                              </p>
+                            ))}
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
 
-                      <div className=" mt-3 text-sm">
-                        <div className="my-5">
-                          {/* Credit Section */}
-                          <p className="mb-3 flex items-center gap-3 text-white">
-                            <Leaf />
-                            {/* Make sure Leaf icon is aligned */}
-                            <span>Credit: {currentUser?.cradit}</span>
-                          </p>
-                        </div>
-                        <div className="space-y-2 mb-7">
-                          {/* Project Link */}
-                          <Link
-                            href={"/app"}
-                            onClick={() => setIsProfileOpen(false)}
-                            className="flex items-center gap-3"
-                          >
-                            <SiGoogledocs
-                              size={22}
-                              className="flex-shrink-0"
-                              color="white"
-                            />{" "}
-                            {/* Align Project Icon */}
-                            <span>Project</span>
-                          </Link>
-                        </div>
+                    <div className="pl-5 mt-3 text-sm">
+                      <div className="my-5">
+                        {/* Credit Section */}
+                        <p className="mb-3 flex items-center gap-3 text-white">
+                          <Leaf />
+                          {/* Make sure Leaf icon is aligned */}
+                          <span>Credit: {currentUser?.cradit}</span>
+                        </p>
+                      </div>
+                      <div className="space-y-2 mb-7">
+                        {/* Project Link */}
+                        <Link
+                          href={"/app"}
+                          onClick={() => setIsProfileOpen(false)}
+                          className="flex items-center gap-3"
+                        >
+                          <SiGoogledocs
+                            size={22}
+                            className="flex-shrink-0"
+                            color="white"
+                          />{" "}
+                          {/* Align Project Icon */}
+                          <span>Project</span>
+                        </Link>
                       </div>
                     </div>
 
