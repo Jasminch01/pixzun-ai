@@ -204,7 +204,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
       {/* Arrow Icon position absolutely within the sidebar */}
       <div
         className={`
-            absolute top-1/2 transform -translate-y-1/2  size-7 -right-6 z-30 cursor-pointer  lg:flex items-center justify-center hidden `}
+            absolute top-1/2 transform -translate-y-1/2  size-7 -right-[25px] z-30 cursor-pointer  lg:flex items-center justify-center hidden `}
         onClick={() => setIsMinimize(!isMinimize)}
       >
         {/* {!isMinimize ? (

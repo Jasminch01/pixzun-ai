@@ -44,7 +44,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
       {/* Arrow Icon position absolutely on the left of the sidebar */}
 
       <div
-        className={`absolute top-1/2 transform  -translate-y-1/2 size-7 -left-6 z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden rotate-180`}
+        className={`absolute top-1/2 transform  -translate-y-1/2 size-7 -left-[25px] z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden rotate-180`}
         onClick={() => setIsMinimize(!isMinimize)}
       >
         {/* 
