@@ -61,7 +61,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   const [creditIncrement, setCreditIncrement] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
+  const userEmail = user?.emailAddresses[0].emailAddress;
   useEffect(() => {
     if (isPaymentModalOpen) {
       setIsPricingModalOpen(false);
@@ -69,9 +69,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   }, [isPaymentModalOpen]);
 
   const fetchUser = async () => {
-    const res = await axiosInstance.get(
-      `/api/users/me?email=${user?.emailAddresses[0].emailAddress}`
-    );
+    const res = await axiosInstance.get(`/api/users/me?email=${userEmail}`);
     return res.data.data;
   };
 
@@ -81,7 +79,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     isLoading,
   } = useQuery({
     queryFn: fetchUser,
-    queryKey: ["user", user?.emailAddresses[0].emailAddress],
+    queryKey: ["user", userEmail],
     // enabled: !!isLoaded && !!user,
   });
 
