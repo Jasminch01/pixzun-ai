@@ -82,7 +82,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   } = useQuery({
     queryFn: fetchUser,
     queryKey: ["user", user?.emailAddresses[0].emailAddress],
-    enabled: !!isLoaded && !!user,
+    // enabled: !!isLoaded && !!user,
   });
 
   const handleSubscriptionPayment = async () => {
