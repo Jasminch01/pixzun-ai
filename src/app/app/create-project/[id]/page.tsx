@@ -25,6 +25,7 @@ import { LeafWhite } from "@/components/Svg";
 import { HiOutlinePlusSm } from "react-icons/hi";
 import Link from "next/link";
 import { GrPowerReset } from "react-icons/gr";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 interface Project {
   name: string;
@@ -466,8 +467,7 @@ const Project: React.FC = () => {
                   <div className="text-center flex justify-center items-center gap-3">
                     {
                       <p className="flex justify-center items-center gap-3">
-                        {" "}
-                        Generate{" "}
+                        <FaWandMagicSparkles />Generate<LeafWhite />-1
                       </p>
                     }
                   </div>
