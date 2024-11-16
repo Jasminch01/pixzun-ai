@@ -126,7 +126,7 @@ export const LeafWhite: React.FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="size-5"
+      className="size-[12px]"
       viewBox="0 0 37 37"
       fill="none"
     >

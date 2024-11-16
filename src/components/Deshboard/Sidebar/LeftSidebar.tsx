@@ -3,85 +3,97 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Panel } from "@/components/Svg";
 
 const naturalImages = [
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731746434/tamplate2_zywvrn.png",
     alt: "Image 1",
+    name: "Mountain Landscape",
     prompt:
       "Majestic mountain landscape+ with snow-capped peaks+, green hills+, and a clear blue lake- reflecting the scenery.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 2",
+    name: "Rainy Street",
     prompt:
       "Rainy street+ with reflective pavement+, soft streetlight glow+, and figures moving through the rain-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 3",
+    name: "Mediterranean Seaside",
     prompt:
       "Mediterranean seaside+ with white-washed buildings+, blue accents+, and a small harbor with boats+.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 4",
+    name: "Rainforest Waterfall",
     prompt:
       "Tropical rainforest+ with tall trees+, vibrant flowers+, and a waterfall+ cascading into a clear pool-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 5",
+    name: "Japanese Garden",
     prompt:
       "Japanese garden+ with koi pond+, blooming cherry trees+, and stone lanterns+ creating a peaceful scene-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 6",
+    name: "Urban Park",
     prompt:
       "City park+ with green lawns+, tall trees+, a pond+, and urban skyline- in the background.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 7",
+    name: "Ocean Waves",
     prompt:
       "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 8",
+    name: "Sunset Winter",
     prompt:
       "Winter wonderland+ with snow-covered trees+, frozen lake+, and soft sunset colors- in the sky.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 9",
+    name: "Harvest Farm",
     prompt:
       "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
   },
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731746434/tamplate_hjq6jl.png",
     alt: "Image 10",
+    name: "Rose Petals",
     prompt:
       "Rose petals+ scattered across a pure white background- with vibrant red and pink hues+.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
     alt: "Image 11",
+    name: "Wildflower Forest",
     prompt:
       "Forest clearing+ with tall trees+, wildflowers+, and a stream winding through the grass-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
     alt: "Image 12",
+    name: "Urban Nightscape",
     prompt:
       "Urban nightscape+ with illuminated skyscrapers+, neon signs+, and wet pavement- reflecting streetlights.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
     alt: "Image 13",
+    name: "Snowy Peaks",
     prompt:
       "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
   },
@@ -91,66 +103,77 @@ const monochromeImages = [
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
     alt: "Image 10",
+    name: "Rose Petals",
     prompt:
       "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
     alt: "Image 11",
+    name: "Forest Clearing",
     prompt:
       "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
     alt: "Image 12",
+    name: "Urban Nightscape",
     prompt:
       "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
     alt: "Image 13",
+    name: "Mountain Landscape",
     prompt:
       "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 3",
+    name: "Mediterranean Seaside",
     prompt:
       "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 4",
+    name: "Tropical Rainforest",
     prompt:
       "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 5",
+    name: "Japanese Garden",
     prompt:
       "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 6",
+    name: "City Park",
     prompt:
       "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 7",
+    name: "Coastal Cliffside",
     prompt:
       "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 8",
+    name: "Winter Wonderland",
     prompt:
       "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
   },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
     alt: "Image 9",
+    name: "Countryside Farm",
     prompt:
       "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
   },
@@ -207,11 +230,6 @@ const LeftSidebar: React.FC<ModalProps> = ({
             absolute top-1/2 transform -translate-y-1/2  size-7 -right-[25px] z-30 cursor-pointer  lg:flex items-center justify-center hidden `}
         onClick={() => setIsMinimize(!isMinimize)}
       >
-        {/* {!isMinimize ? (
-          <IoIosArrowBack color="white" />
-        ) : (
-          <IoIosArrowForward color="white" size={20} />
-        )} */}
         <Panel />
       </div>
 
@@ -257,7 +275,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
           </div>
         </div>
 
-        <div className="mt-4 pt-4">
+        <div className={`mt-4 pt-4 ${isMinimize ? "hidden" : "flex"}`}>
           {/* Swiper for mobile and tablet devices */}
           <div className="block lg:hidden">
             <Swiper
@@ -297,29 +315,55 @@ const LeftSidebar: React.FC<ModalProps> = ({
           </div>
 
           {/* Grid layout for large screens */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-4">
+          <div className={`hidden lg:grid lg:grid-cols-2 gap-4`}>
             {activeTab === "Monochrome"
               ? monochromeImages.map((image, index) => (
-                  <Image
-                    key={index}
-                    src={image.src}
-                    alt={image.alt}
-                    width={200}
-                    height={200}
-                    className="lg:w-full h-auto object-cover rounded-md cursor-pointer"
-                    onClick={() => handleImageClick(image.prompt || "")}
-                  />
+                  <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
+                    <div
+                      className={`relative group hover:border-0 border border-white rounded-md`}
+                    >
+                      <Image
+                        key={index}
+                        src={image.src}
+                        alt={image.alt}
+                        width={200}
+                        height={200}
+                        className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
+                        onClick={() => handleImageClick(image.prompt || "")}
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">
+                        <p className="text-white p-2 absolute bottom-0 text-sm">
+                          {image.name}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 ))
               : naturalImages.map((image, index) => (
-                  <Image
-                    key={index}
-                    src={image.src}
-                    alt={image.alt}
-                    width={200}
-                    height={200}
-                    className="lg:w-full h-auto object-cover rounded-md cursor-pointer"
-                    onClick={() => handleImageClick(image.prompt || "")}
-                  />
+                  <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
+                    <div
+                      className={`relative group hover:border-0 border border-white rounded-md ${
+                        isMinimize && "border-0"
+                      }`}
+                    >
+                      <Image
+                        key={index}
+                        src={image.src}
+                        alt={image.alt}
+                        width={200}
+                        height={200}
+                        className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
+                        onClick={() => handleImageClick(image.prompt || "")}
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">
+                        <p className="text-white p-2 absolute bottom-0 text-sm">
+                          {image.name}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 ))}
           </div>
         </div>

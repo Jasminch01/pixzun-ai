@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import { Check } from "./Svg";
+import Link from "next/link";
 
 const Pricing: React.FC = () => {
   const plans = [
@@ -42,7 +43,9 @@ const Pricing: React.FC = () => {
   return (
     <div className="mt-36 px-5 xl:px-0">
       <div className="text-center">
-        <p className="lg:text-4xl md:text-3xl text-2xl font-bold text-white">Pricing</p>
+        <p className="lg:text-4xl md:text-3xl text-2xl font-bold text-white">
+          Pricing
+        </p>
         <p className="text-gray-400 mt-5">
           Choose the perfect plan that fits your budget and requirements.
         </p>
@@ -86,13 +89,15 @@ const Pricing: React.FC = () => {
               </ul>
             </div>
             <div className="text-center relative z-10">
-              <button
-                className={`${
-                  plan.price === "0" ? "border" : "bg-button-gradient"
-                } cursor-pointer rounded-full md:w-44 md:h-[54px] px-3 py-2`}
-              >
-                {plan.buttonText}
-              </button>
+              <Link href={"/sign-in"}>
+                <button
+                  className={`${
+                    plan.price === "0" ? "border" : "bg-button-gradient"
+                  } cursor-pointer rounded-full md:w-44 md:h-[54px] px-3 py-2`}
+                >
+                  {plan.buttonText}
+                </button>
+              </Link>
             </div>
           </div>
         ))}
