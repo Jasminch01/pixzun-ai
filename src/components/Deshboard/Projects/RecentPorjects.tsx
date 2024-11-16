@@ -148,7 +148,7 @@ const RecentProjects: React.FC = () => {
     return (
       <div className="flex justify-center items-center mt-44">
         <p className="text-gray-400 text-center text-sm md:text-base">
-          Something went wrong while fetching projects!
+          You don't have any projects yet!
         </p>
       </div>
     );
