@@ -4,7 +4,6 @@ import Image from "next/image";
 import { DotPulse } from "@/components/loadingComponent";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Panel } from "@/components/Svg";
 
 interface RightSidebarProps {
@@ -20,7 +19,6 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMinimize, setIsMinimize] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const sidebar = document.getElementById("right-sidebar");
@@ -39,6 +37,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
       }
     }
   }, []);
+  const reverseGeneratedResult = [...generatedResults].reverse();
   return (
     <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
       {/* Arrow Icon position absolutely on the left of the sidebar */}
@@ -102,26 +101,35 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
                     },
                   }}
                 >
-                  {generatedResults.map((image, index) => (
-                    <SwiperSlide key={index} onClick={() => openModal(index)}>
-                      <div
-                        key={index}
-                        onClick={() => openModal(index)}
-                        className="relative p-[1px] rounded cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500"
+                  {reverseGeneratedResult.map((image, index) => {
+                    // Calculate the correct reversed index
+                    const reversedIndex =
+                      reverseGeneratedResult.length - 1 - index;
+
+                    return (
+                      <SwiperSlide
+                        key={reversedIndex}
+                        onClick={() => openModal(reversedIndex)}
                       >
-                        {/* Image inside a gradient border */}
-                        <div className="rounded overflow-hidden bg-[#1B1D29]">
-                          <Image
-                            src={image}
-                            alt={"generatedImage"}
-                            width={200}
-                            height={200}
-                            className="size-20 md:size-32 rounded cursor-pointer object-cover "
-                          />
+                        <div
+                          key={reversedIndex}
+                          onClick={() => openModal(reversedIndex)}
+                          className="relative p-[1px] rounded cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500"
+                        >
+                          {/* Image inside a gradient border */}
+                          <div className="rounded overflow-hidden bg-[#1B1D29]">
+                            <Image
+                              src={image}
+                              alt="generatedImage"
+                              width={200}
+                              height={200}
+                              className="size-20 md:size-32 rounded cursor-pointer object-cover"
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}
+                      </SwiperSlide>
+                    );
+                  })}
                 </Swiper>
               </div>
 
@@ -133,24 +141,29 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
                     : "lg:grid lg:grid-cols-2 xl:grid-cols-2 gap-4"
                 } hidden `}
               >
-                {generatedResults.map((image, index) => (
-                  <div
-                    key={index}
-                    onClick={() => openModal(index)}
-                    className="relative p-[1px] rounded cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500"
-                  >
-                    {/* Image inside a gradient border */}
-                    <div className="rounded overflow-hidden bg-[#1B1D29]">
-                      <Image
-                        src={image}
-                        alt={"generatedImage"}
-                        width={200}
-                        height={200}
-                        className="xl:w-[130px] xl:h-[120px] object-cover w-24 h-24 rounded"
-                      />
+                {reverseGeneratedResult.map((image, index) => {
+                  // Calculate the reversed index
+                  const reversedIndex =
+                    reverseGeneratedResult.length - 1 - index;
+                  return (
+                    <div
+                      key={reversedIndex}
+                      onClick={() => openModal(reversedIndex)}
+                      className="relative p-[1px] rounded cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500"
+                    >
+                      {/* Image inside a gradient border */}
+                      <div className="rounded overflow-hidden bg-[#1B1D29]">
+                        <Image
+                          src={image}
+                          alt={"generatedImage"}
+                          width={200}
+                          height={200}
+                          className="xl:w-[130px] xl:h-[120px] object-cover w-24 h-24 rounded"
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </>
           ) : (
