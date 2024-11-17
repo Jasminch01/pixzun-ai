@@ -14,12 +14,11 @@ import PricingModal from "@/components/Deshboard/Projects/PricingModal";
 import { IoMdImages } from "react-icons/io";
 import ImageMOdal from "@/components/ImageMOdal";
 import {
-  IoArrowBack,
   IoChevronBackSharp,
   IoChevronForwardSharp,
   IoDocumentsSharp,
 } from "react-icons/io5";
-import { Spiner } from "@/components/loadingComponent";
+import { Spiner, Spiner2 } from "@/components/loadingComponent";
 import { useUser } from "@clerk/nextjs";
 import { LeafWhite } from "@/components/Svg";
 import { HiOutlinePlusSm } from "react-icons/hi";
@@ -240,7 +239,7 @@ const Project: React.FC = () => {
                 disabled={
                   !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
                 }
-                className={`text-white gap-2 bg-button-gradient lg:p-3 p-2 rounded-full ${
+                className={`text-white gap-2 bg-button-gradient lg:p-3 p-3 rounded-full ${
                   (!imageUploaded ||
                     !inputPrompt ||
                     countWords(inputPrompt) < 5) &&
@@ -250,8 +249,10 @@ const Project: React.FC = () => {
                 <div className="text-center flex justify-center items-center gap-3">
                   {
                     <p className="flex justify-center items-center gap-3">
-                      {" "}
-                      Generate{" "}
+                      <FaWandMagicSparkles />
+                      Generate
+                      <LeafWhite />
+                      -1
                     </p>
                   }
                 </div>
@@ -262,22 +263,16 @@ const Project: React.FC = () => {
       </div>
       {/* dnd components */}
       <div className="mt-[6rem] order-4 relative">
-        <Link
-          href={"/app"}
-          className="text-white lg:hidden text-lg text-left top-1 absolute cursor-pointer"
-        >
-          <IoArrowBack />
-        </Link>
         <p className="text-white text-lg font-bold text-center">
           {projectName}
         </p>
-        <div className="flex items-center justify-center lg:mt-[8rem] mt-5 relative">
+        <div className="flex items-center justify-center lg:mt-[5rem] mt-3 relative">
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
           <div className="bg-white/10 border-primary/25 border-[0.3px] rounded size-[17.5rem] xl:size-[21.5rem] flex justify-center items-center relative">
             <div
               {...getRootProps()}
-              className={`bg-secondary size-[16rem] xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
+              className={`bg-gradient-to-r from-[#1B1D29] to-[#2f334f] size-[16rem] xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
                 (loadingResult ||
                   imageUploadLoading ||
                   imageUploaded ||
@@ -302,8 +297,6 @@ const Project: React.FC = () => {
             {imageUploadLoading || loadingResult ? (
               <div className="size-[16rem] xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
                 <Spiner />
-                {/* <p className="text-white mt-3">
-              </p> */}
               </div>
             ) : generatedResults.length > 0 ? (
               <div className="md:flex-row gap-5 md:gap-0 flex flex-col bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 relative">
@@ -453,6 +446,7 @@ const Project: React.FC = () => {
                 <button
                   onClick={handleSubmit}
                   disabled={
+                    loadingResult ||
                     !imageUploaded ||
                     !inputPrompt ||
                     countWords(inputPrompt) < 5
@@ -465,11 +459,16 @@ const Project: React.FC = () => {
                   }`}
                 >
                   <div className="text-center flex justify-center items-center gap-3">
-                    {
+                    {loadingResult ? (
+                      <Spiner2 />
+                    ) : (
                       <p className="flex justify-center items-center gap-3">
-                        <FaWandMagicSparkles />Generate<LeafWhite />-1
+                        <FaWandMagicSparkles />
+                        Generate
+                        <LeafWhite />
+                        -1
                       </p>
-                    }
+                    )}
                   </div>
                 </button>
               </div>
