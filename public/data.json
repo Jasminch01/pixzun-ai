@@ -1,0 +1,163 @@
+[
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731746434/tamplate2_zywvrn.png",
+    "alt": "Image 1",
+    "name": "Mountain Landscape",
+    "prompt": "Majestic mountain landscape+ with snow-capped peaks+, green hills+, and a clear blue lake- reflecting the scenery.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 2",
+    "name": "Rainy Street",
+    "prompt": "Rainy street+ with reflective pavement+, soft streetlight glow+, and figures moving through the rain-.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 3",
+    "name": "Mediterranean Seaside",
+    "prompt": "Mediterranean seaside+ with white-washed buildings+, blue accents+, and a small harbor with boats+.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 4",
+    "name": "Rainforest Waterfall",
+    "prompt": "Tropical rainforest+ with tall trees+, vibrant flowers+, and a waterfall+ cascading into a clear pool-.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 5",
+    "name": "Japanese Garden",
+    "prompt": "Japanese garden+ with koi pond+, blooming cherry trees+, and stone lanterns+ creating a peaceful scene-.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 6",
+    "name": "Urban Park",
+    "prompt": "City park+ with green lawns+, tall trees+, a pond+, and urban skyline- in the background.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 7",
+    "name": "Ocean Waves",
+    "prompt": "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 8",
+    "name": "Sunset Winter",
+    "prompt": "Winter wonderland+ with snow-covered trees+, frozen lake+, and soft sunset colors- in the sky.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 9",
+    "name": "Harvest Farm",
+    "prompt": "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731746434/tamplate_hjq6jl.png",
+    "alt": "Image 10",
+    "name": "Rose Petals",
+    "prompt": "Rose petals+ scattered across a pure white background- with vibrant red and pink hues+.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
+    "alt": "Image 11",
+    "name": "Wildflower Forest",
+    "prompt": "Forest clearing+ with tall trees+, wildflowers+, and a stream winding through the grass-.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
+    "alt": "Image 12",
+    "name": "Urban Nightscape",
+    "prompt": "Urban nightscape+ with illuminated skyscrapers+, neon signs+, and wet pavement- reflecting streetlights.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
+    "alt": "Image 13",
+    "name": "Snowy Peaks",
+    "prompt": "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
+    "category": "natural"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
+    "alt": "Image 10",
+    "name": "Rose Petals",
+    "prompt": "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
+    "alt": "Image 11",
+    "name": "Forest Clearing",
+    "prompt": "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
+    "alt": "Image 12",
+    "name": "Urban Nightscape",
+    "prompt": "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
+    "alt": "Image 13",
+    "name": "Mountain Landscape",
+    "prompt": "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 3",
+    "name": "Mediterranean Seaside",
+    "prompt": "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 4",
+    "name": "Tropical Rainforest",
+    "prompt": "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 5",
+    "name": "Japanese Garden",
+    "prompt": "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 6",
+    "name": "City Park",
+    "prompt": "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 7",
+    "name": "Coastal Cliffside",
+    "prompt": "A rugged coastal cliffside+, with waves crashing on rocks+, seagulls+ flying overhead, and the vast ocean+ stretching out to the horizon. Dramatic clouds+ complete the scene. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  },
+  {
+    "src": "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    "alt": "Image 8",
+    "name": "Winter Wonderland",
+    "prompt": "A peaceful winter wonderland+, with snow-covered trees+, a frozen lake+, and soft pastel sunset colors+ in the sky. Animals+ like deer and birds+ create a lively touch. --v 5 --ar 16:9 --q 2",
+    "category": "monochrome"
+  }
+]

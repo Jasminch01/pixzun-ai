@@ -219,7 +219,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
 
   const handleImageClick = (prompt: string) => {
     setInputPrompt(prompt);
-    handleSubmit();
+    // handleSubmit();
   };
 
   return (
@@ -307,6 +307,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
                         alt={image.alt}
                         width={200}
                         height={200}
+                        onClick={() => handleImageClick(image.prompt || "")}
                         className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
                       />
                     </SwiperSlide>
@@ -320,6 +321,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
               ? monochromeImages.map((image, index) => (
                   <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
                     <div
+                      onClick={() => handleImageClick(image.prompt || "")}
                       className={`relative group hover:border-0 border border-white rounded-md`}
                     >
                       <Image
@@ -329,7 +331,6 @@ const LeftSidebar: React.FC<ModalProps> = ({
                         width={200}
                         height={200}
                         className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
-                        onClick={() => handleImageClick(image.prompt || "")}
                       />
                       {/* Gradient Overlay */}
                       <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">
@@ -343,6 +344,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
               : naturalImages.map((image, index) => (
                   <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
                     <div
+                      onClick={() => handleImageClick(image.prompt || "")}
                       className={`relative group hover:border-0 border border-white rounded-md ${
                         isMinimize && "border-0"
                       }`}
@@ -354,7 +356,6 @@ const LeftSidebar: React.FC<ModalProps> = ({
                         width={200}
                         height={200}
                         className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
-                        onClick={() => handleImageClick(image.prompt || "")}
                       />
                       {/* Gradient Overlay */}
                       <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">

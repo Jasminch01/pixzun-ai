@@ -128,7 +128,8 @@ const Project: React.FC = () => {
       refetch();
       //refatching the user after generate
       refatchUser();
-      setGeneratedResults(response.data.data.images.slice(-1)[0].urls);
+      const generatedImageUrls = response.data.data.images.slice(-1)[0].urls;
+      setGeneratedResults(generatedImageUrls);
       setLoadingResult(false);
     } catch (error) {
       console.error("Error during post request:", error);
@@ -419,6 +420,7 @@ const Project: React.FC = () => {
           <div className="lg:w-[20rem] xl:w-[35rem]">
             <textarea
               onChange={handleInputChange}
+              value={!loadingResult && imageUploaded ? inputPrompt : ""}
               rows={3}
               className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
               placeholder="Type whatever you want to do with AI"
@@ -446,6 +448,7 @@ const Project: React.FC = () => {
                 <button
                   onClick={handleSubmit}
                   disabled={
+                    generatedResults.length > 0 ||
                     loadingResult ||
                     !imageUploaded ||
                     !inputPrompt ||
