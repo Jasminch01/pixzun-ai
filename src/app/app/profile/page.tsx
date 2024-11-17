@@ -97,7 +97,9 @@ const Profile: React.FC = () => {
               </div>
               <div>
                 <div>
-                  <p className="text-gray-300 text-sm md:text-base">User Email</p>
+                  <p className="text-gray-300 text-sm md:text-base">
+                    User Email
+                  </p>
                   <div className="md:flex justify-between">
                     <p className="text-white text-sm md:text-base">{`${currentUser?.email}`}</p>
                     {/* <button
@@ -110,7 +112,9 @@ const Profile: React.FC = () => {
                 </div>
               </div>
               <div className="md:flex justify-between">
-                <p className="text-gray-300 font-bold text-sm md:text-base">Disable Account</p>
+                <p className="text-gray-300 font-bold text-sm md:text-base">
+                  Disable Account
+                </p>
                 <button className="py-2 md:text-base text-sm mt-3 md:mt-0 rounded-md px-4 border border-gray-400">
                   Apply
                 </button>
@@ -125,28 +129,6 @@ const Profile: React.FC = () => {
             </div>
           </div>
         );
-      // case "credits":
-      //   return (
-      //     <div className="text-center">
-      //       <h2 className="text-2xl mb-4 text-white">Credits</h2>
-      //       <div className="bg-[#292B3A] p-4 rounded">
-      //         <p className="text-white">
-      //           Available Credits: {currentUser?.cradit}
-      //         </p>
-      //         {/* <p className="text-white">Credits Used: 5</p> */}
-      //       </div>
-      //     </div>
-      //   );
-      // case "subscription":
-      // return (
-      //   <div className="text-center">
-      //     <h2 className="text-2xl mb-4 text-white">Subscription</h2>
-      //     <div className="bg-[#292B3A] p-4 rounded">
-      //       <p className="text-white">Plan: {currentUser?.role}</p>
-      //       {/* <p className="text-white">Next Billing Date: 01/01/2024</p> */}
-      //     </div>
-      //   </div>
-      // );
       default:
         return null;
     }
@@ -155,14 +137,18 @@ const Profile: React.FC = () => {
   return (
     <div className="flex flex-col items-center p-6 lg:mt-[10rem] mt-[5rem] text-white">
       <div className="flex justify-center items-center space-x-5">
-        <div className="text-base text-white size-11 flex justify-center items-center rounded-full transition-all">
-          <img
-            src={user?.imageUrl}
-            alt="Profile"
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
+        <div className="text-base text-white lg:size-14 size-11 flex justify-center items-center rounded-full transition-all">
+          <div
+            className="relative inline-block p-[2px] bg-gradient-to-b from-[#bb25d8] to-[#3444d8] rounded-full"
+          >
+            <img
+              src={user?.imageUrl}
+              alt="Profile"
+              width={60}
+              height={60}
+              className="rounded-full"
+            />
+          </div>
         </div>
         <div>
           <h1 className="md:text-xl font-bold text-sm">{currentUser?.name}</h1>
@@ -181,22 +167,6 @@ const Profile: React.FC = () => {
           >
             Personal Info
           </button>
-          {/* <button
-            className={`p-2 md:text-lg ${
-              activeTab === "credits" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
-            }`}
-            onClick={() => setActiveTab("credits")}
-          >
-            Credits
-          </button>
-          <button
-            className={`p-2 md:text-lg ${
-              activeTab === "subscription" ? "border-b-2 border-white" : "border-b-2 border-[#242735]"
-            }`}
-            onClick={() => setActiveTab("subscription")}
-          >
-            Subscription
-          </button> */}
         </div>
         <div className="max-w-5xl mx-auto">
           <div className="mt-10">{renderContent()}</div>

@@ -31,7 +31,7 @@
   content: "";
   position: absolute;
   height: 104%;
-  width: 102%;
+  width: 101%;
   border-radius: 1000px;
   background-image: linear-gradient(to right, #a82ad8, #4940d8);
   z-index: -1;

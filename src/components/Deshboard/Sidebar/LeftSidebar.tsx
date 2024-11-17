@@ -1,9 +1,17 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Panel } from "@/components/Svg";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 const naturalImages = [
   {
@@ -179,6 +187,86 @@ const monochromeImages = [
   },
 ];
 
+const ModernImages = [
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
+    alt: "Image 10",
+    name: "Rose Petals",
+    prompt:
+      "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
+    alt: "Image 11",
+    name: "Forest Clearing",
+    prompt:
+      "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
+    alt: "Image 12",
+    name: "Urban Nightscape",
+    prompt:
+      "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
+    alt: "Image 13",
+    name: "Mountain Landscape",
+    prompt:
+      "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 3",
+    name: "Mediterranean Seaside",
+    prompt:
+      "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 4",
+    name: "Tropical Rainforest",
+    prompt:
+      "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 5",
+    name: "Japanese Garden",
+    prompt:
+      "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 6",
+    name: "City Park",
+    prompt:
+      "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 7",
+    name: "Coastal Cliffside",
+    prompt:
+      "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 8",
+    name: "Winter Wonderland",
+    prompt:
+      "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    alt: "Image 9",
+    name: "Countryside Farm",
+    prompt:
+      "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
+  },
+];
+
 interface ModalProps {
   handleSubmit: () => Promise<void>;
   setInputPrompt: Dispatch<SetStateAction<string>>;
@@ -191,10 +279,40 @@ const LeftSidebar: React.FC<ModalProps> = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMinimize, setIsMinimize] = useState(false);
   const [activeTab, setActiveTab] = useState("Monochrome");
+  const [currentTabIndex, setCurrentTabIndex] = useState(0);
+  const tabContainerRef = useRef<HTMLDivElement>(null);
+  const [tabs, setTabs] = useState([
+    "Monochrome",
+    "Natural",
+    "Abstract",
+    "Vintage",
+    "Modern",
+  ]);
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
+
+  const handleTabScroll = (direction: "left" | "right") => {
+    if (direction === "right" && currentTabIndex < tabs.length - 2) {
+      setCurrentTabIndex((prevIndex) => prevIndex + 1);
+    } else if (direction === "left" && currentTabIndex > 0) {
+      setCurrentTabIndex((prevIndex) => prevIndex - 1);
+    }
+  };
+
+  useEffect(() => {
+    if (tabContainerRef.current) {
+      const tabContainer = tabContainerRef.current;
+      const visibleTabsWidth = tabContainer.offsetWidth;
+      const tabWidth = tabContainer.firstElementChild?.clientWidth || 0;
+      const totalTabsWidth = tabWidth * tabs.length;
+      const maxOffset = totalTabsWidth - visibleTabsWidth;
+      const currentOffset = currentTabIndex * tabWidth;
+
+      tabContainer.scrollTo({ left: currentOffset, behavior: "smooth" });
+    }
+  }, [currentTabIndex, tabs]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -237,45 +355,62 @@ const LeftSidebar: React.FC<ModalProps> = ({
         id="left-sidebar"
         className={`relative transition-all duration-300 ease-in-out overflow-hidden lg:overflow-y-auto lg:overflow-x-hidden lg:h-full custom-scrollbar ${
           isMinimize ? "lg:w-10 xl:w-10" : "lg:w-60 xl:w-80"
-        } lg:border lg:border-l-0 lg:rounded lg:border-primary lg:px-5 lg:pb-5`}
+        } lg:border lg:border-l-0 lg:rounded lg:border-primary  lg:pb-5`}
       >
         <div
           className={`lg:sticky top-0 z-10 transition-colors lg:duration-300 py-5 ${
             isScrolled && "bg-[#1B1D29]"
           } ${isMinimize ? "hidden" : ""}`}
         >
-          <div className="">
+          <div className="px-5">
             <p className="text-white md:text-base md:font-bold">
               Use Templates
             </p>
           </div>
-          <div className="gap-3 mt-4 flex">
-            {/* Monochrome Tab */}
-            <button
-              className={`lg:w-full p-2  text-white rounded lg:text-base text-sm ${
-                activeTab === "Monochrome"
-                  ? "gradient"
-                  : " border border-[#595959] rounded-full"
-              }`}
-              onClick={() => handleTabClick("Monochrome")}
+          <div className=" mt-4 flex items-center gap-5 px-5">
+            {/* Left Scroll Arrow */}
+            {currentTabIndex > 0 && (
+              <LuChevronLeft
+                color="white"
+                size={25}
+                onClick={() => handleTabScroll("left")}
+              />
+            )}
+
+            {/* Tab Container */}
+            <div
+              ref={tabContainerRef}
+              className="flex overflow-hidden gap-x-2 items-center w-full"
             >
-              Monochrome
-            </button>
-            {/* Natural Tab */}
-            <button
-              className={`lg:w-full p-2  text-white rounded lg:text-base text-sm ${
-                activeTab === "Natural"
-                  ? "gradient"
-                  : " border border-[#595959] rounded-full"
-              }`}
-              onClick={() => handleTabClick("Natural")}
-            >
-              Natural
-            </button>
+              {tabs
+                .slice(currentTabIndex, currentTabIndex + 2)
+                .map((tabName) => (
+                  <button
+                    key={tabName}
+                    className={`lg:w-full p-2 text-white rounded lg:text-base text-sm ${
+                      activeTab === tabName
+                        ? "gradient"
+                        : "border border-[#595959] rounded-full"
+                    }`}
+                    onClick={() => handleTabClick(tabName)}
+                  >
+                    {tabName}
+                  </button>
+                ))}
+            </div>
+
+            {/* Right Scroll Arrow */}
+            {currentTabIndex < tabs.length - 2 && (
+              <LuChevronRight
+                color="white"
+                size={25}
+                onClick={() => handleTabScroll("right")}
+              />
+            )}
           </div>
         </div>
 
-        <div className={`mt-4 pt-4  ${isMinimize && "hidden"}`}>
+        <div className={`mt-3 px-5 ${isMinimize && "hidden"}`}>
           {/* Swiper for mobile and tablet devices */}
           <div className="block lg:hidden">
             <Swiper
