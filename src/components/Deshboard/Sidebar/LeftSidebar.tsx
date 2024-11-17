@@ -275,7 +275,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
           </div>
         </div>
 
-        <div className={`mt-4 pt-4 ${isMinimize ? "hidden" : "flex"}`}>
+        <div className={`mt-4 pt-4  ${isMinimize && "hidden"}`}>
           {/* Swiper for mobile and tablet devices */}
           <div className="block lg:hidden">
             <Swiper
@@ -315,7 +315,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
           </div>
 
           {/* Grid layout for large screens */}
-          <div className={`hidden lg:grid lg:grid-cols-2 gap-4`}>
+          <div className={`hidden lg:grid lg:grid-cols-2 gap-4 `}>
             {activeTab === "Monochrome"
               ? monochromeImages.map((image, index) => (
                   <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">

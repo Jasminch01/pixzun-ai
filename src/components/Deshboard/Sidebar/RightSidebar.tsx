@@ -42,18 +42,10 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
   return (
     <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
       {/* Arrow Icon position absolutely on the left of the sidebar */}
-
       <div
         className={`absolute top-1/2 transform  -translate-y-1/2 size-7 -left-[25px] z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden rotate-180`}
         onClick={() => setIsMinimize(!isMinimize)}
       >
-        {/* 
-        {!isMinimize ? (
-          <IoIosArrowBack color="white" />
-        ) : (
-          <IoIosArrowForward color="white" size={20} />
-        )} */}
-
         <Panel />
       </div>
 
