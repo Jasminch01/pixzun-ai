@@ -202,6 +202,15 @@ const Project: React.FC = () => {
   };
   return (
     <div className="flex justify-center flex-col-reverse lg:flex-row-reverse border-white border-3 px-5 relative lg:static">
+      {/* project name for small devices */}
+      {generatedResults.length > 0 && (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <p className="text-white md:hidden text-lg font-bold text-center">
+            {projectName}
+          </p>
+        </div>
+      )}
+
       <LeftSidebar
         handleSubmit={handleSubmit}
         setInputPrompt={setInputPrompt}
@@ -211,6 +220,7 @@ const Project: React.FC = () => {
         <div className="lg:w-[35rem]">
           <textarea
             onChange={handleInputChange}
+            value={!loadingResult && imageUploaded ? inputPrompt : ""}
             rows={2}
             className="rounded-md w-full bg-transparent p-3 border-2 border-primary border-opacity-80 outline-none focus:border-primary focus:shadow-primary-blur text-white placeholder-gray-500"
             placeholder="Type whatever you want to do with AI"
@@ -238,9 +248,13 @@ const Project: React.FC = () => {
               <button
                 onClick={handleSubmit}
                 disabled={
-                  !imageUploaded || !inputPrompt || countWords(inputPrompt) < 5
+                  generatedResults.length > 0 ||
+                  loadingResult ||
+                  !imageUploaded ||
+                  !inputPrompt ||
+                  countWords(inputPrompt) < 5
                 }
-                className={`text-white gap-2 bg-button-gradient lg:p-3 p-3 rounded-full ${
+                className={`text-white gap-2 bg-button-gradient lg:p-3 p-3 ${loadingResult && 'w-24'} rounded-full ${
                   (!imageUploaded ||
                     !inputPrompt ||
                     countWords(inputPrompt) < 5) &&
@@ -248,14 +262,16 @@ const Project: React.FC = () => {
                 }`}
               >
                 <div className="text-center flex justify-center items-center gap-3">
-                  {
+                  {loadingResult ? (
+                    <Spiner2 />
+                  ) : (
                     <p className="flex justify-center items-center gap-3">
                       <FaWandMagicSparkles />
                       Generate
                       <LeafWhite />
                       -1
                     </p>
-                  }
+                  )}
                 </div>
               </button>
             </div>
@@ -263,7 +279,12 @@ const Project: React.FC = () => {
         </div>
       </div>
       {/* dnd components */}
-      <div className="mt-[6rem] order-4 relative">
+      <div
+        className={`lg:mt-[9rem] mt-[5rem] order-4 relative ${
+          generatedResults.length > 0 &&
+          `mt-[15rem] lg:mt-[9rem] mb-[10rem] lg:mb-0`
+        }`}
+      >
         <p className="text-white text-lg font-bold text-center">
           {projectName}
         </p>
@@ -454,7 +475,7 @@ const Project: React.FC = () => {
                     !inputPrompt ||
                     countWords(inputPrompt) < 5
                   }
-                  className={`text-white gap-2 bg-button-gradient md:p-3 p-2 rounded-full ${
+                  className={`text-white gap-2 bg-button-gradient md:p-3 p-2 ${loadingResult && 'w-24'} rounded-full ${
                     (!imageUploaded ||
                       !inputPrompt ||
                       countWords(inputPrompt) < 5) &&

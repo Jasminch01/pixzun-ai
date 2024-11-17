@@ -140,13 +140,18 @@ const DashboardAppBar: React.FC = () => {
                   className="text-base text-white flex justify-center items-center rounded-full transition-all "
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                 >
-                  <img
-                    src={user?.imageUrl}
-                    alt="Profile"
-                    width={40}
-                    height={40}
-                    className="rounded-full"
-                  />
+                  <div
+                    className="relative inline-block p-[2px] bg-gradient-to-b from-[#bb25d8]
+                    to-[#3444d8] rounded-full"
+                  >
+                    <img
+                      src={user?.imageUrl}
+                      alt="Profile"
+                      width={40}
+                      height={40}
+                      className="rounded-full"
+                    />
+                  </div>
                 </button>
                 {currentUser && isProfileOpen && (
                   <div className="absolute right-4 top-[4rem] text-white bg-[#2B2E3C] border-2 border-gray-400 rounded-md transition-transform duration-300 ease-in-out transform block w-[20rem] pb-3">
@@ -158,7 +163,10 @@ const DashboardAppBar: React.FC = () => {
                           className="flex items-center gap-3  py-3"
                         >
                           {/* Profile Image */}
-                          <div className="text-base text-white flex-shrink-0 rounded-full">
+                          <div
+                            className="relative inline-block p-[2px] bg-gradient-to-b from-[#bb25d8]
+                    to-[#3444d8] rounded-full"
+                          >
                             <img
                               src={user?.imageUrl}
                               alt="Profile"
