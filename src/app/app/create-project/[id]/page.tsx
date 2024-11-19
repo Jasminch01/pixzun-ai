@@ -254,7 +254,9 @@ const Project: React.FC = () => {
                   !inputPrompt ||
                   countWords(inputPrompt) < 5
                 }
-                className={`text-white gap-2 bg-button-gradient lg:p-3 p-3 ${loadingResult && 'w-24'} rounded-full ${
+                className={`text-white gap-2 bg-button-gradient lg:p-3 p-3 ${
+                  loadingResult && "w-24"
+                } rounded-full ${
                   (!imageUploaded ||
                     !inputPrompt ||
                     countWords(inputPrompt) < 5) &&
@@ -475,7 +477,9 @@ const Project: React.FC = () => {
                     !inputPrompt ||
                     countWords(inputPrompt) < 5
                   }
-                  className={`text-white gap-2 bg-button-gradient md:p-3 p-2 ${loadingResult && 'w-24'} rounded-full ${
+                  className={`text-white gap-2 bg-button-gradient md:p-3 p-2 ${
+                    loadingResult && "w-24"
+                  } rounded-full ${
                     (!imageUploaded ||
                       !inputPrompt ||
                       countWords(inputPrompt) < 5) &&

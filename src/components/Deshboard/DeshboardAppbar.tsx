@@ -127,7 +127,9 @@ const DashboardAppBar: React.FC = () => {
             <nav className="flex items-center space-x-3">
               <div className="text-base space-x-2 px-5 py-3 flex text-white">
                 <Leaf />
-                <p>Credit : {currentUser?.cradit}</p>
+                <p>
+                  Credit : {currentUser?.cradit ? currentUser?.cradit : "0"}
+                </p>
               </div>
               <button
                 onClick={modalOpen}
@@ -189,13 +191,16 @@ const DashboardAppBar: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="pl-5 mt-3 text-sm">
+                    <div className="pl-5 mt-3 text-sm"> 
                       <div className="my-5">
                         {/* Credit Section */}
                         <p className="mb-3 flex items-center gap-3 text-white">
                           <Leaf />
                           {/* Make sure Leaf icon is aligned */}
-                          <span>Credit: {currentUser?.cradit}</span>
+                          <span>
+                            Credit:{" "}
+                            {currentUser?.cradit ? currentUser?.cradit : "0"}
+                          </span>
                         </p>
                       </div>
                       <div className="space-y-2 mb-7">

@@ -10,19 +10,18 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Panel } from "@/components/Svg";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+import { LuChevronRight } from "react-icons/lu";
 
 const naturalImages = [
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731746434/tamplate2_zywvrn.png",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731855498/uploads/sjwyknlejjhgyjkbxwf2.jpg",
     alt: "Image 1",
     name: "Mountain Landscape",
     prompt:
       "Majestic mountain landscape+ with snow-capped peaks+, green hills+, and a clear blue lake- reflecting the scenery.",
   },
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731935603/uploads/v4houyoyf1jxkrm2w7yk.jpg",
     alt: "Image 2",
     name: "Rainy Street",
     prompt:
@@ -64,7 +63,7 @@ const naturalImages = [
       "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
   },
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731934659/uploads/rpyvxhq5xfk4wwgsatvm.jpg",
     alt: "Image 8",
     name: "Sunset Winter",
     prompt:
@@ -78,7 +77,7 @@ const naturalImages = [
       "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
   },
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731746434/tamplate_hjq6jl.png",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731939587/uploads/dpdsdddtxjifqgo22hb8.jpg",
     alt: "Image 10",
     name: "Rose Petals",
     prompt:
@@ -105,6 +104,13 @@ const naturalImages = [
     prompt:
       "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
   },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731938662/uploads/nu5ggrndbhearwdqzlrr.jpg",
+    alt: "Image 14",
+    name: "Botanical Elegance",
+    prompt:
+      "bottle+ on a wooden platform-, adorned with a beautiful flower+ and surrounded by colorful decorative elements and greenery",
+  },
 ];
 
 const monochromeImages = [
@@ -118,87 +124,7 @@ const monochromeImages = [
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
     alt: "Image 11",
-    name: "Forest Clearing",
-    prompt:
-      "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
-    alt: "Image 12",
-    name: "Urban Nightscape",
-    prompt:
-      "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
-    alt: "Image 13",
-    name: "Mountain Landscape",
-    prompt:
-      "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 3",
-    name: "Mediterranean Seaside",
-    prompt:
-      "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 4",
-    name: "Tropical Rainforest",
-    prompt:
-      "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 5",
-    name: "Japanese Garden",
-    prompt:
-      "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 6",
-    name: "City Park",
-    prompt:
-      "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 7",
-    name: "Coastal Cliffside",
-    prompt:
-      "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 8",
-    name: "Winter Wonderland",
-    prompt:
-      "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 9",
-    name: "Countryside Farm",
-    prompt:
-      "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
-  },
-];
-
-const ModernImages = [
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
-    alt: "Image 10",
-    name: "Rose Petals",
-    prompt:
-      "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
-    alt: "Image 11",
-    name: "Forest Clearing",
+    name: "Forest",
     prompt:
       "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
   },
@@ -288,16 +214,19 @@ const LeftSidebar: React.FC<ModalProps> = ({
     "Vintage",
     "Modern",
   ]);
+  const visibleTabCount = 2;
 
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
 
-  const handleTabScroll = (direction: "left" | "right") => {
-    if (direction === "right" && currentTabIndex < tabs.length - 2) {
+  const handleTabScroll = () => {
+    if (currentTabIndex < tabs.length - visibleTabCount) {
+      // Move to the next set of tabs
       setCurrentTabIndex((prevIndex) => prevIndex + 1);
-    } else if (direction === "left" && currentTabIndex > 0) {
-      setCurrentTabIndex((prevIndex) => prevIndex - 1);
+    } else {
+      // Reset to the start when the last tab is reached
+      setCurrentTabIndex(0);
     }
   };
 
@@ -367,29 +296,20 @@ const LeftSidebar: React.FC<ModalProps> = ({
               Use Templates
             </p>
           </div>
-          <div className=" mt-4 flex items-center gap-5 px-5">
-            {/* Left Scroll Arrow */}
-            {currentTabIndex > 0 && (
-              <LuChevronLeft
-                color="white"
-                size={25}
-                onClick={() => handleTabScroll("left")}
-              />
-            )}
-
+          <div className="mt-4 flex items-center gap-5 px-5">
             {/* Tab Container */}
             <div
               ref={tabContainerRef}
               className="flex overflow-hidden gap-x-2 items-center w-full"
             >
               {tabs
-                .slice(currentTabIndex, currentTabIndex + 2)
+                .slice(currentTabIndex, currentTabIndex + visibleTabCount)
                 .map((tabName) => (
                   <button
                     key={tabName}
                     className={`lg:w-full p-2 text-white rounded lg:text-base text-sm ${
                       activeTab === tabName
-                        ? "gradient"
+                        ? "gradient" // Apply the gradient class if the tab is active
                         : "border border-[#595959] rounded-full"
                     }`}
                     onClick={() => handleTabClick(tabName)}
@@ -400,13 +320,12 @@ const LeftSidebar: React.FC<ModalProps> = ({
             </div>
 
             {/* Right Scroll Arrow */}
-            {currentTabIndex < tabs.length - 2 && (
-              <LuChevronRight
-                color="white"
-                size={25}
-                onClick={() => handleTabScroll("right")}
-              />
-            )}
+
+            <LuChevronRight
+              className="cursor-pointer text-white hover:text-purple-500"
+              size={25}
+              onClick={handleTabScroll}
+            />
           </div>
         </div>
 
