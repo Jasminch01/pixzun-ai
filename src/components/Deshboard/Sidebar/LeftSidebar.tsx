@@ -27,55 +27,55 @@ const naturalImages = [
     prompt:
       "Rainy street+ with reflective pavement+, soft streetlight glow+, and figures moving through the rain-.",
   },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 3",
-    name: "Mediterranean Seaside",
-    prompt:
-      "Mediterranean seaside+ with white-washed buildings+, blue accents+, and a small harbor with boats+.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 4",
-    name: "Rainforest Waterfall",
-    prompt:
-      "Tropical rainforest+ with tall trees+, vibrant flowers+, and a waterfall+ cascading into a clear pool-.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 5",
-    name: "Japanese Garden",
-    prompt:
-      "Japanese garden+ with koi pond+, blooming cherry trees+, and stone lanterns+ creating a peaceful scene-.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 6",
-    name: "Urban Park",
-    prompt:
-      "City park+ with green lawns+, tall trees+, a pond+, and urban skyline- in the background.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 7",
-    name: "Ocean Waves",
-    prompt:
-      "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731934659/uploads/rpyvxhq5xfk4wwgsatvm.jpg",
-    alt: "Image 8",
-    name: "Sunset Winter",
-    prompt:
-      "Winter wonderland+ with snow-covered trees+, frozen lake+, and soft sunset colors- in the sky.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 9",
-    name: "Harvest Farm",
-    prompt:
-      "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
-  },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 3",
+  //   name: "Mediterranean Seaside",
+  //   prompt:
+  //     "Mediterranean seaside+ with white-washed buildings+, blue accents+, and a small harbor with boats+.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 4",
+  //   name: "Rainforest Waterfall",
+  //   prompt:
+  //     "Tropical rainforest+ with tall trees+, vibrant flowers+, and a waterfall+ cascading into a clear pool-.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 5",
+  //   name: "Japanese Garden",
+  //   prompt:
+  //     "Japanese garden+ with koi pond+, blooming cherry trees+, and stone lanterns+ creating a peaceful scene-.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 6",
+  //   name: "Urban Park",
+  //   prompt:
+  //     "City park+ with green lawns+, tall trees+, a pond+, and urban skyline- in the background.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 7",
+  //   name: "Ocean Waves",
+  //   prompt:
+  //     "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731934659/uploads/rpyvxhq5xfk4wwgsatvm.jpg",
+  //   alt: "Image 8",
+  //   name: "Sunset Winter",
+  //   prompt:
+  //     "Winter wonderland+ with snow-covered trees+, frozen lake+, and soft sunset colors- in the sky.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 9",
+  //   name: "Harvest Farm",
+  //   prompt:
+  //     "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
+  // },
   {
     src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731939587/uploads/dpdsdddtxjifqgo22hb8.jpg",
     alt: "Image 10",
@@ -83,34 +83,34 @@ const naturalImages = [
     prompt:
       "Rose petals+ scattered across a pure white background- with vibrant red and pink hues+.",
   },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
-    alt: "Image 11",
-    name: "Wildflower Forest",
-    prompt:
-      "Forest clearing+ with tall trees+, wildflowers+, and a stream winding through the grass-.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
-    alt: "Image 12",
-    name: "Urban Nightscape",
-    prompt:
-      "Urban nightscape+ with illuminated skyscrapers+, neon signs+, and wet pavement- reflecting streetlights.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
-    alt: "Image 13",
-    name: "Snowy Peaks",
-    prompt:
-      "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731938662/uploads/nu5ggrndbhearwdqzlrr.jpg",
-    alt: "Image 14",
-    name: "Botanical Elegance",
-    prompt:
-      "bottle+ on a wooden platform-, adorned with a beautiful flower+ and surrounded by colorful decorative elements and greenery",
-  },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
+  //   alt: "Image 11",
+  //   name: "Wildflower Forest",
+  //   prompt:
+  //     "Forest clearing+ with tall trees+, wildflowers+, and a stream winding through the grass-.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
+  //   alt: "Image 12",
+  //   name: "Urban Nightscape",
+  //   prompt:
+  //     "Urban nightscape+ with illuminated skyscrapers+, neon signs+, and wet pavement- reflecting streetlights.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
+  //   alt: "Image 13",
+  //   name: "Snowy Peaks",
+  //   prompt:
+  //     "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731938662/uploads/nu5ggrndbhearwdqzlrr.jpg",
+  //   alt: "Image 14",
+  //   name: "Botanical Elegance",
+  //   prompt:
+  //     "bottle+ on a wooden platform-, adorned with a beautiful flower+ and surrounded by colorful decorative elements and greenery",
+  // },
 ];
 
 const monochromeImages = [
@@ -121,76 +121,76 @@ const monochromeImages = [
     prompt:
       "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
   },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
-    alt: "Image 11",
-    name: "Forest",
-    prompt:
-      "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
-    alt: "Image 12",
-    name: "Urban Nightscape",
-    prompt:
-      "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
-    alt: "Image 13",
-    name: "Mountain Landscape",
-    prompt:
-      "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 3",
-    name: "Mediterranean Seaside",
-    prompt:
-      "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 4",
-    name: "Tropical Rainforest",
-    prompt:
-      "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 5",
-    name: "Japanese Garden",
-    prompt:
-      "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 6",
-    name: "City Park",
-    prompt:
-      "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 7",
-    name: "Coastal Cliffside",
-    prompt:
-      "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 8",
-    name: "Winter Wonderland",
-    prompt:
-      "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
-  },
-  {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-    alt: "Image 9",
-    name: "Countryside Farm",
-    prompt:
-      "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
-  },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
+  //   alt: "Image 11",
+  //   name: "Forest",
+  //   prompt:
+  //     "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
+  //   alt: "Image 12",
+  //   name: "Urban Nightscape",
+  //   prompt:
+  //     "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
+  //   alt: "Image 13",
+  //   name: "Mountain Landscape",
+  //   prompt:
+  //     "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 3",
+  //   name: "Mediterranean Seaside",
+  //   prompt:
+  //     "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 4",
+  //   name: "Tropical Rainforest",
+  //   prompt:
+  //     "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 5",
+  //   name: "Japanese Garden",
+  //   prompt:
+  //     "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 6",
+  //   name: "City Park",
+  //   prompt:
+  //     "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 7",
+  //   name: "Coastal Cliffside",
+  //   prompt:
+  //     "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 8",
+  //   name: "Winter Wonderland",
+  //   prompt:
+  //     "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
+  // },
+  // {
+  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
+  //   alt: "Image 9",
+  //   name: "Countryside Farm",
+  //   prompt:
+  //     "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
+  // },
 ];
 
 interface ModalProps {
@@ -210,9 +210,9 @@ const LeftSidebar: React.FC<ModalProps> = ({
   const [tabs, setTabs] = useState([
     "Monochrome",
     "Natural",
-    "Abstract",
-    "Vintage",
-    "Modern",
+    // "Abstract",
+    // "Vintage",
+    // "Modern",
   ]);
   const visibleTabCount = 2;
 
