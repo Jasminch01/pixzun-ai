@@ -183,7 +183,6 @@ const Project: React.FC = () => {
 
   //
   const openImageModal = (index: number) => {
-    console.log(index);
     setSelectedImage(index);
     setIsModalOpen(true);
   };
@@ -559,6 +558,7 @@ const Project: React.FC = () => {
           showPrevImage={showPrevImage}
           selectedImage={selectedImage}
           projectImage={projectImages}
+          refetch = {refetch}
         >
           <Image
             src={projectImages[selectedImage]}
