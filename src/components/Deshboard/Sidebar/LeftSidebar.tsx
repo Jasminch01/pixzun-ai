@@ -10,239 +10,177 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Panel } from "@/components/Svg";
-import { LuChevronRight } from "react-icons/lu";
 
-const naturalImages = [
+const tamplateImages = [
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731855498/uploads/sjwyknlejjhgyjkbxwf2.jpg",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733157718/lpwel3tlmyd0r1i4reet_gqaopi.jpg",
     alt: "Image 1",
-    name: "Mountain Landscape",
+    name: "bright and sturdy",
     prompt:
-      "Majestic mountain landscape+ with snow-capped peaks+, green hills+, and a clear blue lake- reflecting the scenery.",
+      "Create an image of a bright and sturdy pastel backdrop with a designated area for product placement. The background should convey a sense of reliability and versatility, making it a perfect canvas for showcasing various products. Ensure that the lighting is optimal to accentuate the featured items and make them stand out, reflections, dslr, in focus, 4k, unsplash",
+    nagative_propmt:
+      "grey scale, text, watermark, patterns, deformed, human, fingers, blurry",
   },
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731935603/uploads/v4houyoyf1jxkrm2w7yk.jpg",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733150305/ztfpxpgv2cjfc7ewfntw_x8g08c.jpg",
     alt: "Image 2",
-    name: "Rainy Street",
+    name: "Magical",
     prompt:
-      "Rainy street+ with reflective pavement+, soft streetlight glow+, and figures moving through the rain-.",
+      "A photo of a pastel gradient backdrop, advertising photography style with studio lighting, natural shadows, and a DSLR focus, 4K resolution, unsplash-style quality. In the scene, a subject is standing on a purple studio table, surrounded by pumpkins and smoke, set against a deep purple background. The atmosphere is magical, eerie, and enchanting, with bright lighting highlighting the composition.",
+    nagative_propmt:
+      "dark, grey, textures, bad geometry, out of focus, bad art, deformed, b&w, blurry, dark, hair, products, props, watermark, text, floating, flowers",
   },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 3",
-  //   name: "Mediterranean Seaside",
-  //   prompt:
-  //     "Mediterranean seaside+ with white-washed buildings+, blue accents+, and a small harbor with boats+.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 4",
-  //   name: "Rainforest Waterfall",
-  //   prompt:
-  //     "Tropical rainforest+ with tall trees+, vibrant flowers+, and a waterfall+ cascading into a clear pool-.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 5",
-  //   name: "Japanese Garden",
-  //   prompt:
-  //     "Japanese garden+ with koi pond+, blooming cherry trees+, and stone lanterns+ creating a peaceful scene-.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 6",
-  //   name: "Urban Park",
-  //   prompt:
-  //     "City park+ with green lawns+, tall trees+, a pond+, and urban skyline- in the background.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 7",
-  //   name: "Ocean Waves",
-  //   prompt:
-  //     "Coastal cliffside+ with towering cliffs+, ocean waves crashing on rocks+, and seagulls- flying above.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731934659/uploads/rpyvxhq5xfk4wwgsatvm.jpg",
-  //   alt: "Image 8",
-  //   name: "Sunset Winter",
-  //   prompt:
-  //     "Winter wonderland+ with snow-covered trees+, frozen lake+, and soft sunset colors- in the sky.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 9",
-  //   name: "Harvest Farm",
-  //   prompt:
-  //     "Countryside farm+ with a rustic barn+, green fields+, and crops+ ready for harvest.",
-  // },
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731939587/uploads/dpdsdddtxjifqgo22hb8.jpg",
-    alt: "Image 10",
-    name: "Rose Petals",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733150750/tik4ysy6hxo0d5ef4nkt_zbjh81.jpg",
+    alt: "Image 3",
+    name: "Magical",
     prompt:
-      "Rose petals+ scattered across a pure white background- with vibrant red and pink hues+.",
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR, in focus, 4K resolution, unsplash-quality. Standing on a white platform, surrounded by lavender, with a pastel purple background, this product photography captures the scene with soft lighting, clean composition, and a serene, elegant atmosphere",
+    nagative_propmt:
+      " ugly, deformed, noisy, distorted, grainy, dark, black, low,quality ",
   },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
-  //   alt: "Image 11",
-  //   name: "Wildflower Forest",
-  //   prompt:
-  //     "Forest clearing+ with tall trees+, wildflowers+, and a stream winding through the grass-.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
-  //   alt: "Image 12",
-  //   name: "Urban Nightscape",
-  //   prompt:
-  //     "Urban nightscape+ with illuminated skyscrapers+, neon signs+, and wet pavement- reflecting streetlights.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
-  //   alt: "Image 13",
-  //   name: "Snowy Peaks",
-  //   prompt:
-  //     "Mountain landscape+ with towering snow-capped peaks+, green hills+, and a clear lake- reflecting the scenery.",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1731938662/uploads/nu5ggrndbhearwdqzlrr.jpg",
-  //   alt: "Image 14",
-  //   name: "Botanical Elegance",
-  //   prompt:
-  //     "bottle+ on a wooden platform-, adorned with a beautiful flower+ and surrounded by colorful decorative elements and greenery",
-  // },
-];
-
-const monochromeImages = [
   {
-    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp1_hw1dse.jpg",
-    alt: "Image 10",
-    name: "Rose Petals",
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733151055/wbvazlnov8mfbzshl37b_yuz6q1.jpg",
+    alt: "Image 4",
+    name: "Mars",
     prompt:
-      "rose petals+ scattered across a flat, pure white background-, with a focus on vibrant red and pink hues+. Emphasize the contrast between the colorful petals+ and the solid white background-.",
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR, in focus, 4K resolution, unsplash-quality. In the middle of Mars, with a surreal and otherworldly atmosphere, the scene features dusty red terrain under soft lighting, blending the ethereal backdrop with the Martian landscape for a unique and striking composition.",
+    nagative_propmt: "ugly",
   },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp3_voyqlk.jpg",
-  //   alt: "Image 11",
-  //   name: "Forest",
-  //   prompt:
-  //     "A serene forest clearing+, tall trees+ surrounding an open grassy area+ bathed in soft sunlight+, with wildflowers+ and a gentle stream+ winding through the scene. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp2_angngu.jpg",
-  //   alt: "Image 12",
-  //   name: "Urban Nightscape",
-  //   prompt:
-  //     "A vibrant urban nightscape+, with skyscrapers+ illuminated by glowing windows+ and neon lights+, creating a lively city scene+. Reflections on wet pavement+ add to the realism. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283977/temp5_crnoux.jpg",
-  //   alt: "Image 13",
-  //   name: "Mountain Landscape",
-  //   prompt:
-  //     "A majestic mountain landscape+, featuring snow-capped peaks+, rolling green hills+, and a crystal-clear lake+ reflecting the scene. Sky is a vibrant blue+. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 3",
-  //   name: "Mediterranean Seaside",
-  //   prompt:
-  //     "A picturesque Mediterranean seaside+, with white-washed buildings+ and blue accents+ overlooking a sparkling sea+. Cobblestone streets+, flowers in pots+, and a small harbor+ add charm. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 4",
-  //   name: "Tropical Rainforest",
-  //   prompt:
-  //     "A lush tropical rainforest+, showcasing dense vegetation+, tall trees+, and vibrant flowers+. A waterfall+ cascades into a clear pool+. Light filters through the canopy+, creating a humid atmosphere+. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 5",
-  //   name: "Japanese Garden",
-  //   prompt:
-  //     "A tranquil Japanese garden+, with a serene koi pond+, manicured plants+, stone lanterns+, and cherry blossoms+ gently falling into the water. Essence of Zen+. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 6",
-  //   name: "City Park",
-  //   prompt:
-  //     "A 4K city park+, featuring green lawns+, tall trees+ for shade, winding paths+, benches+, and a small pond+ with ducks+. Urban skyline+ in the background. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 7",
-  //   name: "Coastal Cliffside",
-  //   prompt:
-  //     "A dramatic coastal cliffside+, with towering cliffs+ overlooking the ocean+ and waves+ crashing against the rocky shore+. Seagulls+ fly above+. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 8",
-  //   name: "Winter Wonderland",
-  //   prompt:
-  //     "A magical winter wonderland+, snow-covered forest+ with tall evergreens+ and a frozen lake+. Gentle sunset colors+ in the sky add warmth. --v 5 --ar 16:9 --q 2",
-  // },
-  // {
-  //   src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1723283627/tamp_dhxqij.jpg",
-  //   alt: "Image 9",
-  //   name: "Countryside Farm",
-  //   prompt:
-  //     "A peaceful countryside farm+, featuring a rustic barn+, green fields+, and crops+ ready for harvest. Grazing animals+ and a dirt path+. --v 5 --ar 16:9 --q 2",
-  // },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733151462/suwh4sqlwcyvtvrgig_lupwmc.jpg",
+    alt: "Image 5",
+    name: "Bedroom",
+    prompt:
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR, in focus, 4K resolution, unsplash-quality. On a warm-toned wooden nightstand next to a plush, comfortable bed with soft, neutral-toned linens. The bedroom is cozy and inviting, with soft, diffused lighting in the background, creating a relaxing and serene atmosphere perfect for showcasing the product in focus",
+    nagative_propmt: "ugly",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733151819/h41deizqe5hyvrfyyffw_ycsisy.jpg",
+    alt: "Image 6",
+    name: "A minimalist space",
+    prompt:
+      "A photo of a Carrara marble countertop with a kitchen in the background and a window with natural light, natural shadows, sharp focus, DSLR, 4K resolution, unsplash-quality. In a minimalist space with white walls, a simple wooden coffee table, a neutral area rug, and a few carefully chosen decor pieces. Large windows allow natural light to flood in, creating a clean, serene, and modern atmosphere, blending the elegance of the marble countertop with the minimalist interior design.",
+    nagative_propmt:
+      "ugly, grey scale, text, watermark, patterns, deformed, human, fingers, blurry",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733152301/pr1chojbfy8rc6gnji6i_wqgmun.jpg",
+    alt: "Image 7",
+    name: "A sun Drenched",
+    prompt:
+      "A sun-drenched, Scandinavian-inspired dining room with white oak flooring and white walls. A large window overlooks a lush green garden. A simple linen tablecloth graces a wooden table adorned with a ceramic vase filled with wildflowers. Natural light streams through the window, creating a warm and inviting ambiance. Simple, clean, airy",
+    nagative_propmt:
+      "ugly, grey scale, text, watermark, patterns, deformed, human, fingers, blurry",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733154594/mbxfzjtnfnep5viss1zs_bqchwu.jpg",
+    alt: "Image 8",
+    name: "Modern living room",
+    prompt:
+      "In a modern living room, bright daylight, full glass windows, white",
+    nagative_propmt: "ugly, sofa legs, dark, black, sofa",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733155312/fbhgbiqd68mddxkla84c_bjhkol.jpg",
+    alt: "Image 9",
+    name: "Minimalistic living room",
+    prompt: "Minimalistic scandinavian living room, product photography",
+    nagative_propmt: "ugly",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733156184/k7278yofhoqx29grngyn_ytnrmi.jpg",
+    alt: "Image-11",
+    name: "Wooden floor",
+    prompt: "Standing on a wooden floor, beside flowers",
+    nagative_propmt: "ugly",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733156526/mbdxjdbatsax2uxa6tth_qw7hqu.jpg",
+    alt: "Image-12",
+    name: "Marble floor",
+    prompt:
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR sharpness, in focus, 4K resolution, and unsplash-quality. The scene features a subject standing on a marble floor, with the smooth, reflective surface adding elegance to the composition. The lighting is balanced to highlight the subject, blending the soft pastel backdrop with the sleek marble details for a refined and professional aesthetic.",
+    nagative_propmt:
+      "ugly, dark, grey, textures, bad geometry, out of focus, bad art, deformed, b&w, blurry, dark, hair, products, props, watermark, text, floating, flowers",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733156746/uyqm5nyp4wchlfkrclsr_doqjsp.jpg",
+    alt: "Image-13",
+    name: "green monstera plant",
+    prompt:
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR sharpness, in focus, 4K resolution, and unsplash-quality. The scene features a product standing on a white table, positioned beside a vibrant green monstera plant. The composition emphasizes the product with balanced lighting and natural shadows, creating a clean, modern aesthetic ideal for product photography",
+    nagative_propmt:
+      "ugly, dark, grey, textures, bad geometry, out of focus, bad art, deformed, b&w, blurry, dark, hair, products, props, watermark, text, floating, flowers",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733157157/upb4v1dvkjb62klvhofu_unh4et.jpg",
+    alt: "Image-14",
+    name: "vibrant green",
+    prompt:
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR sharpness, in focus, 4K resolution, and unsplash-quality. The scene features a product standing on a table, with dried flowers softly blurred in the background, creating a shallow depth of field. The lighting highlights the product, combining elegance and subtle texture for a professional and visually captivating product photography setup.",
+    nagative_propmt:
+      "ugly, dark, grey, textures, bad geometry, out of focus, bad art, deformed, b&w, blurry, dark, hair, products, props, watermark, text, floating, flowers",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733157512/oieyks9mwzfbqrui9hy5_vs1bbb.jpg",
+    alt: "Image-15",
+    name: "Green mountain",
+    prompt:
+      "A photo of a pastel gradient backdrop, advertising photography style with studio light, natural shadows, DSLR sharpness, in focus, 4K resolution, and unsplash-quality. The scene features a product standing on a rock, with a serene forest and majestic mountains softly blurred in the background. The composition blends the natural elements with the pastel gradient backdrop, creating a striking contrast and a visually appealing setting for professional product photography.",
+    nagative_propmt:
+      "ugly, dark, grey, textures, bad geometry, out of focus, bad art, deformed, b&w, blurry, dark, hair, products, props, watermark, text, floating, flowers",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733158062/lzbm4si2pr2kkrgzvjtm_c5zt9z.jpg",
+    alt: "Image-16",
+    name: "Kitchen",
+    prompt:
+      "a photo of a carrara marble counter top with a kitchen in the background and a window with natural light, natural shadow, sharp, dslr, in focus, 4k, unsplash",
+    nagative_propmt:
+      "fake, 3d render, cartoonish, bad geometry, out of focus, bad art, deformed, b&w, blurry, dark",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733158031/ledwxcng3m1oit1uyaue_esttgn.jpg",
+    alt: "Image-17",
+    name: "Valentine",
+    prompt:
+      "a photo of a red studio backdrop, surrounded by small balloon hearts, hard light and shadows, lovecore aesthetic, 8k, 4k, photorealistic, realistic, cinematic composition, volumetric lighting, high-resolution, vivid, professional, lifelike, crisp, flawless, DSLR, sharp, best quality, high quality, highres, proportion",
+    nagative_propmt:
+      "textures, reflections, text, watermark, deformed, human, fingers, blurry",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733158339/ao2tdfqws8plxcb3vyut_molhjn.jpg",
+    alt: "Image-19",
+    name: "Light",
+    prompt:
+      "a realistic photo of a white floor with golden backdrop studio and string lights in the background, studio light, sharp, dslr, in focus, 4k, unsplash",
+    nagative_propmt:
+      "wooden floor, reflections, text, watermark, deformed, human, fingers, blurry, oversaturated, 3d render",
+  },
+  {
+    src: "https://res.cloudinary.com/ddqt9bodf/image/upload/v1733158526/faafw1ln1tm4ynfghyp6_kocn5j.jpg",
+    alt: "Image-19",
+    name: "coffee shop",
+    prompt:
+      "a photo of a coffee shop countertop, winter atmosphere, coffee shop appliances in the background, earth tones, natural light, sharp, dslr, in focus, 4k, unsplash",
+    nagative_propmt:
+      "deform, duplicated, repeat, oversaturated, bad geometry, out of focus, cartoon, 3d, disfigured, bad art, deformed, poorly drawn, extra limbs, close up, b&w, weird colors, blurry",
+  },
 ];
-
 interface ModalProps {
   handleSubmit: () => Promise<void>;
   setInputPrompt: Dispatch<SetStateAction<string>>;
+  setInputNagativePrompt: Dispatch<SetStateAction<string>>;
 }
 
 const LeftSidebar: React.FC<ModalProps> = ({
   handleSubmit,
   setInputPrompt,
+  setInputNagativePrompt,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMinimize, setIsMinimize] = useState(false);
-  const [activeTab, setActiveTab] = useState("Monochrome");
-  const [currentTabIndex, setCurrentTabIndex] = useState(0);
-  const tabContainerRef = useRef<HTMLDivElement>(null);
-  const [tabs, setTabs] = useState([
-    "Monochrome",
-    "Natural",
-    // "Abstract",
-    // "Vintage",
-    // "Modern",
-  ]);
-  const visibleTabCount = 2;
-
-  const handleTabClick = (tabName: string) => {
-    setActiveTab(tabName);
-  };
-
-  const handleTabScroll = () => {
-    if (currentTabIndex < tabs.length - visibleTabCount) {
-      // Move to the next set of tabs
-      setCurrentTabIndex((prevIndex) => prevIndex + 1);
-    } else {
-      // Reset to the start when the last tab is reached
-      setCurrentTabIndex(0);
-    }
-  };
-
-  useEffect(() => {
-    if (tabContainerRef.current) {
-      const tabContainer = tabContainerRef.current;
-      const visibleTabsWidth = tabContainer.offsetWidth;
-      const tabWidth = tabContainer.firstElementChild?.clientWidth || 0;
-      const totalTabsWidth = tabWidth * tabs.length;
-      const maxOffset = totalTabsWidth - visibleTabsWidth;
-      const currentOffset = currentTabIndex * tabWidth;
-
-      tabContainer.scrollTo({ left: currentOffset, behavior: "smooth" });
-    }
-  }, [currentTabIndex, tabs]);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const sidebar = document.getElementById("left-sidebar");
@@ -264,9 +202,9 @@ const LeftSidebar: React.FC<ModalProps> = ({
     }
   }, []);
 
-  const handleImageClick = (prompt: string) => {
+  const handleImageClick = (prompt: string, negativePrompt: string) => {
     setInputPrompt(prompt);
-    // handleSubmit();
+    setInputNagativePrompt(negativePrompt);
   };
 
   return (
@@ -296,37 +234,6 @@ const LeftSidebar: React.FC<ModalProps> = ({
               Use Templates
             </p>
           </div>
-          <div className="mt-4 flex items-center gap-5 px-5">
-            {/* Tab Container */}
-            <div
-              ref={tabContainerRef}
-              className="flex overflow-hidden gap-x-2 items-center w-full"
-            >
-              {tabs
-                .slice(currentTabIndex, currentTabIndex + visibleTabCount)
-                .map((tabName) => (
-                  <button
-                    key={tabName}
-                    className={`lg:w-full p-2 text-white rounded lg:text-base text-sm ${
-                      activeTab === tabName
-                        ? "gradient" // Apply the gradient class if the tab is active
-                        : "border border-[#595959] rounded-full"
-                    }`}
-                    onClick={() => handleTabClick(tabName)}
-                  >
-                    {tabName}
-                  </button>
-                ))}
-            </div>
-
-            {/* Right Scroll Arrow */}
-
-            <LuChevronRight
-              className="cursor-pointer text-white hover:text-purple-500"
-              size={25}
-              onClick={handleTabScroll}
-            />
-          </div>
         </div>
 
         <div className={`mt-3 px-5 ${isMinimize && "hidden"}`}>
@@ -341,85 +248,53 @@ const LeftSidebar: React.FC<ModalProps> = ({
                 768: { slidesPerView: 5, spaceBetween: 10 },
               }}
             >
-              {activeTab === "Monochrome"
-                ? monochromeImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={200}
-                        height={200}
-                        className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
-                        onClick={() => handleImageClick(image.prompt || "")}
-                      />
-                    </SwiperSlide>
-                  ))
-                : naturalImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={200}
-                        height={200}
-                        onClick={() => handleImageClick(image.prompt || "")}
-                        className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
-                      />
-                    </SwiperSlide>
-                  ))}
+              {tamplateImages.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    width={200}
+                    height={200}
+                    className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
+                    onClick={() =>
+                      handleImageClick(
+                        image.prompt,
+                        image.nagative_propmt || ""
+                      )
+                    }
+                  />
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
 
           {/* Grid layout for large screens */}
           <div className={`hidden lg:grid lg:grid-cols-2 gap-4 `}>
-            {activeTab === "Monochrome"
-              ? monochromeImages.map((image, index) => (
-                  <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
-                    <div
-                      onClick={() => handleImageClick(image.prompt || "")}
-                      className={`relative group hover:border-0 border border-white rounded-md`}
-                    >
-                      <Image
-                        key={index}
-                        src={image.src}
-                        alt={image.alt}
-                        width={200}
-                        height={200}
-                        className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
-                      />
-                      {/* Gradient Overlay */}
-                      <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">
-                        <p className="text-white p-2 absolute bottom-0 text-sm">
-                          {image.name}
-                        </p>
-                      </div>
-                    </div>
+            {tamplateImages.map((image, index) => (
+              <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
+                <div
+                  onClick={() =>
+                    handleImageClick(image.prompt, image.nagative_propmt || "")
+                  }
+                  className={`relative group hover:border-0 border border-white rounded-md`}
+                >
+                  <Image
+                    key={index}
+                    src={image.src}
+                    alt={image.alt}
+                    width={200}
+                    height={200}
+                    className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">
+                    <p className="text-white p-2 absolute bottom-0 text-sm">
+                      {image.name}
+                    </p>
                   </div>
-                ))
-              : naturalImages.map((image, index) => (
-                  <div className="relative hover:p-[1px] rounded-md cursor-pointer bg-gradient-to-r from-purple-500 to-blue-500">
-                    <div
-                      onClick={() => handleImageClick(image.prompt || "")}
-                      className={`relative group hover:border-0 border border-white rounded-md ${
-                        isMinimize && "border-0"
-                      }`}
-                    >
-                      <Image
-                        key={index}
-                        src={image.src}
-                        alt={image.alt}
-                        width={200}
-                        height={200}
-                        className="size-20 md:size-32 object-cover rounded-md cursor-pointer"
-                      />
-                      {/* Gradient Overlay */}
-                      <div className="absolute hidden group-hover:flex inset-0 bg-gradient-to-t from-black to-transparent opacity-70 rounded-md items-center transition-all ease-in duration-700">
-                        <p className="text-white p-2 absolute bottom-0 text-sm">
-                          {image.name}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -41,6 +41,8 @@ const ImageModal: React.FC<ModalProps> = ({
   }, [isOpen]);
 
   const handleDownload = async (imageUrl: string) => {
+
+    console.log(imageUrl)
     try {
       const response = await axiosInstance.get(imageUrl, {
         responseType: "blob",
