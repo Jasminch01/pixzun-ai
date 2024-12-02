@@ -47,6 +47,7 @@ const Project: React.FC = () => {
   } = useUserContext();
   const [projectName, setProjectName] = useState<string>("");
   const [inputPrompt, setInputPrompt] = useState("");
+  const [inputNagativePrompt, setInputNagativePrompt] = useState("");
   const [loadingResult, setLoadingResult] = useState(false);
   const [loadingProject, setLoadingProject] = useState(true);
   const [generatedResults, setGeneratedResults] = useState<string[]>([]);
@@ -119,7 +120,7 @@ const Project: React.FC = () => {
     }
 
     setLoadingResult(true);
-    const payload = { propmt: inputPrompt, image: uploadedImage[0] };
+    const payload = { propmt: inputPrompt, negative_prompt : inputNagativePrompt,  image: uploadedImage[0] };
     try {
       const response = await axiosInstance.post(
         `/api/project/${id}/generate`,
@@ -213,6 +214,7 @@ const Project: React.FC = () => {
       <LeftSidebar
         handleSubmit={handleSubmit}
         setInputPrompt={setInputPrompt}
+        setInputNagativePrompt = {setInputNagativePrompt}
       />
       {/* input for mobile device */}
       <div className="flex flex-col justify-center mt-10 md:px-0 order-2 lg:hidden ">
@@ -247,18 +249,17 @@ const Project: React.FC = () => {
               <button
                 onClick={handleSubmit}
                 disabled={
-                  generatedResults.length > 0 ||
                   loadingResult ||
                   !imageUploaded ||
                   !inputPrompt ||
-                  countWords(inputPrompt) < 5
+                  countWords(inputPrompt) < 3
                 }
                 className={`text-white gap-2 bg-button-gradient lg:p-3 p-3 ${
                   loadingResult && "w-24"
                 } rounded-full ${
                   (!imageUploaded ||
                     !inputPrompt ||
-                    countWords(inputPrompt) < 5) &&
+                    countWords(inputPrompt) < 3) &&
                   "opacity-50 cursor-not-allowed"
                 }`}
               >
@@ -470,18 +471,17 @@ const Project: React.FC = () => {
                 <button
                   onClick={handleSubmit}
                   disabled={
-                    generatedResults.length > 0 ||
                     loadingResult ||
                     !imageUploaded ||
                     !inputPrompt ||
-                    countWords(inputPrompt) < 5
+                    countWords(inputPrompt) < 3
                   }
                   className={`text-white gap-2 bg-button-gradient md:p-3 p-2 ${
                     loadingResult && "w-24"
                   } rounded-full ${
                     (!imageUploaded ||
                       !inputPrompt ||
-                      countWords(inputPrompt) < 5) &&
+                      countWords(inputPrompt) < 3) &&
                     "opacity-50 cursor-not-allowed"
                   }`}
                 >
