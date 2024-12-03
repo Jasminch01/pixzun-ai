@@ -208,7 +208,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="relative lg:fixed lg:top-40 lg:left-0 lg:h-[40rem] order-3 mt-5 lg:mt-0">
+    <div className="relative lg:fixed lg:top-40 lg:left-0 lg:h-[30rem] xl:h-[40rem] order-3 mt-5 lg:mt-0">
       {/* Arrow Icon position absolutely within the sidebar */}
       <div
         className={`
@@ -229,14 +229,14 @@ const LeftSidebar: React.FC<ModalProps> = ({
             isScrolled && "bg-[#1B1D29]"
           } ${isMinimize ? "hidden" : ""}`}
         >
-          <div className="px-5">
+          <div className="">
             <p className="text-white md:text-base md:font-bold">
               Use Templates
             </p>
           </div>
         </div>
 
-        <div className={`mt-3 px-5 ${isMinimize && "hidden"}`}>
+        <div className={`mt-3 lg:px-5 md:px-0 ${isMinimize && "hidden"}`}>
           {/* Swiper for mobile and tablet devices */}
           <div className="block lg:hidden">
             <Swiper
