@@ -208,7 +208,7 @@ const LeftSidebar: React.FC<ModalProps> = ({
   };
 
   return (
-    <div className="relative lg:fixed lg:top-40 lg:left-0 lg:h-[30rem] xl:h-[40rem] order-3 mt-5 lg:mt-0">
+    <div className="relative lg:fixed lg:top-40 lg:left-0 xl:h-[30rem] lg:h-[30rem] 2xl:h-[40rem] order-3 mt-5 lg:mt-0">
       {/* Arrow Icon position absolutely within the sidebar */}
       <div
         className={`

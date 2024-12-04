@@ -39,7 +39,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
   }, []);
   const reverseGeneratedResult = [...generatedResults].reverse();
   return (
-    <div className="relative lg:fixed lg:top-40 lg:right-0 lg:h-[30rem] xl:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
+    <div className="relative lg:fixed lg:top-40 lg:right-0 xl:h-[30rem] lg:h-[30rem] 2xl:h-[40rem] order-1 mt-5  mb-32 lg:mt-0">
       {/* Arrow Icon position absolutely on the left of the sidebar */}
       <div
         className={`absolute top-1/2 transform  -translate-y-1/2 size-7 -left-[25px] z-30 cursor-pointer rounded-full lg:flex items-center justify-center hidden rotate-180`}
