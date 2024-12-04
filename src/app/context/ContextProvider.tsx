@@ -24,6 +24,8 @@ interface UserContextType {
   setIsPricingModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isPaymentModalOpen: boolean;
   setIsPaymentModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsprjectsLoading : React.Dispatch<React.SetStateAction<boolean>>;
+  isprojectsLoading : boolean;
   setSelectedPriceId: React.Dispatch<React.SetStateAction<string>>;
   setSelectedPrice: React.Dispatch<React.SetStateAction<string>>;
   handleSubscriptionPayment: () => Promise<void>;
@@ -54,6 +56,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
   const { isLoaded, user } = useUser();
   const [isPricingModalOpen, setIsPricingModalOpen] = useState(false);
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const [isprojectsLoading, setIsprjectsLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [selectedPriceId, setSelectedPriceId] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -82,7 +85,7 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
     queryKey: ["user", userEmail],
     // enabled: !!isLoaded && !!user,
   });
-
+  
   const handleSubscriptionPayment = async () => {
     if (!stripe || !elements) {
       console.error("Stripe or Elements not loaded.");
@@ -168,6 +171,8 @@ export const ContextProvider: React.FC<ContextProviderProps> = ({
         clientSecret,
         setNewRole,
         setCreditIncrement,
+        setIsprjectsLoading,
+        isprojectsLoading
       }}
     >
       {children}

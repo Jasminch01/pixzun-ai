@@ -75,7 +75,7 @@ const Project: React.FC = () => {
     }
   };
 
-  const { data: projectImages = [], refetch } = useQuery({
+  const { data: projectImages = [], refetch,} = useQuery({
     queryFn: async () => await fetchProjectDetails(),
     queryKey: ["project"],
     enabled: !!id && !!currentUser,

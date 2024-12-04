@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { DotPulse } from "@/components/loadingComponent";
 import { useClerk } from "@clerk/nextjs";
+import { useUserContext } from "@/app/context/ContextProvider";
 
 interface ImageDetail {
   urls: string[];
@@ -32,6 +33,8 @@ const RecentProjects: React.FC = () => {
   const { user } = useClerk();
   const containerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
+  const { setIsprjectsLoading } = useUserContext();
+
   // Function to fetch projects
   const fetchProjects = async (): Promise<Project[]> => {
     const response = await axiosInstance(
@@ -54,6 +57,12 @@ const RecentProjects: React.FC = () => {
     queryKey: ["recentProject"],
     retry: 1,
   });
+
+  if (isLoading) {
+    setIsprjectsLoading(true);
+  } else {
+    setIsprjectsLoading(false);
+  }
 
   // Function to toggle the menu open/close state
   const handleMenuToggle = (projectId: string) => {
