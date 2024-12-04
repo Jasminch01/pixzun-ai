@@ -11,8 +11,7 @@ const Page: React.FC = () => {
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [projectName, setProjectName] = useState<string>("");
-
-  const { currentUser } = useUserContext();
+  const { currentUser, isprojectsLoading } = useUserContext();
 
   // Handle modal close
   const handleWelcomeModalClose = () => {
@@ -77,7 +76,11 @@ const Page: React.FC = () => {
         <div className="flex justify-center">
           {/* adjust height width for small devices */}
           <div
-            onClick={() => setIsNewProjectModalOpen(true)}
+            onClick={
+              isprojectsLoading
+                ? () => setIsNewProjectModalOpen(false)
+                : () => setIsNewProjectModalOpen(true)
+            }
             className="cursor-pointer xl:w-[32rem] w-[15rem] lg:w-[25rem] rounded p-px bg-gradient-to-r from-[#A82AD8] to-[#4940D8]"
           >
             <div className="rounded xl:p-5 p-2 lg:p-3 bg-[#222532] flex justify-center items-center space-x-5">
