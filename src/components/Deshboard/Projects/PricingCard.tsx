@@ -72,7 +72,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
              md:w-[20rem] md:h-[10rem] h-[10rem] w-[20rem] top-10`}
           ></div>
         )}
-        <div className="lg:px-16 px-10 mt-10 relative z-10">
+        <div className="2xl:px-16 px-10 2xl:mt-10 relative z-10">
           <div>
             <h2 className="text-xl font-bold mb-4">{title}</h2>
             <p className="relative text-base font-bold ml-2">
@@ -130,7 +130,7 @@ const PricingCard: React.FC<PricingCardProps> = ({
             onClick={openModal}
             className={`${
               price === "0" ? "border" : "bg-button-gradient"
-            } cursor-pointer rounded-full md:w-44 md:h-[54px] px-3 py-2`}
+            } cursor-pointer rounded-full 2xl:w-44 xl:w-36 xl:h-[48px] 2xl:h-[54px] px-3 py-2`}
           >
             {buttonText}
           </button>

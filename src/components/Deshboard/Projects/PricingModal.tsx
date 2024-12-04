@@ -8,7 +8,6 @@ const pricingPlans = [
     price: "19",
     period: "Per month",
     features: [
-      "Generate 25 pictures a day",
       "No watermark",
       "High quality images",
       "Enhanced images",
@@ -22,7 +21,6 @@ const pricingPlans = [
     price: "99",
     period: "Per month",
     features: [
-      "Generate unlimited pictures",
       "No watermark",
       "High quality images",
       "Enhanced images",
@@ -44,8 +42,8 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      modalSize=" w-[55rem] h-[46rem] static"
-      gradientSize=" w-[50rem] h-[30rem]"
+      modalSize="2xl:w-[55rem] lg:w-[50rem] md:w-[40rem] md:h-[40rem] h-[46rem] static"
+      gradientSize=" 2xl:w-[50rem] xl:w-[50rem] md:w-[40rem] lg:w-[40rem] h-[30rem]"
       marginTop="lg:-mt-[18rem]"
     >
       <p className="text-white text-2xl font-bold">Subscribe</p>
