@@ -298,10 +298,10 @@ const Project: React.FC = () => {
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
           <div
-            className={`bg-white/10 xl:size-[16rem] lg:size-[12.90rem] border-primary/25 border-[0.3px] rounded  flex justify-center items-center relative ${
+            className={` xl:size-[16rem] 2xl:size-[21.5rem] lg:size-[12.90rem] rounded  flex justify-center items-center relative ${
               generatedResults.length > 0
-                ? ``
-                : "bg-white/10 xl:size-[14rem] size-[12rem] 2xl:size-[21.5rem]"
+                ? `bg-transparent`
+                : "bg-white/10 border-primary/25 border-[0.3px] xl:size-[14rem] size-[12rem] 2xl:size-[21.5rem]"
             }`}
           >
             <div

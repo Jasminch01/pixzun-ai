@@ -58,7 +58,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({
         <div
           className={` ${
             isMinimize ? "hidden" : ""
-          } lg:p-6 text-white text-base font-bold lg:sticky top-0 z-10 lg:transition-colors lg:duration-300 py-5 ${
+          } lg:py-5 lg:pl-3 xl:pl-3 xl:py-5 text-white text-base font-bold lg:sticky top-0 z-10 lg:transition-colors lg:duration-300 py-5 ${
             isScrolled ? "lg:bg-[#1B1D29] lg:py-5" : ""
           }`}
         >

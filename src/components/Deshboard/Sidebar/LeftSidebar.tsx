@@ -229,14 +229,14 @@ const LeftSidebar: React.FC<ModalProps> = ({
             isScrolled && "bg-[#1B1D29]"
           } ${isMinimize ? "hidden" : ""}`}
         >
-          <div className="">
+          <div className="xl:pl-5 lg:pl-5">
             <p className="text-white md:text-base md:font-bold">
               Use Templates
             </p>
           </div>
         </div>
 
-        <div className={`mt-3 lg:px-5 md:px-0 ${isMinimize && "hidden"}`}>
+        <div className={`xl:p-5 lg:px-3 md:px-0 ${isMinimize && "hidden"}`}>
           {/* Swiper for mobile and tablet devices */}
           <div className="block lg:hidden">
             <Swiper
