@@ -286,9 +286,9 @@ const Project: React.FC = () => {
       </div>
       {/* dnd components */}
       <div
-        className={`xl:mt-[8rem] 2xl:mt-[9rem] mt-[5rem] order-4 relative ${
+        className={`xl:mt-[6rem] lg:mt-[9rem] 2xl:mt-[9rem] mt-[5rem] order-4 relative ${
           generatedResults.length > 0 &&
-          `mt-[15rem] xl:mt-[9rem] order-4 relative flex flex-col justify-center items-center`
+          `mt-[15rem] 2xl:mt-[9rem] xl:mt-[6rem]  order-4 relative flex flex-col justify-center items-center`
         }`}
       >
         <p className={`text-white text-lg font-bold text-center ${generatedResults.length > 0 && 'hidden md:flex'}`}>
@@ -298,7 +298,7 @@ const Project: React.FC = () => {
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
           <div
-            className={`bg-white/10 xl:size-[16rem] border-primary/25 border-[0.3px] rounded  flex justify-center items-center relative ${
+            className={`bg-white/10 xl:size-[16rem] lg:size-[12.90rem] border-primary/25 border-[0.3px] rounded  flex justify-center items-center relative ${
               generatedResults.length > 0
                 ? ``
                 : "bg-white/10 xl:size-[14rem] size-[12rem] 2xl:size-[21.5rem]"
@@ -306,7 +306,7 @@ const Project: React.FC = () => {
           >
             <div
               {...getRootProps()}
-              className={`bg-gradient-to-r from-[#1B1D29] to-[#2f334f] size-[11rem] xl:size-[14rem] 2xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
+              className={`bg-gradient-to-r from-[#1B1D29] to-[#2f334f] size-[11rem] xl:size-[14rem] 2xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center cursor-pointer ${
                 (loadingResult ||
                   imageUploadLoading ||
                   imageUploaded ||
@@ -317,7 +317,7 @@ const Project: React.FC = () => {
             >
               <div className="flex flex-col justify-center items-center px-5">
                 <input {...getInputProps()} />
-                <IoMdImages className="xl:mb-9 text-2xl xl:size-10 2xl:size-20 size-5]" />
+                <IoMdImages className="xl:mb-9 text-2xl xl:size-10 lg:size-10 2xl:size-20 size-5]" />
                 <p className="text-center mb-3 text-xs lg:text-sm xl:text-base ">
                   <span className="font-bold">Click to upload </span>
                   or drag and drop
