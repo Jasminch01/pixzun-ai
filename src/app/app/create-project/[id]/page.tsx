@@ -286,27 +286,27 @@ const Project: React.FC = () => {
       </div>
       {/* dnd components */}
       <div
-        className={`lg:mt-[8rem] xl:mt-[9rem] mt-[5rem] order-4 relative ${
+        className={`xl:mt-[8rem] 2xl:mt-[9rem] mt-[5rem] order-4 relative ${
           generatedResults.length > 0 &&
-          `mt-[15rem] lg:mt-[9rem] order-4 relative flex flex-col justify-center items-center`
+          `mt-[15rem] xl:mt-[9rem] order-4 relative flex flex-col justify-center items-center`
         }`}
       >
         <p className={`text-white text-lg font-bold text-center ${generatedResults.length > 0 && 'hidden md:flex'}`}>
           {projectName}
         </p>
-        <div className="flex items-center justify-center lg:mt-[3rem] xl:mt-[5rem] mt-3 relative">
+        <div className="flex items-center justify-center xl:mt-[3rem] 2xl:mt-[5rem] mt-3 relative">
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
           <div
-            className={` border-primary/25 border-[0.3px] rounded  flex justify-center items-center relative ${
+            className={`bg-white/10 xl:size-[16rem] border-primary/25 border-[0.3px] rounded  flex justify-center items-center relative ${
               generatedResults.length > 0
-                ? ` `
-                : "bg-white/10 lg:size-[14rem] size-[12rem] xl:size-[21.5rem]"
+                ? ``
+                : "bg-white/10 xl:size-[14rem] size-[12rem] 2xl:size-[21.5rem]"
             }`}
           >
             <div
               {...getRootProps()}
-              className={`bg-gradient-to-r from-[#1B1D29] to-[#2f334f] size-[11rem] lg:size-[14rem] xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
+              className={`bg-gradient-to-r from-[#1B1D29] to-[#2f334f] size-[11rem] xl:size-[14rem] 2xl:size-[20rem] border-dashed text-white border-gray-400 border-2 rounded flex flex-col justify-center items-center lg:px-5 cursor-pointer ${
                 (loadingResult ||
                   imageUploadLoading ||
                   imageUploaded ||
@@ -317,7 +317,7 @@ const Project: React.FC = () => {
             >
               <div className="flex flex-col justify-center items-center px-5">
                 <input {...getInputProps()} />
-                <IoMdImages className="xl:mb-9 text-2xl lg:size-10 xl:size-20 size-5]" />
+                <IoMdImages className="xl:mb-9 text-2xl xl:size-10 2xl:size-20 size-5]" />
                 <p className="text-center mb-3 text-xs lg:text-sm xl:text-base ">
                   <span className="font-bold">Click to upload </span>
                   or drag and drop
@@ -329,13 +329,13 @@ const Project: React.FC = () => {
             </div>
 
             {imageUploadLoading || loadingResult ? (
-              <div className="size-[11rem] lg:size-[12rem] xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
+              <div className="size-[11rem] xl:size-[12rem] 2xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
                 <Spiner />
               </div>
             ) : generatedResults.length > 0 ? (
               <div className="md:flex-row gap-5 md:gap-0 flex flex-col bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 relative">
                 {/* Always display the first image */}
-                <div className="lg:size-[12rem] size-[12rem] xl:size-[20rem]">
+                <div className="xl:size-[12rem] size-[12rem] 2xl:size-[20rem]">
                   <div
                     className="relative w-full h-full rounded-l"
                     style={{
@@ -372,7 +372,7 @@ const Project: React.FC = () => {
                 </div>
 
                 {/* Display the current image with navigation buttons */}
-                <div className="lg:size-[12rem] size-[12rem] xl:size-[20rem]">
+                <div className="xl:size-[12rem] size-[12rem] 2xl:size-[20rem]">
                   <div className="relative w-full h-full rounded-l bg-white">
                     <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
                       <a
@@ -424,7 +424,7 @@ const Project: React.FC = () => {
                 </div>
               </div>
             ) : imageUploaded ? (
-              <div className="bg-secondary lg:size-[14rem] size-[12rem] xl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
+              <div className="bg-secondary xl:size-[14rem] size-[12rem] xxl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
                 <div className="relative w-full h-full">
                   <Image
                     src={uploadedImage[0]}
@@ -450,7 +450,7 @@ const Project: React.FC = () => {
         </div>
         {/* input for large divices */}
         <div className="lg:flex flex-col justify-center mt-10 px-5 lg:px-0 hidden">
-          <div className="lg:w-[20rem] xl:w-[35rem]">
+          <div className="xl:w-[20rem] 2xl:w-[35rem]">
             <textarea
               onChange={handleInputChange}
               value={!loadingResult && imageUploaded ? inputPrompt : ""}
