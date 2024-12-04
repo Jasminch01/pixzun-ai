@@ -7,6 +7,7 @@ import {
 } from "react-icons/io5";
 import { MdDelete, MdOutlineFileDownload } from "react-icons/md";
 import ImageDeleteConfirmationModal from "./ConfirmModal";
+import axios from "axios";
 
 interface ModalProps {
   children: ReactNode;
@@ -16,7 +17,7 @@ interface ModalProps {
   showNextImage: () => void;
   selectedImage: number;
   projectImage: [string];
-  refetch : () => void;
+  refetch: () => void;
 }
 
 const ImageModal: React.FC<ModalProps> = ({
@@ -27,7 +28,7 @@ const ImageModal: React.FC<ModalProps> = ({
   showNextImage,
   selectedImage,
   projectImage,
-  refetch
+  refetch,
 }) => {
   const modalRef = useRef<HTMLDialogElement>(null);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false); // State to control the delete confirmation modal visibility
@@ -41,10 +42,9 @@ const ImageModal: React.FC<ModalProps> = ({
   }, [isOpen]);
 
   const handleDownload = async (imageUrl: string) => {
-
-    console.log(imageUrl)
+    
     try {
-      const response = await axiosInstance.get(imageUrl, {
+      const response = await axios.get(imageUrl, {
         responseType: "blob",
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -63,7 +63,7 @@ const ImageModal: React.FC<ModalProps> = ({
     try {
       const res = await axiosInstance.post(`/api/project/deleteimg`, { path });
       console.log(res.data);
-      refetch()
+      refetch();
       setDeleteModalOpen(false); // Close the confirmation modal
     } catch (error) {
       console.error("Error deleting image:", error);

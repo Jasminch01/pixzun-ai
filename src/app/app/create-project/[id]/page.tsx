@@ -424,7 +424,7 @@ const Project: React.FC = () => {
                 </div>
               </div>
             ) : imageUploaded ? (
-              <div className="bg-secondary xl:size-[14rem] size-[12rem] xxl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
+              <div className="bg-secondary xl:size-[14rem] size-[12rem] 2xl:size-[20rem] text-white rounded flex justify-center items-center overflow-hidden">
                 <div className="relative w-full h-full">
                   <Image
                     src={uploadedImage[0]}
