@@ -13,11 +13,7 @@ import RightSidebar from "@/components/Deshboard/Sidebar/RightSidebar";
 import PricingModal from "@/components/Deshboard/Projects/PricingModal";
 import { IoMdImages } from "react-icons/io";
 import ImageMOdal from "@/components/ImageMOdal";
-import {
-  IoChevronBackSharp,
-  IoChevronForwardSharp,
-  IoDocumentsSharp,
-} from "react-icons/io5";
+import { IoDocumentsSharp } from "react-icons/io5";
 import { Spiner, Spiner2 } from "@/components/loadingComponent";
 import { useUser } from "@clerk/nextjs";
 import { LeafWhite } from "@/components/Svg";
@@ -52,8 +48,7 @@ const Project: React.FC = () => {
   const [loadingProject, setLoadingProject] = useState(true);
   const [generatedResults, setGeneratedResults] = useState<string[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
-  const { isLoaded, user } = useUser();
-
+  const { user } = useUser();
   const { id } = useParams();
 
   const fetchProjectDetails = async () => {
@@ -75,7 +70,7 @@ const Project: React.FC = () => {
     }
   };
 
-  const { data: projectImages = [], refetch,} = useQuery({
+  const { data: projectImages = [], refetch } = useQuery({
     queryFn: async () => await fetchProjectDetails(),
     queryKey: ["project"],
     enabled: !!id && !!currentUser,
@@ -113,12 +108,10 @@ const Project: React.FC = () => {
     if (!inputPrompt || !imageUploaded || countWords(inputPrompt) < 5) {
       return;
     }
-
     if (currentUser?.cradit < 1) {
       openModal();
       return;
     }
-
     setLoadingResult(true);
     const payload = {
       propmt: inputPrompt,
@@ -291,17 +284,21 @@ const Project: React.FC = () => {
           `mt-[15rem] 2xl:mt-[9rem] xl:mt-[6rem]  order-4 relative flex flex-col justify-center items-center`
         }`}
       >
-        <p className={`text-white text-lg font-bold text-center ${generatedResults.length > 0 && 'hidden md:flex'}`}>
+        <p
+          className={`text-white text-lg font-bold text-center ${
+            generatedResults.length > 0 && "hidden md:flex"
+          }`}
+        >
           {projectName}
         </p>
         <div className="flex items-center justify-center xl:mt-[3rem] 2xl:mt-[5rem] mt-3 relative">
           <div className="absolute bg-bg-lighter blur-3xl lg:w-[25rem] lg:h-[20rem] w-[300px] h-[200px] rounded -z-10"></div>
           {/* dnd component */}
           <div
-            className={` xl:size-[16rem] 2xl:size-[21.5rem] lg:size-[12.90rem] rounded  flex justify-center items-center relative ${
+            className={`bg-white/10 xl:size-[16rem] 2xl:size-[22rem] lg:size-[12.90rem] rounded  flex justify-center items-center relative ${
               generatedResults.length > 0
                 ? `bg-transparent`
-                : "bg-white/10 border-primary/25 border-[0.3px] xl:size-[14rem] size-[12rem] 2xl:size-[21.5rem]"
+                : "bg-white/10 border-primary/25 border-[0.3px] xl:size-[14rem] size-[12rem] 2xl:size-[22]"
             }`}
           >
             <div
@@ -329,10 +326,51 @@ const Project: React.FC = () => {
             </div>
 
             {imageUploadLoading || loadingResult ? (
-              <div className="size-[11rem] xl:size-[12rem] 2xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
+              <div className="size-[11rem] lg:size-[12rem] xl:size-[15rem] 2xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
                 <Spiner />
+                <p className="text-white text-xs 2xl:text-base xl:text-sm mt-3">Generating images...</p>
               </div>
-            ) : generatedResults.length > 0 ? (
+            ) : generatedResults.length === 1 ? (
+              <div className=" bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 relative">
+                {/* Display the current image with navigation buttons */}
+                <div className="xl:size-[12rem] size-[12rem] 2xl:size-[20rem]">
+                  <div className="relative w-full h-full rounded-l bg-white">
+                    <div className="absolute z-[1] top-2 right-2 bg-secondary rounded-full p-2">
+                      <a
+                        href={generatedResults[0]}
+                        download={
+                          generatedResults[0].split("/").pop() || "image.jpg"
+                        }
+                        className="cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDownload(generatedResults[0]);
+                        }}
+                      >
+                        <MdOutlineFileDownload
+                          size={24}
+                          className="text-white"
+                        />
+                      </a>
+                    </div>
+                    <Image
+                      src={generatedResults[0]}
+                      alt="generated image 0"
+                      layout="fill"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                {/*reset button */}
+                <div className="absolute -right-7 bottom-0">
+                  <GrPowerReset
+                    color="white"
+                    className="cursor-pointer"
+                    onClick={resetGenerate}
+                  />
+                </div>
+              </div>
+            ) : generatedResults.length > 1 ? (
               <div className="md:flex-row gap-5 md:gap-0 flex flex-col bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 relative">
                 {/* Always display the first image */}
                 <div className="xl:size-[12rem] size-[12rem] 2xl:size-[20rem]">
@@ -392,20 +430,6 @@ const Project: React.FC = () => {
                         />
                       </a>
                     </div>
-                    <button
-                      onClick={handlePrevImage}
-                      disabled={selectedImage === 0}
-                      className="absolute z-[1] left-2 top-1/2 transform -translate-y-1/2  text-black rounded-full p-2"
-                    >
-                      <IoChevronBackSharp size={26} />
-                    </button>
-                    <button
-                      onClick={handleNextImage}
-                      disabled={selectedImage === generatedResults.length - 1}
-                      className="absolute z-[1] right-2 top-1/2 transform -translate-y-1/2 text-black rounded-full p-2 cursor-pointer"
-                    >
-                      <IoChevronForwardSharp size={26} />
-                    </button>
                     <Image
                       src={generatedResults[currentImageIndex]}
                       alt="generated image 0"
