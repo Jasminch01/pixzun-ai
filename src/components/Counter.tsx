@@ -27,9 +27,9 @@ const Counter: React.FC = () => {
             <Image src={"/time.svg"} width={80} height={80} alt="images-logo" />
           </div>
           <div className="text-center mt-4">
-            <p className="font-bold text-4xl gradient-text2">5</p>
+            <p className="font-bold text-4xl gradient-text2">20</p>
             <p className="text-gray-400 mt-1">
-              Minutes to <br /> enhanced images
+              Second to <br /> enhanced images
             </p>
           </div>
         </div>
