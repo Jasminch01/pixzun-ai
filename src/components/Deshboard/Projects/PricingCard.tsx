@@ -8,7 +8,7 @@ interface PricingCardProps {
   period: string;
   features: string[];
   buttonText: string;
-  pricingId : string;
+  pricingId: string;
 }
 
 const PricingCard: React.FC<PricingCardProps> = ({
@@ -35,12 +35,11 @@ const PricingCard: React.FC<PricingCardProps> = ({
 
   const openModal = () => {
     setSelectedPrice(price);
-    setSelectedPriceId(pricingId)
+    setSelectedPriceId(pricingId);
     setNewRole(title);
     setCreditIncrement(credit);
     setIsPaymentModalOpen(true);
   };
-
   // const handleToggleAutoRenew = () => {
   //   setIsAutoRenew(!isAutoRenew);
   // };
