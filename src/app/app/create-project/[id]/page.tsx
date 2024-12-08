@@ -328,7 +328,16 @@ const Project: React.FC = () => {
             {imageUploadLoading || loadingResult ? (
               <div className="size-[11rem] lg:size-[12rem] xl:size-[15rem] 2xl:size-[20rem] bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 lg:px-5 flex flex-col justify-center items-center">
                 <Spiner />
-                <p className="text-white text-xs 2xl:text-base xl:text-sm mt-3">Generating images...</p>
+                {loadingResult && (
+                  <p className="text-white text-xs 2xl:text-base xl:text-sm mt-3">
+                    Generating images...
+                  </p>
+                )}
+                {imageUploadLoading && (
+                  <p className="text-white text-xs 2xl:text-base xl:text-sm mt-3">
+                    Uploading...
+                  </p>
+                )}
               </div>
             ) : generatedResults.length === 1 ? (
               <div className=" bg-secondary border-[1px] border-primary border-opacity-50 rounded p-3 relative">
