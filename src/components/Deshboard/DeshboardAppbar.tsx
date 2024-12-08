@@ -12,6 +12,13 @@ import CheckoutForm from "../CheckrouForm";
 import PricingModal from "./Projects/PricingModal";
 import { Toaster } from "react-hot-toast";
 import Image from "next/image";
+import { Oxanium } from "next/font/google";
+
+const oxanium = Oxanium({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: "normal",
+});
 
 const DashboardAppBar: React.FC = () => {
   const { signOut } = useClerk();
@@ -120,7 +127,7 @@ const DashboardAppBar: React.FC = () => {
         <div className="flex justify-between items-center py-5">
           <Link href={"/app"} className="flex justify-center items-center gap-2">
             <Image src={"/logo.png"} width={500} height={500} alt="brand" className="size-10"></Image>
-            <p className="md:text-2xl uppercase text-xl text-white">
+            <p className={`md:text-2xl uppercase text-xl text-white ${oxanium.className}`}>
               pixzun
             </p>
           </Link>

@@ -7,6 +7,13 @@ import { MdOutlineClose } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from "next/image";
+import { Oxanium } from "next/font/google";
+
+const oxanium = Oxanium({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: "normal",
+});
 
 interface LinkItem {
   name: string;
@@ -53,13 +60,15 @@ const Appbar: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex justify-center items-center gap-2">
             <Image
-              src={"/logo.png"}
+              src={"/logo2.png"}
               width={500}
               height={500}
               alt="pixzun_brand"
               className="size-10"
             ></Image>
-            <p className="md:text-2xl uppercase text-xl text-white">
+            <p
+              className={`md:text-2xl uppercase text-xl text-white ${oxanium.className}`}
+            >
               pixzun
             </p>
           </div>

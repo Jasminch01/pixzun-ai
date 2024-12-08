@@ -3,7 +3,15 @@ import Container from "./Container";
 import Link from "next/link";
 import { IoLogoLinkedin } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa6";
-import { Brand } from "./Svg";
+import Image from "next/image";
+
+import { Oxanium } from "next/font/google";
+
+const oxanium = Oxanium({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: "normal",
+});
 
 const Footer: React.FC = () => {
   return (
@@ -11,8 +19,15 @@ const Footer: React.FC = () => {
       <div className=" text-white xl:px-0 px-5">
         <div className="flex md:flex-row flex-col-reverse justify-between">
           <div className="">
-            <div className="mb-5">
-              <p className="text-xl">pixzun</p>
+            <div className="mb-5 flex items-center gap-2">
+              <Image
+                src={"/logo2.png"}
+                width={500}
+                height={500}
+                alt="pixzun_brand"
+                className="size-8"
+              ></Image>
+              <p className={`text-xl uppercase ${oxanium.className}`}>pixzun</p>
             </div>
             <div className="">
               <div className="space-x-10">
@@ -78,7 +93,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <p className="text-center text-white mt-10 text-sm">
-        All rights reserved. © Smol AI 2024.
+        All rights reserved. © PIXZUN 2024.
       </p>
     </Container>
   );
