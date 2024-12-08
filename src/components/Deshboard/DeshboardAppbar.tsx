@@ -11,6 +11,7 @@ import CheckOutModal from "../CheckOutModal";
 import CheckoutForm from "../CheckrouForm";
 import PricingModal from "./Projects/PricingModal";
 import { Toaster } from "react-hot-toast";
+import Image from "next/image";
 
 const DashboardAppBar: React.FC = () => {
   const { signOut } = useClerk();
@@ -117,9 +118,9 @@ const DashboardAppBar: React.FC = () => {
       <Toaster />
       <div className="px-5">
         <div className="flex justify-between items-center py-5">
-          <Link href={"/app"} className="flex justify-center gap-2">
-            <Brand />
-            <p className="md:text-2xl text-xl text-white hidden lg:flex">
+          <Link href={"/app"} className="flex justify-center items-center gap-2">
+            <Image src={"/logo.png"} width={500} height={500} alt="brand" className="size-10"></Image>
+            <p className="md:text-2xl uppercase text-xl text-white">
               pixzun
             </p>
           </Link>
@@ -191,7 +192,7 @@ const DashboardAppBar: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="pl-5 mt-3 text-sm"> 
+                    <div className="pl-5 mt-3 text-sm">
                       <div className="my-5">
                         {/* Credit Section */}
                         <p className="mb-3 flex items-center gap-3 text-white">

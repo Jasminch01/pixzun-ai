@@ -14,7 +14,7 @@ const pricingPlans = [
       "1000 Credits",
     ],
     buttonText: "Get premium",
-    pricingId : 'price_1Px0HIA1JY3LMKw5Q2MuSLmE'
+    pricingId: process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PRICING_ID as string,
   },
   {
     title: "Enterprise",
@@ -28,7 +28,7 @@ const pricingPlans = [
       "5000 Credits",
     ],
     buttonText: "Get Enterprise",
-    pricingId : 'price_1Px16FA1JY3LMKw5eQnEwePG'
+    pricingId: process.env.NEXT_PUBLIC_STRIPE_ENTERPRICE_PRICING_ID as string,
   },
 ];
 
@@ -56,7 +56,7 @@ const PricingModal: React.FC<PricingModalProps> = ({ isOpen, onClose }) => {
             period={plan.period}
             features={plan.features}
             buttonText={plan.buttonText}
-            pricingId= {plan.pricingId}
+            pricingId={plan.pricingId}
           />
         ))}
       </div>

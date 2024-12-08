@@ -6,6 +6,7 @@ import { CgMenuRight } from "react-icons/cg";
 import { MdOutlineClose } from "react-icons/md";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from "next/image";
 
 interface LinkItem {
   name: string;
@@ -50,9 +51,17 @@ const Appbar: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center py-4">
-          <div className="flex justify-center gap-2">
-            <Brand />
-            <p className="md:text-2xl text-xl text-white">pixzun</p>
+          <div className="flex justify-center items-center gap-2">
+            <Image
+              src={"/logo.png"}
+              width={500}
+              height={500}
+              alt="pixzun_brand"
+              className="size-10"
+            ></Image>
+            <p className="md:text-2xl uppercase text-xl text-white">
+              pixzun
+            </p>
           </div>
           <div className="hidden md:flex items-center">
             {links.map((link, index) => (
